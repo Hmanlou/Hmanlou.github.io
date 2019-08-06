@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>WEB前端安全-XSS与CSRF | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="XSS  XSS，Cross Site Script，即跨站脚本攻击；XSS攻击通常指黑客通过“HTML”注入篡改了网页，插入了恶意的脚本，从而在浏览网页时，控制用户浏览器的一种攻击。XSS根据效果的不同可以分为以下三类：    反射型XSS，也叫做“非持久型XSS”，只是简单的把用户输入的数据“反射”给浏览器；    存储型XSS，也叫做“持久型XSS”，会把用户输入的数据“存储在”服务器端。常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WEB前端安全-XSS与CSRF">
+<meta property="og:url" content="http://yoursite.com/2019/07/20/drops夏令营14/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="XSS  XSS，Cross Site Script，即跨站脚本攻击；XSS攻击通常指黑客通过“HTML”注入篡改了网页，插入了恶意的脚本，从而在浏览网页时，控制用户浏览器的一种攻击。XSS根据效果的不同可以分为以下三类：    反射型XSS，也叫做“非持久型XSS”，只是简单的把用户输入的数据“反射”给浏览器；    存储型XSS，也叫做“持久型XSS”，会把用户输入的数据“存储在”服务器端。常">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-20T07:24:20.490Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WEB前端安全-XSS与CSRF">
+<meta name="twitter:description" content="XSS  XSS，Cross Site Script，即跨站脚本攻击；XSS攻击通常指黑客通过“HTML”注入篡改了网页，插入了恶意的脚本，从而在浏览网页时，控制用户浏览器的一种攻击。XSS根据效果的不同可以分为以下三类：    反射型XSS，也叫做“非持久型XSS”，只是简单的把用户输入的数据“反射”给浏览器；    存储型XSS，也叫做“持久型XSS”，会把用户输入的数据“存储在”服务器端。常">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-drops夏令营14" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/20/drops夏令营14/" class="article-date">
+  <time datetime="2019-07-20T07:11:35.000Z" itemprop="datePublished">2019-07-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      WEB前端安全-XSS与CSRF
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>XSS<br>  XSS，Cross Site Script，即跨站脚本攻击；XSS攻击通常指黑客通过“HTML”注入篡改了网页，插入了恶意的脚本，从而在浏览网页时，控制用户浏览器的一种攻击。<br>XSS根据效果的不同可以分为以下三类：</p>
+<p>   反射型XSS，也叫做“非持久型XSS”，只是简单的把用户输入的数据“反射”给浏览器；</p>
+<p>   存储型XSS，也叫做“持久型XSS”，会把用户输入的数据“存储在”服务器端。常见的场景是，黑客写下一篇含有恶意JavaScript代码的博客文章，文章发表后，所有访问该博客文章的用户，都会在他们的浏览器中执行这段恶意的JavaScript代码；</p>
+<p>   DOM Based XSS，从效果来说也是反射型XSS，单独划分出了是因为DOM Based XSS的形成原因比较特殊，通过修改页面的DOM节点形成的XSS</p>
+<p>XSS常见危害：<br>劫持用户会话<br>盗取cookie<br>钓鱼欺骗<br>强制弹出广告<br>提升用户权限<br>传播跨站脚本蠕虫</p>
+<hr>
+<p>CSRF<br>CSRF，Cross Site Request Forgery，即跨站点请求伪造；<br>它是一种常见的Web攻击，也是Web安全中最容易被忽略的一种攻击方式<br>它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装成受信任用户的请求来利用受信任的网站。</p>
+<p>一般攻击方式为攻击者诱使用户访问了一个页面，就以该用户身份在第三方站点里执行了一次操作</p>
+<p>CSRF攻击的两个重点</p>
+<p>*CSRF的攻击建立在浏览器与web服务器的会话中<br>*欺骗用户访问URL</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/20/drops夏令营14/" data-id="cjyzmx1ay0002qcw050aspsxt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/07/20/sql注入/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          sql注入
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/20/drops夏令营11/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">渗透测试工具</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/06/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/27/二进制之ctf基础pwn题/">二进制之ctf基础pwn题</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/23/pwntools的安装/">ubuntu16下 pwntools的安装</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/20/sql注入/">sql注入</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/20/drops夏令营14/">WEB前端安全-XSS与CSRF</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

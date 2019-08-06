@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>ctf之web安全 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Web题目分类1.源码获取，扫描，弱密码爆破，js绕过  Php代码审计，弱类型比较 文件上传，文件包含 序列化和反序列化 Sql注入（必有） Xss跨站脚本攻击（难）   第一节web基础知识 X-Forwarded-For 是一个 HTTP 扩展头部，主要是为了让 Web 服务器获取访问用户的真实 IP 地址（其实这个真实未必是真实的，是自己写入的，完全由自己定夺，是自己想告诉服务器自己的IP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ctf之web安全">
+<meta property="og:url" content="http://yoursite.com/2019/07/19/drops夏令营12/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Web题目分类1.源码获取，扫描，弱密码爆破，js绕过  Php代码审计，弱类型比较 文件上传，文件包含 序列化和反序列化 Sql注入（必有） Xss跨站脚本攻击（难）   第一节web基础知识 X-Forwarded-For 是一个 HTTP 扩展头部，主要是为了让 Web 服务器获取访问用户的真实 IP 地址（其实这个真实未必是真实的，是自己写入的，完全由自己定夺，是自己想告诉服务器自己的IP">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-20T06:40:42.946Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ctf之web安全">
+<meta name="twitter:description" content="Web题目分类1.源码获取，扫描，弱密码爆破，js绕过  Php代码审计，弱类型比较 文件上传，文件包含 序列化和反序列化 Sql注入（必有） Xss跨站脚本攻击（难）   第一节web基础知识 X-Forwarded-For 是一个 HTTP 扩展头部，主要是为了让 Web 服务器获取访问用户的真实 IP 地址（其实这个真实未必是真实的，是自己写入的，完全由自己定夺，是自己想告诉服务器自己的IP">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-drops夏令营12" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/19/drops夏令营12/" class="article-date">
+  <time datetime="2019-07-19T07:25:12.000Z" itemprop="datePublished">2019-07-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ctf之web安全
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Web题目分类<br>1.源码获取，扫描，弱密码爆破，js绕过</p>
+<ol start="2">
+<li>Php代码审计，弱类型比较</li>
+<li>文件上传，文件包含</li>
+<li>序列化和反序列化</li>
+<li>Sql注入（必有）</li>
+<li>Xss跨站脚本攻击（难）</li>
+</ol>
+<hr>
+<p>第一节web基础知识</p>
+<p>X-Forwarded-For 是一个 HTTP 扩展头部，主要是为了让 Web 服务器获取访问用户的真实 IP 地址（其实这个真实未必是真实的，是自己写入的，完全由自己定夺，是自己想告诉服务器自己的IP地址）；</p>
+<p>Referer是告诉服务器你从哪里来，比如说从谷歌来；</p>
+<p>源码获取，git<br>  由于现在当前大量开发人员使用git进行版本控制，对站点自动部署。  如果配置不当，可能会将.git文件夹直接部署到线上环境。这就引起了git泄露漏洞。<br>GitHack是一个.git泄露利用脚本，通过泄露的.git文件夹下的文件，还原重建工程源代码。</p>
+<p>扫描<br>  有些网站的隐藏的文件，页面并不是能够发现，所以需要我们利用一些扫描工具进行扫描，得到隐藏的页面，得到关键的信息。<br>常用的扫描软件：御剑，dirserach<br>御剑在window下运用，而dirsearch需要在linux下进行扫描。<br>Dirsearch扫描命令格式：./dirsearch –u 目标网址 –e*<br>例如：./dirsearch –u htttps://<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> –e*</p>
+<hr>
+<p>第二节 php代码审计</p>
+<p>Extract变量覆盖<br>Php弱类型比较<br>二次url编码绕过<br>哈希绕过<br>正则绕过</p>
+<hr>
+<p>第三节 文件上传 文件包含</p>
+<p>本地js检验<br>黑名单检验<br>白名单<br>内容检验<br>竞争上传</p>
+<p>本地包含<br>远程文件 包含<br>相关函数：<br>Include（）<br>Include_once（）<br>require()<br>Rquire_once()</p>
+<hr>
+<p>第四节 序列化和反序列化</p>
+<p> 在PHP中，序列化用于存储或传递 PHP 的值的过程中，同时不丢失其类型和结构。<br>序列化函数原型如下：<br>string serialize ( mixed $value )<br>对象的序列化主要有两种用途：<br>1） 把对象的字节序列永久地保存到硬盘上，通常存放在一个文件中；<br>2） 在网络上传送对象的字节序列。<br>在很多应用中，需要对某些对象进行序列化，让它们离开内存空间，入住物理硬盘，以便长期保存。比如最常见的是Web服务器中的Session对象，当有 10万用户并发访问，就有可能出现10万个Session对象，内存可能吃不消，于是Web容器就会把一些seesion先序列化到硬盘中，等要用了，再把保存在硬盘中的对象还原到内存中。<br>当两个进程在进行远程通信时，彼此可以发送各种类型的数据。无论是何种类型的数据，都会以二进制序列的形式在网络上传送。发送方需要把这个Java对象转换为字节序列，才能在网络上传送；接收方则需要把字节序列再恢复为Java对象。<br><a href="https://www.cnblogs.com/youyoui/p/8610068.html" target="_blank" rel="noopener">https://www.cnblogs.com/youyoui/p/8610068.html</a></p>
+<p>魔术方法<br>参考网站：<a href="https://php.net/manual/zh/language.oop5.magic.php" target="_blank" rel="noopener">https://php.net/manual/zh/language.oop5.magic.php</a><br><strong>construct(), __destruct(), __call(), __callStatic(), __get(), __set(), __isset(), __unset(),<br>__sleep(), __wakeup(), __toString(), __invoke(), __set_state(), __clone()和</strong>debuginfo()等方法在 PHP 中被称为魔术方法（Magic methods）。在命名自己的类方法时不能使用这些方法名，除非是想使用其魔术功能。<br>  Caution<br>PHP 将所有以 __（两个下划线）开头的类方法保留为魔术方法。所以在定义类方法时，除了上述魔术方法，建议不要以 __ 为前缀。<br>   serialize() 函数会检查类中是否存在一个魔术方法 __sleep()。如果存在，该方法会先被调用，然后才执行序列化操作。此功能可以用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组。如果该方法未返回任何内容，则 NULL 被序列化，并产生一个 E_NOTICE 级别的错误。</p>
+<hr>
+<p>第五节 sql注入</p>
+<p>宽字节注入<br>约束条件注入<br>基于时间盲注</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/19/drops夏令营12/" data-id="cjyzmx1b10003qcw0yg515o3c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/07/19/drops夏令营13/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ctf之MISC
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/15/test/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">test</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/06/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/27/二进制之ctf基础pwn题/">二进制之ctf基础pwn题</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/23/pwntools的安装/">ubuntu16下 pwntools的安装</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/20/sql注入/">sql注入</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/20/drops夏令营14/">WEB前端安全-XSS与CSRF</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
