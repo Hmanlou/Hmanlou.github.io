@@ -191,7 +191,8 @@
     echo'Oh.no';
     }
     }
-    ?><br>extract函数，从数组中将变量导入到当前的符号表；该函数使用数组简明作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的的一个变量。<br>那么这里的关键点就是shiyan和flag这两个变量了。<br>只要我们让他们一致就ok了<br>我们使用置空的方式让他们的值相等就ok了。<br>flag=&amp;shiyan=</p>
+    ?></p>
+<p>extract函数，从数组中将变量导入到当前的符号表；该函数使用数组简明作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的的一个变量。<br>那么这里的关键点就是shiyan和flag这两个变量了。<br>只要我们让他们一致就ok了<br>我们使用置空的方式让他们的值相等就ok了。<br>flag=&amp;shiyan=</p>
 <hr>
 <p>#strcmp比较字符串<br>    <?php
     $flag = "flag{xxxxx}";
@@ -203,7 +204,8 @@
     else
     print 'No';
     }
-    ?><br>分析代码，可知只需使变量a等于flag即可输出flag，<br>strcmp()函数只有在相等的情况下返回0。<br>那么我们传入一个数组，它会返回NULL，而判断使用了==，而NULL==0是bool(true)，这样就成功绕过。</p>
+    ?></p>
+<p>分析代码，可知只需使变量a等于flag即可输出flag，<br>strcmp()函数只有在相等的情况下返回0。<br>那么我们传入一个数组，它会返回NULL，而判断使用了==，而NULL==0是bool(true)，这样就成功绕过。</p>
 <hr>
 <p>#urldecode二次编码绕过<br>    &lt;?php<br>    if(eregi(“hackerDJ”,$_GET[id])) {<br>    echo(“</p>
 <pre><code>not allowed!
@@ -235,7 +237,8 @@ flag
     else
     print 'Invalid password';
     }
-    ?><br>md5()函数遇到数组会返回空，所以可以构造两个数组，这样就有null===null</p>
+    ?></p>
+<p>md5()函数遇到数组会返回空，所以可以构造两个数组，这样就有null===null</p>
 <h2 id="username-1-amp-password-2"><a href="#username-1-amp-password-2" class="headerlink" title="username[]=1&amp;password[]=2"></a>username[]=1&amp;password[]=2</h2><p>#数组返回null绕过<br>    &lt;?php<br>    $flag = “flag”;</p>
 <pre><code>if (isset ($_GET[&apos;password&apos;]))
  {     
@@ -302,7 +305,8 @@ Login first!
     {
     // Disallow all the digits!
     $digit = ord($temp{$i});
-    if ( ($digit >= $one) && ($digit <= $nine) ) { aha, digit not allowed! return "flase"; } if($number="=" $temp) $flag; $temp="$_GET['password'];" echo noother_says_correct($temp); ?><br>首先分析代码，函数要求变量$temp不能存在1~9之间的数字，<br>最后，又要求$temp=3735929054;<br>这本来是自相矛盾的，但php在转码时会把16进制转化为十进制.于是把<br>3735929054转换成16进制为0xdeadc0de</=></p>
+    if ( ($digit >= $one) && ($digit <= $nine) ) { aha, digit not allowed! return "flase"; } if($number="=" $temp) $flag; $temp="$_GET['password'];" echo noother_says_correct($temp); ?></=></p>
+<p>首先分析代码，函数要求变量$temp不能存在1~9之间的数字，<br>最后，又要求$temp=3735929054;<br>这本来是自相矛盾的，但php在转码时会把16进制转化为十进制.于是把<br>3735929054转换成16进制为0xdeadc0de</p>
 <hr>
 <p>#ereg正则%00截断<br>    &lt;?php<br>    $flag = “xxx”;<br>    if (isset ($_GET[‘password’]))<br>    {<br>    if (ereg (“^[a-zA-Z0-9]+$”, $_GET[‘password’]) === FALSE)<br>    {<br>    echo ‘</p>
 <pre><code>You password must be alphanumeric
@@ -343,7 +347,8 @@ Invalid password
     else
     echo '骚年，继续努力吧啊~';
     }
-    ?><br>数组绕过ereg()函数，strpos()函数，这两个函数遇到数组会返回null，<br>null===FALSE,不成立，null!==FALSE成立<br>ctf[]=1</p>
+    ?></p>
+<p>数组绕过ereg()函数，strpos()函数，这两个函数遇到数组会返回null，<br>null===FALSE,不成立，null!==FALSE成立<br>ctf[]=1</p>
 <hr>
 <p>#数字验证正则绕过<br>    <?php
     error_reporting(0);
