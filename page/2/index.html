@@ -156,6 +156,97 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-drops夏令营12" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/19/drops夏令营12/">ctf之web安全</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/19/drops夏令营12/" class="archive-article-date">
+  	<time datetime="2019-07-19T07:25:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Web题目分类<br>1.源码获取，扫描，弱密码爆破，js绕过</p>
+<ol start="2">
+<li>Php代码审计，弱类型比较</li>
+<li>文件上传，文件包含</li>
+<li>序列化和反序列化</li>
+<li>Sql注入（必有）</li>
+<li>Xss跨站脚本攻击（难）</li>
+</ol>
+<hr>
+<p>第一节web基础知识</p>
+<p>X-Forwarded-For 是一个 HTTP 扩展头部，主要是为了让 Web 服务器获取访问用户的真实 IP 地址（其实这个真实未必是真实的，是自己写入的，完全由自己定夺，是自己想告诉服务器自己的IP地址）；</p>
+<p>Referer是告诉服务器你从哪里来，比如说从谷歌来；</p>
+<p>源码获取，git<br>  由于现在当前大量开发人员使用git进行版本控制，对站点自动部署。  如果配置不当，可能会将.git文件夹直接部署到线上环境。这就引起了git泄露漏洞。<br>GitHack是一个.git泄露利用脚本，通过泄露的.git文件夹下的文件，还原重建工程源代码。</p>
+<p>扫描<br>  有些网站的隐藏的文件，页面并不是能够发现，所以需要我们利用一些扫描工具进行扫描，得到隐藏的页面，得到关键的信息。<br>常用的扫描软件：御剑，dirserach<br>御剑在window下运用，而dirsearch需要在linux下进行扫描。<br>Dirsearch扫描命令格式：./dirsearch –u 目标网址 –e*<br>例如：./dirsearch –u htttps://<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> –e*</p>
+<hr>
+<p>第二节 php代码审计</p>
+<p>Extract变量覆盖<br>Php弱类型比较<br>二次url编码绕过<br>哈希绕过<br>正则绕过</p>
+<hr>
+<p>第三节 文件上传 文件包含</p>
+<p>本地js检验<br>黑名单检验<br>白名单<br>内容检验<br>竞争上传</p>
+<p>本地包含<br>远程文件 包含<br>相关函数：<br>Include（）<br>Include_once（）<br>require()<br>Rquire_once()</p>
+<hr>
+<p>第四节 序列化和反序列化</p>
+<p> 在PHP中，序列化用于存储或传递 PHP 的值的过程中，同时不丢失其类型和结构。<br>序列化函数原型如下：<br>string serialize ( mixed $value )<br>对象的序列化主要有两种用途：<br>1） 把对象的字节序列永久地保存到硬盘上，通常存放在一个文件中；<br>2） 在网络上传送对象的字节序列。<br>在很多应用中，需要对某些对象进行序列化，让它们离开内存空间，入住物理硬盘，以便长期保存。比如最常见的是Web服务器中的Session对象，当有 10万用户并发访问，就有可能出现10万个Session对象，内存可能吃不消，于是Web容器就会把一些seesion先序列化到硬盘中，等要用了，再把保存在硬盘中的对象还原到内存中。<br>当两个进程在进行远程通信时，彼此可以发送各种类型的数据。无论是何种类型的数据，都会以二进制序列的形式在网络上传送。发送方需要把这个Java对象转换为字节序列，才能在网络上传送；接收方则需要把字节序列再恢复为Java对象。<br><a href="https://www.cnblogs.com/youyoui/p/8610068.html" target="_blank" rel="noopener">https://www.cnblogs.com/youyoui/p/8610068.html</a></p>
+<p>魔术方法<br>参考网站：<a href="https://php.net/manual/zh/language.oop5.magic.php" target="_blank" rel="noopener">https://php.net/manual/zh/language.oop5.magic.php</a><br><strong>construct(), __destruct(), __call(), __callStatic(), __get(), __set(), __isset(), __unset(),<br>__sleep(), __wakeup(), __toString(), __invoke(), __set_state(), __clone()和</strong>debuginfo()等方法在 PHP 中被称为魔术方法（Magic methods）。在命名自己的类方法时不能使用这些方法名，除非是想使用其魔术功能。<br>  Caution<br>PHP 将所有以 __（两个下划线）开头的类方法保留为魔术方法。所以在定义类方法时，除了上述魔术方法，建议不要以 __ 为前缀。<br>   serialize() 函数会检查类中是否存在一个魔术方法 __sleep()。如果存在，该方法会先被调用，然后才执行序列化操作。此功能可以用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组。如果该方法未返回任何内容，则 NULL 被序列化，并产生一个 E_NOTICE 级别的错误。</p>
+<hr>
+<p>第五节 sql注入</p>
+<p>宽字节注入<br>约束条件注入<br>基于时间盲注</p>
+<hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/19/drops夏令营12/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
