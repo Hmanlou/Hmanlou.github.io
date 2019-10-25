@@ -156,6 +156,142 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-序列化与反序列化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/25/序列化与反序列化/">序列化与反序列化</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/25/序列化与反序列化/" class="archive-article-date">
+  	<time datetime="2019-10-25T07:21:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="php的序列化与反序列化"><a href="#php的序列化与反序列化" class="headerlink" title="php的序列化与反序列化"></a>php的序列化与反序列化</h2><p>通俗的说，序列化就是将变量通过一系列的操作转化为字符串的过程；而反序列化就是其逆过程，将字符串还原成原来的变量；<br>进行序列化与反序列化操作，可以轻松地存储和传输数据。 </p>
+        
+          <a class="article-more-a" href="/2019/10/25/序列化与反序列化/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/25/序列化与反序列化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-hackergame2019部分题解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/20/hackergame2019部分题解/">hackergame2019部分题解</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/20/hackergame2019部分题解/" class="archive-article-date">
+  	<time datetime="2019-10-20T09:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##签到题：<br>token后面有一个显示按钮，点击显示，token就出来了，复制，打开题目网址，把token放进框里，发现获取flag的按钮无法点击，F12查看元素，把该按钮的属性<br>disabled=”disabled”改为abled=”disabled”，即可获取flag；</p>
+<hr>
+<p>##白与夜：<br>打开题目网址，看到一个cat图片，点开图片，what? flag就这样出来了？<br>flag{4_B14CK_C4T}</p>
+<hr>
+<p>##信息安全2077：<br>打开题目，提示比赛时间还没开始，<br>Not yet! The competition will start after 21165 days and 54068<br>于是想到了改时间，刚开始有点憨憨的，一直在尝试修改电脑本地的时间日期，一直没改对；哎，怎么没想到，可以用burpsuit直接改包啊！！！<br>刚开始忘了如何打开.txt文件，百度了一下，<br>202.38.93.241:2077/?myfile = fopen(“flag.txt”, “r”)</p>
+<p>抓到的包：<br>GET / HTTP/1.1<br>Host: 202.38.93.241:2077<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,<em>/</em>;q=0.8<br>Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0</p>
+<p>.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br>Accept-Encoding: gzip, deflate<br>Connection: keep-alive<br>Upgrade-Insecure-Requests: 1<br>If-Modified-Since: Sun, 13 Oct 2019 13:34:45 GMT<br>If-None-Match: “1570973685.0-1234-3182889908”<br>Cache-Control: max-age=0</p>
+<p>POST /flag.txt HTTP/1.1<br>Host: 202.38.93.241:2077<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) HEICORE/49.1.2623.213 Safari/537.36<br>Accept: <em>/</em><br>Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br>Accept-Encoding: gzip, deflate<br>Referer: <a href="http://202.38.93.241:2077/" target="_blank" rel="noopener">http://202.38.93.241:2077/</a><br>If-Unmodified-Since: Sun, 20 Oct 2019 09:02:49 GMT<br>Origin: <a href="http://202.38.93.241:2077" target="_blank" rel="noopener">http://202.38.93.241:2077</a><br>Connection: keep-alive<br>Pragma: no-cache<br>Cache-Control: no-cache<br>Content-Length: 0</p>
+<p>一共两个包，把相应的时间都改了，改为2077年，就可以了；</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/20/hackergame2019部分题解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-第一道文件上传题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -964,140 +1100,9 @@ exit;
 
 
   
-    <article id="post-二进制之ctf基础pwn题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/27/二进制之ctf基础pwn题/">二进制之ctf基础pwn题</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/27/二进制之ctf基础pwn题/" class="archive-article-date">
-  	<time datetime="2019-07-27T07:49:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##做题大体思路<br>首先可以看看是否有后门函数，有的话，直接通过后门函数拿到shell，若没有，可以选择构造后门函数；若后门函数行不通，可以考虑执行shellcode，但前提是程序没有打开NX保护；若程序开启了canare保护，就不能简单的覆盖栈，必须保证canary不变，可以考虑通过字符串格式化漏洞，找到这个canary的位置，然后再进行操作。</p>
-        
-          <a class="article-more-a" href="/2019/07/27/二进制之ctf基础pwn题/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/27/二进制之ctf基础pwn题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-pwntools的安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/23/pwntools的安装/">ubuntu16下 pwntools的安装</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/23/pwntools的安装/" class="archive-article-date">
-  	<time datetime="2019-07-23T03:22:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code>sudo apt-get update
-sudo apt-get install python2.7 python-pip python-dev git libssl-dev libffi-dev build-essentia
-sudo pip install --upgrade pip -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
-sudo pip install --upgrade pwntools  -i http://pypi.douban.com/simple --trusted-host pypi.douban.com</code></pre><p>如果第四条指令报错的话，可以在最后加上 –user 试试；</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/23/pwntools的安装/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 

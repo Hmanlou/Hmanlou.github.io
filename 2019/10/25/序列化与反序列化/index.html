@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Hexo</title>
+  <title>序列化与反序列化 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="php的序列化与反序列化通俗的说，序列化就是将变量通过一系列的操作转化为字符串的过程；而反序列化就是其逆过程，将字符串还原成原来的变量；进行序列化与反序列化操作，可以轻松地存储和传输数据。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="序列化与反序列化">
+<meta property="og:url" content="http://yoursite.com/2019/10/25/序列化与反序列化/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="php的序列化与反序列化通俗的说，序列化就是将变量通过一系列的操作转化为字符串的过程；而反序列化就是其逆过程，将字符串还原成原来的变量；进行序列化与反序列化操作，可以轻松地存储和传输数据。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-10-25T07:34:08.507Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="序列化与反序列化">
+<meta name="twitter:description" content="php的序列化与反序列化通俗的说，序列化就是将变量通过一系列的操作转化为字符串的过程；而反序列化就是其逆过程，将字符串还原成原来的变量；进行序列化与反序列化操作，可以轻松地存储和传输数据。">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -154,295 +158,205 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-序列化与反序列化" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      序列化与反序列化
+    </h1>
+  
+
+        
+        <a href="/2019/10/25/序列化与反序列化/" class="archive-article-date">
+  	<time datetime="2019-10-25T07:21:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="php的序列化与反序列化"><a href="#php的序列化与反序列化" class="headerlink" title="php的序列化与反序列化"></a>php的序列化与反序列化</h2><p>通俗的说，序列化就是将变量通过一系列的操作转化为字符串的过程；而反序列化就是其逆过程，将字符串还原成原来的变量；<br>进行序列化与反序列化操作，可以轻松地存储和传输数据。 </p>
+<a id="more"></a>
+<hr>
+<p>序列化对于不同类型得到的字符串格式为：<br>    String : s:size:value;<br>    Integer : i:value;<br>    Boolean : b:value;(保存1或0)<br>    Null : N;<br>    Array : a:size:{key definition;value definition;}<br>    Object : O:strlen(object name):object name:object size:{s:strlen(propertyname):property name:property definition;}</p>
+<p>举个例子：<br> $arr = array(‘PHP’,’Java’,’Python’,’C’);<br> $result = serialize($arr);<br> echo $result;</p>
+<p>运行结果： a:4:{i:0;s:3:”PHP”;i:1;s:4:”Java”;i:2;s:6:”Python”;i:3;s:1:”C”;}<br>a:表示的是整体的数据类型，这里是array数组;<br>a:4中的4:表示数组元素的个数;<br>i:表示int,整型;<br>0:表示数组元素的下标;<br>s:表示string，即数组值得类型;<br>s:3中的3:表示数组值的长度。</p>
+<p>在序列化对象时，不会保留常量的值，对于父类中的变量，则会保留。<br>当调用serialize()函数序列化对象时，该函数会检查类中是否存在一个魔术方法，__sleep()。如果存在，该方法会被先调用，然后才执行序列化操作。可以通过重载这个方法，从而自定义序列化行为。例如，对象中的一些私有敏感属性，我们不想将它们序列化，就可以用这样的方法。<br>__sleep()的方法原型为：<br>public array __sleep ( void )<br>该方法返回一个包含对象中所有应被序列化的变量名称的数组，不能返回父类的私有成员的名字。</p>
+<hr>
+<p>对于反序列化，有一个unserialize()函数，unserialize()反序列化函数用于将单一的已序列化的变量转换回 PHP 的值。<br>如果传递的字符串不可解序列化，则返回 FALSE,<br>若被反序列化的变量是一个对象，在成功重新构造对象之后，该函数会检查类中是否存在一个魔术方法，<strong>wakeup()。如果存在，该方法会被先调用，然后才执行反序列化操作。<br>在反序列化操作时，遇到对象，若在此之前并未定义该类，反序列化正常执行，反序列化得到的对象是’</strong>PHP_Incomplete_Class’<br>预先定义了该类</p>
+<pre><code>class User{
+const SITE = &apos;uusama&apos;;
+
+public $username;
+public $nickname;
+private $password;
+private $order;
+
+public function __construct($username, $nickname, $password)
+{
+    $this-&gt;username = $username;
+    $this-&gt;nickname = $nickname;
+    $this-&gt;password = $password;
+}
+
+// 定义反序列化后调用的方法
+public function __wakeup()
+{
+    $this-&gt;password = $this-&gt;username;
+}
+}
+$user_ser = &apos;O:4:&quot;User&quot;:2:{s:8:&quot;username&quot;;s:6:&quot;uusama&quot;;s:8:&quot;nickname&quot;;s:2:&quot;uu&quot;;}&apos;;
+var_dump(unserialize($user_ser));</code></pre><p>运行结果</p>
+<pre><code>object(User)#1 (4) {
+  [&quot;username&quot;]=&gt;
+  string(6) &quot;uusama&quot;
+  [&quot;nickname&quot;]=&gt;
+  string(2) &quot;uu&quot;
+  [&quot;password&quot;:&quot;User&quot;:private]=&gt;
+  string(6) &quot;uusama&quot;
+  [&quot;order&quot;:&quot;User&quot;:private]=&gt;
+  NULL
+}</code></pre><p>没有定义该类：</p>
+<pre><code>$user_ser = &apos;O:4:&quot;User&quot;:2:{s:8:&quot;username&quot;;s:6:&quot;uusama&quot;;s:8:&quot;nickname&quot;;s:2:&quot;uu&quot;;}&apos;;
+var_dump(unserialize($user_ser));</code></pre><p>运行结果：</p>
+<pre><code>object(__PHP_Incomplete_Class)#1 (3) {
+  [&quot;__PHP_Incomplete_Class_Name&quot;]=&gt;
+  string(4) &quot;User&quot;
+  [&quot;username&quot;]=&gt;
+  string(6) &quot;uusama&quot;
+  [&quot;nickname&quot;]=&gt;
+  string(2) &quot;uu&quot;
+}</code></pre>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/27/二进制之ctf基础pwn题/" class="archive-article-date">
-  	<time datetime="2019-07-27T07:49:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/27/二进制之ctf基础pwn题/">二进制之ctf基础pwn题</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/25/序列化与反序列化/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/23/pwntools的安装/" class="archive-article-date">
-  	<time datetime="2019-07-23T03:22:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-23</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/20/hackergame2019部分题解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">hackergame2019部分题解</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/23/pwntools的安装/">ubuntu16下 pwntools的安装</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/20/sql注入/" class="archive-article-date">
-  	<time datetime="2019-07-20T08:24:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/20/sql注入/">sql注入</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/20/drops夏令营14/" class="archive-article-date">
-  	<time datetime="2019-07-20T07:11:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/20/drops夏令营14/">WEB前端安全-XSS与CSRF</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/20/drops夏令营11/" class="archive-article-date">
-  	<time datetime="2019-07-20T06:49:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/20/drops夏令营11/">渗透测试工具</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/20/drops夏令营15/" class="archive-article-date">
-  	<time datetime="2019-07-20T06:25:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/20/drops夏令营15/">漏洞复现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/19/drops夏令营13/" class="archive-article-date">
-  	<time datetime="2019-07-19T07:31:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/19/drops夏令营13/">ctf之MISC</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/19/drops夏令营12/" class="archive-article-date">
-  	<time datetime="2019-07-19T07:25:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/19/drops夏令营12/">ctf之web安全</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/15/test/" class="archive-article-date">
-  	<time datetime="2019-06-14T16:41:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/15/test/">test</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/14/杂项两道writeup/" class="archive-article-date">
-  	<time datetime="2019-06-14T09:16:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/14/杂项两道writeup/">ctf杂项中 想蹭网先解开密码、隐写2两道writeup</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/3/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -466,8 +380,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

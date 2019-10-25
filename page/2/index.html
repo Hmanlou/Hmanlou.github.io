@@ -156,6 +156,137 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-二进制之ctf基础pwn题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/27/二进制之ctf基础pwn题/">二进制之ctf基础pwn题</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/27/二进制之ctf基础pwn题/" class="archive-article-date">
+  	<time datetime="2019-07-27T07:49:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##做题大体思路<br>首先可以看看是否有后门函数，有的话，直接通过后门函数拿到shell，若没有，可以选择构造后门函数；若后门函数行不通，可以考虑执行shellcode，但前提是程序没有打开NX保护；若程序开启了canare保护，就不能简单的覆盖栈，必须保证canary不变，可以考虑通过字符串格式化漏洞，找到这个canary的位置，然后再进行操作。</p>
+        
+          <a class="article-more-a" href="/2019/07/27/二进制之ctf基础pwn题/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/27/二进制之ctf基础pwn题/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-pwntools的安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/23/pwntools的安装/">ubuntu16下 pwntools的安装</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/23/pwntools的安装/" class="archive-article-date">
+  	<time datetime="2019-07-23T03:22:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>sudo apt-get update
+sudo apt-get install python2.7 python-pip python-dev git libssl-dev libffi-dev build-essentia
+sudo pip install --upgrade pip -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+sudo pip install --upgrade pwntools  -i http://pypi.douban.com/simple --trusted-host pypi.douban.com</code></pre><p>如果第四条指令报错的话，可以在最后加上 –user 试试；</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/23/pwntools的安装/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-sql注入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -772,80 +903,9 @@
 
 
   
-    <article id="post-我的第一篇博客文章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/08/我的第一篇博客文章/">最近常用命令行命令</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/08/我的第一篇博客文章/" class="archive-article-date">
-  	<time datetime="2019-06-08T13:24:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##Windows下的命令<br>cd..或者cd ..                                  返回文件上一层目录<br>cd/                                       退回根目录<br>cd ../..                                           返回文件上两回目录<br>cd d:                                             切换到D盘<br>cd /                                               跳转到根目录<br>cd path                                          跳转到指定目录<br>cls                                        清除当前屏幕显示<br>dir                                               显示当前目录中的子文件夹与文件<br>exit                                      退出dos命令行</p>
-<p>md  创建目录<br>例：md movie                           在当前目录中创建名为movie的文件夹<br>例：md d:\test\movie                创建d:\test\movie目录</p>
-<p>rd  删除目录<br>例：rd movie // 删除当前目录下的movie空文件夹<br>例：rd /s /q d:\test  // 使用安静模式删除d:\test（除目录本身外，还将删除指定目录下的所有子目录和文件）</p>
-<p>move  移动目录   </p>
-<p>move 1.png d:\test\2.png  // 将当前目录下的1.png移动到d盘test文件夹中，并重命名为2.png （若test中也存在同名的png图片，会询问是否覆盖）</p>
-<hr>
-<p>##Linux下的命令</p>
-<p>tar  zxvf 文件名                           解压tar.gz 类型文件<br> unrar e all.rar                             解压一个名为all的rar型文件<br>rar  a    a.png  a.rar                  将一个名为a的图片压缩为一个名为a的rar文件<br>pwd   查看当前所处目录路径<br>mkdir 文件名   创建一个文件<br>ls                     显示当前目录中的子文件夹与文件</p>
-<hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/08/我的第一篇博客文章/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
