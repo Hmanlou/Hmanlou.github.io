@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-11-17T08:44:13.004Z">
+<meta property="og:updated_time" content="2019-11-18T10:25:42.611Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sql宽字节注入学习">
 <meta name="twitter:description" content="首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入">
@@ -186,12 +186,12 @@
 <h2 id="UTF8"><a href="#UTF8" class="headerlink" title="UTF8"></a>UTF8</h2><p>由于ASCII表示的字符只有128个，因此网络世界的规范是使用UNICODE编码，但是用ASCII表示的字符使用UNICODE并不高效。因此出现了中间格式字符集，被称为通用转换格式，及UTF</p>
 <h2 id="宽字节"><a href="#宽字节" class="headerlink" title="宽字节"></a>宽字节</h2><p>GB2312、GBK、GB18030、BIG5、Shift_JIS等这些都是常说的宽字节，实际上只有两字节。宽字节带来的安全问题主要是吃ASCII字符(一字节)的现象。<br>宽字节注入，主要针对GBK的使用，<br>原理：<br>  宽字节注入是mysql的一个特性，mysql在使用GBK编码的时候，会认为两个字符是一个汉字（前一个ascii码要大于128，才到汉字的范围）<br>注明：</p>
 <p>GBK编码，它的编码范围是0×8140~0xFEFE(不包括xx7F)，在遇到%df(ascii(223)) &gt;ascii(128)时自动拼接%5c，因此吃掉‘\’，而%27、%20小于ascii(128)的字符就保留了。</p>
-<p>补充：<br>GB2312是被GBK兼容的，它的高位范围是0xA1<del>0xF7，低位范围是0xA1</del>0xFE(0x5C不在该范围内)，因此不能使用编码吃掉%5c。<br>其它的宽字符集也是一样的分析过程，要吃掉%5c，只需要低位中包含正常的0x5c就行了。</p>
 <p>经常用到的url转码</p>
 <pre><code>空格  %20
 &apos;    %27
 \    %5C</code></pre><p>转义函数：<br>addslashes  -使用反斜线引用字符串</p>
-<pre><code>string addslashes(string $str)</code></pre><p>返回字符串，该字符串为了数据库查询语句等的需要，在某些字符前加上反斜线。这些字符是单引号(‘)、双引号(“)、反斜线()与NUL(NULL字符)。<br>如何从addslashes函数逃逸出来？<br>1.\前面再加上一个\（或单数个）。变成\‘,这样\被转义了，’逃出了限制<br>2.把\弄没</p>
+<pre><code>string addslashes(string $str)</code></pre><p>返回字符串，该字符串为了数据库查询语句等的需要，在某些字符前加上反斜线。这些字符是单引号(‘)、双引号(“)、反斜线()与NUL(NULL字符)。<br>如何从addslashes函数逃逸出来？</p>
+<p>把\弄没</p>
 <pre><code>&apos; -&gt; \&apos; -&gt; %5C%27
 %df&apos; -&gt;%df\&apos; -&gt; %df%5C%27</code></pre><hr>
 <h2 id="一道例题"><a href="#一道例题" class="headerlink" title="一道例题"></a>一道例题</h2><p>南邮ctf GBK Injection<br>题目网址：<a href="http://chinalover.sinaapp.com/SQL-GBK/index.php?id=1" target="_blank" rel="noopener">http://chinalover.sinaapp.com/SQL-GBK/index.php?id=1</a></p>
