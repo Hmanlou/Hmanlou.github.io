@@ -156,6 +156,73 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-xss入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/27/xss入门/">xss入门</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/27/xss入门/" class="archive-article-date">
+  	<time datetime="2020-02-27T02:21:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="xss入门"><a href="#xss入门" class="headerlink" title="xss入门"></a>xss入门</h1><h2 id="什么是xss攻击"><a href="#什么是xss攻击" class="headerlink" title="什么是xss攻击"></a>什么是xss攻击</h2><p>xss跨站脚本攻击，是指攻击者通过巧妙的方法将一段脚本内容放入到网页，使用户加载并执行攻击者恶意制造的网页程序。</p>
+<h2 id="攻击的条件"><a href="#攻击的条件" class="headerlink" title="攻击的条件"></a>攻击的条件</h2><p>1.需要向web页面注入恶意代码；<br>2.这些恶意代码能够被浏览器成功执行。</p>
+<p>#xss分类<br>反射型</p>
+<pre><code>反射型跨站脚本是最常见，也是使用最广的一种，可将恶意脚本附加到 URL 地址的参数中。反射型 XSS 的利用一般是攻击者通过特定手法（如电子邮件），诱使用户去访问一个包含恶意代码的 URL，当受害者点击这些专门设计的链接的时候，恶意代码会直接在受害者主机上的浏览器执行。</code></pre><p>存储型 </p>
+<pre><code>存储型跨站脚本，此类 XSS 不需要用户单击特定 URL 就能执行跨站脚本，攻击者事先将恶意代码上传或储存到漏洞服务器中，只要受害者浏览包含此恶意代码的页面就会执行恶意代码。持久型 XSS 一般出现在网站留言、评论、博客日志等交互处，恶意脚本存储到客户端或者服务端的数据库中。</code></pre><p>DOM型</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/27/xss入门/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-sql宽字节注入学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -176,7 +243,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入<br>原理：<br>GBK 占用两字节</p>
+        <p>首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入</p>
+<p>原理：</p>
+<p>GBK 占用两字节</p>
 <p>ASCII占用一字节</p>
 <p>PHP中编码为GBK，函数执行添加的是ASCII编码（添加的符号为“\”），MYSQL默认字符集是GBK等宽字节字符集。<br>mysql在使用GBK编码的时候，会认为两个字符是一个汉字（前一个ascii码要大于128，才到汉字的范围）</p>
         
@@ -779,312 +848,6 @@
 
 
   
-    <article id="post-bugku之代码审计" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/10/bugku之代码审计/">bugku之代码审计</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/10/bugku之代码审计/" class="archive-article-date">
-  	<time datetime="2019-09-10T08:05:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#extract变量覆盖</p>
-<pre><code>&lt;?php
-$flag=&apos;xxx&apos;;
-extract($_GET);
-if(isset($shiyan))
-{
-$content=trim(file_get_contents($flag));
-if($shiyan==$content)
-{
-echo&apos;flag{xxx}&apos;;
-}
-else
-{
-echo&apos;Oh.no&apos;;
-}
-}
-?&gt;</code></pre><p>extract函数，从数组中将变量导入到当前的符号表；该函数使用数组简明作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的的一个变量。<br>那么这里的关键点就是shiyan和flag这两个变量了。<br>只要我们让他们一致就ok了<br>我们使用置空的方式让他们的值相等就ok了。<br>flag=&amp;shiyan=</p>
-<hr>
-<p>#strcmp比较字符串</p>
-<pre><code>&lt;?php
-$flag = &quot;flag{xxxxx}&quot;;
-if (isset($_GET[&apos;a&apos;]))   //isset — 检测变量是否已设置并且非 NULL
-{
-if (strcmp($_GET[&apos;a&apos;], $flag) == 0) //如果 str1 小于 str2 返回 &lt; 0； 如果 str1大于 str2返回 &gt; 0；如果两者相等，返回 0。
-//比较两个字符串（区分大小写）
-die(&apos;Flag: &apos;.$flag);
-else
-print &apos;No&apos;;
-}
-?&gt;</code></pre><p>分析代码，可知只需使变量a等于flag即可输出flag，<br>strcmp()函数只有在相等的情况下返回0。<br>那么我们传入一个数组，它会返回NULL，而判断使用了==，而NULL==0是bool(true)，这样就成功绕过。</p>
-<hr>
-<p>#urldecode二次编码绕过</p>
-<pre><code>&lt;?php
-if(eregi(&quot;hackerDJ&quot;,$_GET[id])) {
-echo(&quot;
-not allowed!
-&quot;);
-exit();
-}
-$_GET[id] = urldecode($_GET[id]);
-if($_GET[id] == &quot;hackerDJ&quot;)
-{
-echo &quot;
-Access granted!
-&quot;;
-echo &quot;
-flag
-&quot;;
-}
-?&gt;</code></pre><p>若想输出flag，变量id进行一次url编码后等于”hackerDJ”<br>但是，变量id和”hackerDJ”进行正则表达式匹配，id不能等于”hackerDJ”，<br>题目提醒两次url编码，可以使id=%2568ackerDJ<br>浏览器会自动进行一次url编码，%25-&gt;%  此时id=%68ackerDJ<br>第二次编码，%68-&gt;h 此时id=hackerDJ<br>这样就可以绕过得flag</p>
-<hr>
-<p>#md5()函数</p>
-<pre><code>&lt;?php
-error_reporting(0);
-$flag = &apos;flag{test}&apos;;
-if (isset($_GET[&apos;username&apos;]) and isset($_GET[&apos;password&apos;])) {
-if ($_GET[&apos;username&apos;] == $_GET[&apos;password&apos;])
-print &apos;Your password can not be your username.&apos;;
-else if (md5($_GET[&apos;username&apos;]) === md5($_GET[&apos;password&apos;]))
-die(&apos;Flag: &apos;.$flag);
-else
-print &apos;Invalid password&apos;;
-}
-?&gt;</code></pre><p>md5()函数遇到数组会返回空，所以可以构造两个数组，这样就有null===null</p>
-<h2 id="username-1-amp-password-2"><a href="#username-1-amp-password-2" class="headerlink" title="username[]=1&amp;password[]=2"></a>username[]=1&amp;password[]=2</h2><p>#数组返回null绕过</p>
-<pre><code>&lt;?php
-$flag = &quot;flag&quot;;
-
-if (isset ($_GET[&apos;password&apos;]))
- {     
-if (ereg (&quot;^[a-zA-Z0-9]+$&quot;, $_GET[&apos;password&apos;]) === FALSE)  //正则表达式匹配
-echo &apos;You password must be alphanumeric&apos;;
-else if (strpos ($_GET[&apos;password&apos;], &apos;--&apos;) !== FALSE)   //查找字符串首次出现的位置
-die(&apos;Flag: &apos; . $flag);
-else
-echo &apos;Invalid password&apos;;
-}
-?&gt;</code></pre><p>题目提醒，数组时解题关键<br>数组可以绕过ereg()函数，strpos()函数，遇到数组，返回的是null<br>null===FALSE不成立，null!==FALSE成立，成功绕过 password[]=1<br>这道题，还可以用%00截断<br>首次这道题要求变量password中不能有除大小写、数字外的字符，下面又用strpos函数，要求password中含有–，读取字符串string时,如果遇到了%00,后面的字符串就不会被解析，故可用password=aA5%00–</p>
-<hr>
-<p>#弱类型整数大小比较绕过</p>
-<pre><code>$temp = $_GET[&apos;password&apos;];
-is_numeric($temp)?die(&quot;no numeric&quot;):NULL;
-if($temp&gt;1336){
-echo $flag;</code></pre><p>首先这道题要求password不能是数字，又要求password大于1336<br>对于弱比较，若字符串以数字开头，则取开头数字作为转换结果，若无则输出0<br>password=1337a</p>
-<hr>
-<p>#sha()函数比较绕过</p>
-<pre><code>&lt;?php
-$flag = &quot;flag&quot;;
-if (isset($_GET[&apos;name&apos;]) and isset($_GET[&apos;password&apos;]))
-{
-var_dump($_GET[&apos;name&apos;]);
-echo &quot;
-&quot;;
-var_dump($_GET[&apos;password&apos;]);
-var_dump(sha1($_GET[&apos;name&apos;]));
-var_dump(sha1($_GET[&apos;password&apos;]));
-if ($_GET[&apos;name&apos;] == $_GET[&apos;password&apos;])
-echo &apos;
-
-Your password can not be your name!
-&apos;;
-else if (sha1($_GET[&apos;name&apos;]) === sha1($_GET[&apos;password&apos;]))  //这里传入两个不同的数组就行
-die(&apos;Flag: &apos;.$flag);
-else
-echo &apos;
-
-Invalid password.
-&apos;;
-}
-else
-echo &apos;
-
-Login first!
-&apos;;
-?&gt;</code></pre><p>md5()与sha1()同样，处理数组时，会返回空 name[]=1&amp;password[]=2</p>
-<hr>
-<p>#md5加密相等绕过</p>
-<pre><code>&lt;?php
-$md51 = md5(&apos;QNKCDZO&apos;);
-$a = @$_GET[&apos;a&apos;];
-$md52 = @md5($a);
-if(isset($a)){
-if ($a != &apos;QNKCDZO&apos; &amp;&amp; $md51 == $md52) {
-echo &quot;flag{*}&quot;;
-} else {
-echo &quot;false!!!&quot;;
-}}
-else{echo &quot;please input a&quot;;}
-?&gt;</code></pre><p>如果知道MD5碰撞的概念，同时知道了在PHP中的MD5中的0e的比较，这道题目就十分的简单。</p>
-<p>如果md的值是以0e开头的，那么就与其他的0e开头的Md5值是相等的。例子如下：</p>
-<p>md5(‘s878926199a’)=0e545993274517709034328855841020<br>md5(‘s155964671a’)=0e342768416822451524974117254469 //可以看到两者的md5值都是以0e开头的，则 md5(‘s878926199a’)==md5(‘s155964671a’) //就是True<br>php关于==号是这样处理的，如果一边是整型，另一边也需要是整型。</p>
-<p>($a != ‘QNKCDZO’ &amp;&amp; $md51 == $md52)</p>
-<p>发现 $a != ‘QNKCDZO’ 并且 $md51 == $md52</p>
-<p>因为$md51 = md5(‘QNKCDZO’)=0e830400451993494058024219903391</p>
-<p>根据上文介绍，我们发现只要满足md5加密后为 “0e<strong><strong><strong>***</strong></strong></strong>“就可以<br>a=s878926199a<br>参考链接<a href="https://blog.csdn.net/qq_42777804/article/details/98512753" target="_blank" rel="noopener">https://blog.csdn.net/qq_42777804/article/details/98512753</a></p>
-<hr>
-<p>#十六进制与数字比较</p>
-<pre><code>&lt;?php
-error_reporting(0);
-function noother_says_correct($temp)
-{
-$flag = &apos;flag{test}&apos;;
-$one = ord(&apos;1&apos;); //ord — 返回字符的 ASCII 码值
-$nine = ord(&apos;9&apos;); //ord — 返回字符的 ASCII 码值
-$number = &apos;3735929054&apos;;
-// Check all the input characters!
-for ($i = 0; $i &lt; strlen($number); $i++)
-{
-// Disallow all the digits!
-$digit = ord($temp{$i});
-if ( ($digit &gt;= $one) &amp;&amp; ($digit &lt;= $nine) )
-{
-// Aha, digit not allowed!
-return &quot;flase&quot;;
-}
-}
-if($number == $temp)
-return $flag;
-}
-$temp = $_GET[&apos;password&apos;];
-echo noother_says_correct($temp);
-?&gt;</code></pre><p>首先分析代码，函数要求变量$temp不能存在1~9之间的数字，<br>最后，又要求$temp=3735929054;<br>这本来是自相矛盾的，但php在转码时会把16进制转化为十进制.于是把<br>3735929054转换成16进制为0xdeadc0de</p>
-<hr>
-<p>#ereg正则%00截断</p>
-<pre><code>&lt;?php
-$flag = &quot;xxx&quot;;
-if (isset ($_GET[&apos;password&apos;]))
-{
-if (ereg (&quot;^[a-zA-Z0-9]+$&quot;, $_GET[&apos;password&apos;]) === FALSE)
-{
-echo &apos;
-
-You password must be alphanumeric
-&apos;;
-}
-else if (strlen($_GET[&apos;password&apos;]) &lt; 8 &amp;&amp; $_GET[&apos;password&apos;] &gt; 9999999)
-{
-if (strpos ($_GET[&apos;password&apos;], &apos;-&apos;) !== FALSE) //strpos — 查找字符串首次出现的位置
-{
-die(&apos;Flag: &apos; . $flag);
-}
-else
-{
-echo(&apos;
-
-    - have not been found
-&apos;);
-}
-}
-else
-{
-echo &apos;
-
-Invalid password
-&apos;;
-}
-}
-?&gt;</code></pre><p>分析代码，若想得到flag，必须使password中不含非字母数字的字符，password长度小于8，大小大9999999，并且password中还得含有’<em>-</em>‘<br>字符串对比解析，ereg函数存在NULL截断漏洞，当ereg读取字符串string时,如果遇到了%00,后面的字符串就不会被解析。<br>password=1e8%00<em>-</em></p>
-<hr>
-<p>#strpos数组绕过</p>
-<pre><code>&lt;?php
-$flag = &quot;flag&quot;;
-if (isset ($_GET[&apos;ctf&apos;])) 
-{
-if (@ereg (&quot;^[1-9]+$&quot;, $_GET[&apos;ctf&apos;]) === FALSE)
-echo &apos;必须输入数字才行&apos;;
-else if (strpos ($_GET[&apos;ctf&apos;], &apos;#biubiubiu&apos;) !== FALSE)
-die(&apos;Flag: &apos;.$flag);
-else
-echo &apos;骚年，继续努力吧啊~&apos;;
-}
-?&gt;</code></pre><p>数组绕过ereg()函数，strpos()函数，这两个函数遇到数组会返回null，<br>null===FALSE,不成立，null!==FALSE成立<br>ctf[]=1</p>
-<hr>
-<p>#数字验证正则绕过</p>
-<pre><code>&lt;?php
-error_reporting(0);
-$flag = &apos;flag{test}&apos;;
-if (&quot;POST&quot; == $_SERVER[&apos;REQUEST_METHOD&apos;])
-{
-$password = $_POST[&apos;password&apos;];
-if (0 &gt;= preg_match(&apos;/^[[:graph:]]{12,}$/&apos;, $password)) //preg_match — 执行一个正则表达式匹配
-{
-echo &apos;flag&apos;;
-exit;
-}
-while (TRUE)
-{
-$reg = &apos;/([[:punct:]]+|[[:digit:]]+|[[:upper:]]+|[[:lower:]]+)/&apos;;
-if (6 &gt; preg_match_all($reg, $password, $arr))
-break;
-$c = 0;
-$ps = array(&apos;punct&apos;, &apos;digit&apos;, &apos;upper&apos;, &apos;lower&apos;); //[[:punct:]] 任何标点符号 [[:digit:]] 任何数字 [[:upper:]] 任何大写字母 [[:lower:]] 任何小写字母
-foreach ($ps as $pt)
-{
-if (preg_match(&quot;/[[:$pt:]]+/&quot;, $password))
-$c += 1;
-}
-if ($c &lt; 3) break;
-//&gt;=3，必须包含四种类型三种与三种以上
-if (&quot;42&quot; == $password) echo $flag;
-else echo &apos;Wrong password&apos;;
-exit;
-}
-}
-?&gt;</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/10/bugku之代码审计/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1099,7 +862,7 @@ exit;
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 John Doe
+    		&copy; 2020 John Doe
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

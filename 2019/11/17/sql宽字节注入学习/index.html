@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>sql宽字节注入学习 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入原理：GBK 占用两字节 ASCII占用一字节 PHP中编码为GBK，函数执行添加的是ASCII编码（添加的符号为“\”），MYSQL默认字符集是GBK等宽字节字符集。mysql在使用GBK编码的时候，会认为两个字符是一个汉字（前一个ascii码要大于128，才到汉字的范围）">
+  <meta name="description" content="首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入 原理： GBK 占用两字节 ASCII占用一字节 PHP中编码为GBK，函数执行添加的是ASCII编码（添加的符号为“\”），MYSQL默认字符集是GBK等宽字节字符集。mysql在使用GBK编码的时候，会认为两个字符是一个汉字（前一个ascii码要大于128，才到汉字的范围）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sql宽字节注入学习">
 <meta property="og:url" content="http://yoursite.com/2019/11/17/sql宽字节注入学习/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入原理：GBK 占用两字节 ASCII占用一字节 PHP中编码为GBK，函数执行添加的是ASCII编码（添加的符号为“\”），MYSQL默认字符集是GBK等宽字节字符集。mysql在使用GBK编码的时候，会认为两个字符是一个汉字（前一个ascii码要大于128，才到汉字的范围）">
+<meta property="og:description" content="首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入 原理： GBK 占用两字节 ASCII占用一字节 PHP中编码为GBK，函数执行添加的是ASCII编码（添加的符号为“\”），MYSQL默认字符集是GBK等宽字节字符集。mysql在使用GBK编码的时候，会认为两个字符是一个汉字（前一个ascii码要大于128，才到汉字的范围）">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-11-18T10:30:29.429Z">
+<meta property="og:updated_time" content="2019-11-18T10:34:28.703Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sql宽字节注入学习">
-<meta name="twitter:description" content="首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入原理：GBK 占用两字节 ASCII占用一字节 PHP中编码为GBK，函数执行添加的是ASCII编码（添加的符号为“\”），MYSQL默认字符集是GBK等宽字节字符集。mysql在使用GBK编码的时候，会认为两个字符是一个汉字（前一个ascii码要大于128，才到汉字的范围）">
+<meta name="twitter:description" content="首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入 原理： GBK 占用两字节 ASCII占用一字节 PHP中编码为GBK，函数执行添加的是ASCII编码（添加的符号为“\”），MYSQL默认字符集是GBK等宽字节字符集。mysql在使用GBK编码的时候，会认为两个字符是一个汉字（前一个ascii码要大于128，才到汉字的范围）">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -178,7 +178,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入<br>原理：<br>GBK 占用两字节</p>
+        <p>首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入</p>
+<p>原理：</p>
+<p>GBK 占用两字节</p>
 <p>ASCII占用一字节</p>
 <p>PHP中编码为GBK，函数执行添加的是ASCII编码（添加的符号为“\”），MYSQL默认字符集是GBK等宽字节字符集。<br>mysql在使用GBK编码的时候，会认为两个字符是一个汉字（前一个ascii码要大于128，才到汉字的范围）</p>
 <a id="more"></a>
@@ -296,6 +298,15 @@ http://chinalover.sinaapp.com/SQL-GBK/index.php?id=-2%df&apos; union select 1,gr
   
 <nav id="article-nav">
   
+    <a href="/2020/02/27/xss入门/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          xss入门
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/11/03/PHP-session反序列化/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">PHP session反序列化</div>
@@ -341,7 +352,7 @@ http://chinalover.sinaapp.com/SQL-GBK/index.php?id=-2%df&apos; union select 1,gr
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 John Doe
+    		&copy; 2020 John Doe
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
