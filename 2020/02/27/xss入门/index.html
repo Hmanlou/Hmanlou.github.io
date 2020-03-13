@@ -8,17 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>xss入门 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="xss入门什么是xss攻击xss跨站脚本攻击，是指攻击者通过巧妙的方法将一段脚本内容放入到网页，使用户加载并执行攻击者恶意制造的网页程序。 攻击的条件1.需要向web页面注入恶意代码；2.这些恶意代码能够被浏览器成功执行。 #xss分类反射型 反射型跨站脚本是最常见，也是使用最广的一种，可将恶意脚本附加到 URL 地址的参数中。反射型 XSS 的利用一般是攻击者通过特定手法（如电子邮件），诱使用户">
+  <meta name="description" content="xss入门什么是xss攻击xss跨站脚本攻击，是指攻击者通过巧妙的方法将一段脚本内容放入到网页，使用户加载并执行攻击者恶意制造的网页程序。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="xss入门">
 <meta property="og:url" content="http://yoursite.com/2020/02/27/xss入门/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="xss入门什么是xss攻击xss跨站脚本攻击，是指攻击者通过巧妙的方法将一段脚本内容放入到网页，使用户加载并执行攻击者恶意制造的网页程序。 攻击的条件1.需要向web页面注入恶意代码；2.这些恶意代码能够被浏览器成功执行。 #xss分类反射型 反射型跨站脚本是最常见，也是使用最广的一种，可将恶意脚本附加到 URL 地址的参数中。反射型 XSS 的利用一般是攻击者通过特定手法（如电子邮件），诱使用户">
+<meta property="og:description" content="xss入门什么是xss攻击xss跨站脚本攻击，是指攻击者通过巧妙的方法将一段脚本内容放入到网页，使用户加载并执行攻击者恶意制造的网页程序。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-02-27T02:50:02.897Z">
+<meta property="og:image" content="http://yoursite.com/2020/02/27/xss入门/2.jpg">
+<meta property="og:image" content="https://i.imgur.com/9EJI51Y.png">
+<meta property="og:updated_time" content="2020-03-01T12:01:56.458Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="xss入门">
-<meta name="twitter:description" content="xss入门什么是xss攻击xss跨站脚本攻击，是指攻击者通过巧妙的方法将一段脚本内容放入到网页，使用户加载并执行攻击者恶意制造的网页程序。 攻击的条件1.需要向web页面注入恶意代码；2.这些恶意代码能够被浏览器成功执行。 #xss分类反射型 反射型跨站脚本是最常见，也是使用最广的一种，可将恶意脚本附加到 URL 地址的参数中。反射型 XSS 的利用一般是攻击者通过特定手法（如电子邮件），诱使用户">
+<meta name="twitter:description" content="xss入门什么是xss攻击xss跨站脚本攻击，是指攻击者通过巧妙的方法将一段脚本内容放入到网页，使用户加载并执行攻击者恶意制造的网页程序。">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/27/xss入门/2.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -179,10 +182,36 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="xss入门"><a href="#xss入门" class="headerlink" title="xss入门"></a>xss入门</h1><h2 id="什么是xss攻击"><a href="#什么是xss攻击" class="headerlink" title="什么是xss攻击"></a>什么是xss攻击</h2><p>xss跨站脚本攻击，是指攻击者通过巧妙的方法将一段脚本内容放入到网页，使用户加载并执行攻击者恶意制造的网页程序。</p>
+<a id="more"></a>
 <h2 id="攻击的条件"><a href="#攻击的条件" class="headerlink" title="攻击的条件"></a>攻击的条件</h2><p>1.需要向web页面注入恶意代码；<br>2.这些恶意代码能够被浏览器成功执行。</p>
-<p>#xss分类<br>反射型</p>
+<h2 id="xss分类"><a href="#xss分类" class="headerlink" title="xss分类"></a>xss分类</h2><p>反射型</p>
 <pre><code>反射型跨站脚本是最常见，也是使用最广的一种，可将恶意脚本附加到 URL 地址的参数中。反射型 XSS 的利用一般是攻击者通过特定手法（如电子邮件），诱使用户去访问一个包含恶意代码的 URL，当受害者点击这些专门设计的链接的时候，恶意代码会直接在受害者主机上的浏览器执行。</code></pre><p>存储型 </p>
 <pre><code>存储型跨站脚本，此类 XSS 不需要用户单击特定 URL 就能执行跨站脚本，攻击者事先将恶意代码上传或储存到漏洞服务器中，只要受害者浏览包含此恶意代码的页面就会执行恶意代码。持久型 XSS 一般出现在网站留言、评论、博客日志等交互处，恶意脚本存储到客户端或者服务端的数据库中。</code></pre><p>DOM型</p>
+<pre><code>基于 DOM 文档对象模型的一种漏洞，所以，受客户端浏览器的脚本代码所影响。客户端 JavaScript 可以访问浏览器的 DOM 文本对象模型，因此能够决定用于加载当前页面的 URL。换句话说，客户端的脚本程序可以通过 DOM 动态地检查和修改页面内容，它不依赖于服务器端的数据，而从客户端获得 DOM 中的数据（如从 URL 中提取数据）并在本地执行。另一方面，浏览器用户可以操纵 DOM 中的一些对象，例如 URL、location 等。用户在客户端输入的数据如果包含了恶意 JavaScript 脚本，而这些脚本没有经过适当的过滤和消毒，那么应用程序就可能受到基于 DOM 的 XSS 攻击。</code></pre><p>反射型xss的数据流向是：浏览器-&gt;后端-&gt;浏览器</p>
+<p>存储型xss的数据流向是:浏览器-&gt;后端-&gt;数据库-&gt;后端-&gt;浏览器</p>
+<p>dom型xss的数据流向是：url-&gt;浏览器</p>
+<h2 id="什么是浏览器的dom文本对象模型"><a href="#什么是浏览器的dom文本对象模型" class="headerlink" title="什么是浏览器的dom文本对象模型"></a>什么是浏览器的dom文本对象模型</h2><p>文本对象模型（DOM）是一个能够让程序和脚本动态访问和更新文档内容，结构和样式的语言平台，提供了标准的HTML和XML对象集，并有一个标准的接口来访问操作他们。</p>
+<p>——摘自W3C</p>
+<p>每个容器、独立的元素，或文本块都被看作一个节点，当一个容器包含另一个容器时，对应的节点之间有父子关系。同时该节点树遵循HTML的结构化本质，如html元素包含head，body，前者又包含title,或者包含各种块元素等。</p>
+<pre><code>&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      Hello World
+    &lt;/p&gt;
+    &lt;div&gt; &lt;img src=&quot;example.png&quot;/&gt;&lt;/div&gt;7
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre> <img src="/2020/02/27/xss入门/2.jpg" width="2">
+<p><img src="https://i.imgur.com/9EJI51Y.png" alt></p>
+<p>常用的javascript代码</p>
+<pre><code>&lt;scirpt&gt;alert(&quot;xss&quot;);&lt;/script&gt;
+&lt;img src=1 onerror=alert(&quot;xss&quot;);&gt;   #onerror 事件会在文档或图像加载过程中发生错误时被触发
+&lt;input onfocus=&quot;alert(&apos;xss&apos;);&quot;&gt;</code></pre><h2 id="xss的危害"><a href="#xss的危害" class="headerlink" title="xss的危害"></a>xss的危害</h2><p>劫持用户会话<br>盗取cookie<br>钓鱼欺骗<br>强制弹出广告<br>提升用户权限<br>传播跨站脚本蠕虫</p>
+<h2 id="xss题目的常用思路"><a href="#xss题目的常用思路" class="headerlink" title="xss题目的常用思路"></a>xss题目的常用思路</h2><p>1.payload外部js</p>
+<p>2.绕过正则</p>
+<p>3.闭合标签</p>
+<p>4.转化编码</p>
+<p>5.创建错误执行Js</p>
+<p>一个xss练习网址：<a href="https://xss.haozi.me/" target="_blank" rel="noopener">https://xss.haozi.me/</a></p>
 
       
 
@@ -275,6 +304,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/03/01/正则表达式笔记“/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          正则表达式笔记“ 
+        
+      </div>
+    </a>
   
   
     <a href="/2019/11/17/sql宽字节注入学习/" id="article-nav-older" class="article-nav-link-wrap">

